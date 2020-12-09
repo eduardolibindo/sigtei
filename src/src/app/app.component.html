@@ -1,0 +1,130 @@
+﻿<!-- <div class="app-container" [ngClass]="{ 'bg-light': account }">
+
+  main nav
+  <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="account">
+    <div class="navbar-nav">
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+        class="nav-item nav-link">Home</a>
+      <a routerLink="/profile" routerLinkActive="active" class="nav-item nav-link">Profile</a>
+      <a *ngIf="account.role === Role.Admin" routerLink="/admin" routerLinkActive="active"
+        class="nav-item nav-link">Admin</a>
+      <a (click)="logout()" class="nav-item nav-link">Logout</a>
+    </div>
+  </nav>
+
+
+  subnav router outlet
+  <router-outlet name="subnav"></router-outlet>
+
+  global alert
+  <alert></alert>
+
+  main router outlet
+  <router-outlet></router-outlet>
+</div> -->
+
+<!-- ------------------------------------------------------------------------------------------------------------------------- -->
+
+<mat-sidenav-container fullscreen>
+
+  <mat-sidenav mode="over" #sidenav position="start">
+    <mat-nav-list *ngIf="account">
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/home" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">Home</a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/profile" routerLinkActive="active">Perfil</a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/id-student" routerLinkActive="active"
+      *ngIf="isEstudante">ID Estudantil</a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/id-student" routerLinkActive="active"
+      *ngIf="isAdmin">ID Estudantil</a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/id-student-checkin" routerLinkActive="active"
+      *ngIf="isMotorista">Check-in ID Estudantil</a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/id-student-checkin" routerLinkActive="active"
+      *ngIf="isAdmin">Check-in ID Estudantil</a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/student-list" routerLinkActive="active"
+      *ngIf="isMotorista">Lista Estudantes</a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/student-list" routerLinkActive="active"
+      *ngIf="isAdmin">Lista Estudantes</a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/schedules" routerLinkActive="active">Horários</a>
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/places" routerLinkActive="active">Locais</a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/admin" routerLinkActive="active"
+        *ngIf="isAdmin">Admin</a>
+
+      <a mat-list-item (click)="logout()" (click)="sidenav.toggle()" class="text-danger">Sair</a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <mat-toolbar color="secondary">
+
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <!-- <ul class="nav" *ngIf="account">
+        <li class="nav-item">
+          <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" routerLink="/profile" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">Perfil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" routerLink="/admin" routerLinkActive="active" *ngIf="isAdmin">Admin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link text-danger" (click)="logout()">Sair</a>
+        </li>
+      </ul> -->
+
+      <span class="toolbar-spacer"></span>
+
+      <!-- <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="material-icons" routerLink="/">dashboard</i>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a aria-expanded="false" aria-haspopup="true" class="nav-link" data-toggle="dropdown"
+            id="navbarDropdownMenuLink">
+            <i class="material-icons">notifications</i>
+            <span class="notification">1</span>
+          </a>
+          <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item">Teste de Notificação</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="material-icons" routerLink="/home">person</i>
+          </a>
+        </li>
+      </ul> -->
+
+    </mat-toolbar>
+
+    <div class="main-content">
+
+      <!-- main app container -->
+      <div class="app-container" [ngClass]="{ 'bg-light': account }">
+        <alert></alert>
+        <router-outlet></router-outlet>
+      </div>
+
+    </div>
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

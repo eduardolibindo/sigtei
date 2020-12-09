@@ -1,0 +1,243 @@
+﻿<!-- <h1 *ngIf="isAddMode">Criar Conta</h1>
+<h1 *ngIf="!isAddMode">Editar conta</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <div class="form-group col-7">
+      <label>Usuario</label>
+      <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+        <option value=""></option>
+        <option value="Estudante">Estudante</option>
+        <option value="Motorista">Motorista</option>
+      </select>
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+        <div *ngIf="f.title.errors.required">Title is required</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="form-row">
+    <div class="form-group col">
+      <label>Primeiro Nome</label>
+      <input type="text" formControlName="firstName" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+      <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+        <div *ngIf="f.firstName.errors.required">Insira o primeiro nome</div>
+      </div>
+    </div>
+    <div class="form-group col">
+      <label>Ultimo Nome</label>
+      <input type="text" formControlName="lastName" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+      <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+        <div *ngIf="f.lastName.errors.required">Insira o ultimo nome</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-7">
+      <label>Email</label>
+      <input type="text" formControlName="email" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">Insira o email</div>
+        <div *ngIf="f.email.errors.email">O email deve ser um endereço de email válido</div>
+      </div>
+    </div>
+    <div class="form-group col-7">
+      <label>Função de Usuário</label>
+      <select formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+        <option value=""></option>
+        <option value="Estudante">Estudante</option>
+        <option value="Motorista">Motorista</option>
+        <option value="Admin">Admin</option>
+      </select>
+      <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+        <div *ngIf="f.role.errors.required">Insira a função de usuário</div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!isAddMode">
+    <h3 class="pt-3">Mudar senha</h3>
+    <p>Deixe em branco para manter a mesma senha</p>
+  </div>
+  <div class="form-row">
+    <div class="form-group col">
+      <label>Senha</label>
+      <input type="password" formControlName="password" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Insira a senha</div>
+        <div *ngIf="f.password.errors.minlength">A senha deve ter pelo menos 6 caracteres</div>
+      </div>
+    </div>
+    <div class="form-group col">
+      <label>Confirme a Senha</label>
+      <input type="password" formControlName="confirmPassword" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+      <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+        <div *ngIf="f.confirmPassword.errors.required">É necessário confirmar a senha</div>
+        <div *ngIf="f.confirmPassword.errors.mustMatch">As senhas devem corresponder</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button [disabled]="loading" class="btn btn-primary">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      Salvar
+    </button>
+    <a routerLink="/admin/accounts" class="btn btn-link">Cancel</a>
+  </div>
+</form> -->
+
+
+<div class="mt-5">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-4 login-form text-center">
+    <h2 class="mb-5 font-weight-light text-uppercase" *ngIf="isAddMode">Criar Conta</h2>
+    <h2 class="mb-5 font-weight-light text-uppercase" *ngIf="!isAddMode">Editar conta</h2>
+    <div class="form-group">
+      <select formControlName="title" class="form-control" class="form-control rounded-pill form-control-lg"
+        [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+        <option value="" disabled selected>Usuário</option>
+        <option value="Estudante">Estudante</option>
+        <option value="Motorista">Motorista</option>
+      </select>
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+        <div *ngIf="f.title.errors.required">Selecione o tipo de usuario</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <input type="text" formControlName="firstName" class="form-control" placeholder="Primeiro Nome"
+          class="form-control rounded-pill form-control-lg"
+          [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+          <div *ngIf="f.firstName.errors.required">Insira o primeiro nome</div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <input type="text" formControlName="lastName" class="form-control" placeholder="Ultimo Nome"
+          class="form-control rounded-pill form-control-lg"
+          [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+          <div *ngIf="f.lastName.errors.required">Insira o ultimo nome</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" formControlName="email" class="form-control" placeholder="Email"
+        class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">Insira o email</div>
+        <div *ngIf="f.email.errors.email">O email deve ser um endereço de email válido</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <select formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.role.errors }" class="form-control rounded-pill form-control-lg">
+        <option value="" disabled selected>Função do Usuário</option>
+        <option value="Estudante">Estudante</option>
+        <option value="Motorista">Motorista</option>
+        <option value="Admin">Admin</option>
+      </select>
+      <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+        <div *ngIf="f.role.errors.required">Insira a função de usuário</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" formControlName="rg" class="form-control" placeholder="RG"
+        class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.rg.errors }" />
+      <div *ngIf="submitted && f.rg.errors" class="invalid-feedback">
+        <div *ngIf="f.rg.errors.required">Insira o RG</div>
+        <div *ngIf="f.rg.errors.rg">O RG deve ser um registro válido</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" formControlName="phone" class="form-control" placeholder="Telefone"
+        class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+      <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+        <div *ngIf="f.phone.errors.required">Insira o Telefone</div>
+        <div *ngIf="f.phone.errors.phone">O Telefone deve ser um numero válido</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <select formControlName="institution" class="form-control" class="form-control rounded-pill form-control-lg"
+        [ngClass]="{ 'is-invalid': submitted && f.institution.errors }">
+        <option value="" disabled selected>Instituição</option>
+        <option value="iff">IFF</option>
+        <option value="unipampa">Unipampa</option>
+        <option value="uergs">Uergs</option>
+        <option value="senac">Senac</option>
+        <option value="anhanguera">Anhanguera</option>
+      </select>
+      <div *ngIf="submitted && f.institution.errors" class="invalid-feedback">
+        <div *ngIf="f.institution.errors.required">Selecione a instituição</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <select formControlName="course" class="form-control" class="form-control rounded-pill form-control-lg"
+        [ngClass]="{ 'is-invalid': submitted && f.course.errors }">
+        <option value="" disabled selected>Curso</option>
+        <option value="sistemas de informacao">Sistemas de Informação</option>
+        <option value="gestao de turismo">Gestão de Turismo</option>
+        <option value="gastronomia">Gastronomia</option>
+        <option value="fisica">Física</option>
+        <option value="matematica">Matemática</option>
+        <option value="tecnico integrado iff">Técnico Integrado IFF</option>
+        <option value="tecnico subsequente iff">Técnico Subsequente IFF</option>
+        <option value="jornalismo">Jornalismo</option>
+        <option value="ciencias humanas">Ciências Humanas</option>
+        <option value="ciencia politica">Ciência Política</option>
+        <option value="comunicacao social">Comunicação Social</option>
+        <option value="direito">Direito</option>
+        <option value="relacoes publicas">Relações Públicas</option>
+        <option value="servico social">Serviço Social</option>
+        <option value="engenharia de bioprocessos e biotecnologia">Engenharia de Bioprocessos e Biotecnologia</option>
+        <option value="gestao ambiental">Gestão Ambiental</option>
+        <option value="tecnico em enfermagem">Técnico em Enfermagem</option>
+        <option value="tecnico em seguranca do trabalho">Técnico em Segurança do Trabalho</option>
+        <option value="tecnico em cabeleireira">Técnico em Cabeleireiro</option>
+        <option value="tecnico em barbearia">Técnico em Barbearia</option>
+        <option value="curso anhanguera ead">Curso anhanguera EAD</option>
+      </select>
+      <div *ngIf="submitted && f.course.errors" class="invalid-feedback">
+        <div *ngIf="f.course.errors.required">Selecione o curso</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" formControlName="address" class="form-control" placeholder="Endereço"
+        class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+      <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+        <div *ngIf="f.address.errors.required">Insira o endereço</div>
+        <div *ngIf="f.address.errors.address">O Endereço deve ser um local válido</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <input type="password" formControlName="password" class="form-control" placeholder="Senha"
+          class="form-control rounded-pill form-control-lg"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Insira a senha</div>
+          <div *ngIf="f.password.errors.minlength">A senha deve ter pelo menos 6 caracteres</div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirmar Senha"
+          class="form-control rounded-pill form-control-lg"
+          [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="f.confirmPassword.errors.required">É necessário confirmar a senha</div>
+          <div *ngIf="f.confirmPassword.errors.mustMatch">As senhas devem corresponder</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button [disabled]="loading" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
+        style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Salvar
+      </button>
+      <button routerLink="/admin/accounts" class="btn mt-3 rounded-pill btn-lg btn-cancel text-uppercase"
+        style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">Cancelar</button>
+    </div>
+  </form>
+</div>

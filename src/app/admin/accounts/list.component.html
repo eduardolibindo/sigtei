@@ -1,0 +1,93 @@
+﻿<!-- <h1>Contas</h1>
+<p>Todas as contas seguras (somente administrador):</p>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Criar Conta</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width:30%">Nome</th>
+            <th style="width:30%">Email</th>
+            <th style="width:30%">Tipo de Usuário</th>
+            <th style="width:10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let account of accounts">
+            <td>{{account.title}} {{account.firstName}} {{account.lastName}}</td>
+            <td>{{account.email}}</td>
+            <td>{{account.role}}</td>
+            <td style="white-space: nowrap">
+                <a routerLink="edit/{{account.id}}" class="btn btn-sm btn-primary mr-1">Editar</a>
+                <button (click)="deleteAccount(account.id)" class="btn btn-sm btn-danger btn-delete-account" [disabled]="account.isDeleting">
+                    <span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!account.isDeleting">Deletar</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!accounts">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table> -->
+
+
+<div>
+
+  <div class="login-form text-center">
+    <h2 class="mb-3 font-weight-light text-uppercase text-center">Contas</h2>
+    <p class="mt-3 font-weight-normal text-center">
+      Todas as contas seguras (somente administrador):
+    </p>
+    <button routerLink="add" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
+      style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">Criar Conta</button>
+  </div>
+
+  <div>
+
+    <div class="container-table100">
+      <div class="wrap-table100">
+        <div class="table">
+
+          <div class="row header">
+            <div class="cell" style="width:30%">
+              Nome
+            </div>
+            <div class="cell" style="width:30%">
+              Email
+            </div>
+            <div class="cell" style="width:30%">
+              Tipo de Usuário
+            </div>
+            <div class="cell" style="width:30%">
+
+            </div>
+          </div>
+
+          <div *ngFor="let account of accounts" class="row">
+            <div class="cell" data-title="Nome">
+              {{account.title}} {{account.firstName}} {{account.lastName}}
+            </div>
+            <div class="cell" data-title="Email">
+              {{account.email}}
+            </div>
+            <div class="cell" data-title="Tipo de Usuário">
+              {{account.role}}
+            </div>
+            <div class="cell" style="white-space: nowrap">
+
+              <button routerLink="edit/{{account.id}}" class="btn btn-sm btn-submit mr-3">Editar</button>
+
+              <button (click)="deleteAccount(account.id)" class="btn btn-sm btn-delete mr-1"
+                [disabled]="account.isDeleting">
+                <span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
+                <span *ngIf="!account.isDeleting">Deletar</span>
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
