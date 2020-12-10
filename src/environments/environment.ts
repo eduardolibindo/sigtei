@@ -14,7 +14,8 @@ export const environment = {
     appId: '1:759474924459:web:69c4282193a9b8de5f00ee',
     measurementId: 'G-S6FPLQ3HTQ'
   },
-  apiUrl: 'http://localhost:4000'
+  // apiUrl: 'http://localhost:4000'
+  apiUrl: 'https://sigtei-api.herokuapp.com'
 };
 
 /*
