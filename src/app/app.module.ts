@@ -27,7 +27,8 @@ import { RouterModule } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
 
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
-import { ZXingScannerModule } from 'angular-weblineindia-qrcode-scanner';
+import { ZXingScannerModule } from 'angular-weblineindia-qrcode-scanner';;
+import { ServiceWorkerModule } from '@angular/service-worker'
 
 
 @NgModule({
@@ -47,8 +48,8 @@ import { ZXingScannerModule } from 'angular-weblineindia-qrcode-scanner';
         MatButtonModule,
         MatIconModule,
         NgxQRCodeModule,
-        ZXingScannerModule
-    ],
+        ZXingScannerModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
     declarations: [
         AppComponent,
         AlertComponent,
