@@ -83,31 +83,31 @@ export class AccountService {
   }
 
   getAll() {
-    return this.http.get<Account[]>(`${baseUrl}/account`);
+    return this.http.get<Account[]>(baseUrl);
   }
 
   getplaceAll() {
-    return this.http.get<Places[]>(`${baseUrl}/place`);
+    return this.http.get<Places[]>(baseUrl);
   }
 
   getById(id: string) {
-    return this.http.get<Account>(`${baseUrl}/account/${id}`);
+    return this.http.get<Account>(`${baseUrl}/${id}`);
   }
 
   getplaceById(id: string) {
-    return this.http.get<Places>(`${baseUrl}/place/${id}`);
+    return this.http.get<Places>(`${baseUrl}/${id}`);
   }
 
   create(params) {
-    return this.http.post(`${baseUrl}/account`, params);
+    return this.http.post(baseUrl, params);
   }
 
   createPlace(params) {
-    return this.http.post(`${baseUrl}/place`, params);
+    return this.http.post(baseUrl, params);
   }
 
   update(id, params) {
-    return this.http.put(`${baseUrl}/account/${id}`, params)
+    return this.http.put(`${baseUrl}/${id}`, params)
       .pipe(map((account: any) => {
         // update the current account if it was updated
         if (account.id === this.accountValue.id) {
@@ -120,7 +120,7 @@ export class AccountService {
   }
 
   updatePlace(id, params) {
-    return this.http.put(`${baseUrl}/place/${id}`, params)
+    return this.http.put(`${baseUrl}/${id}`, params)
       .pipe(map((places: any) => {
         // update the current places if it was updated
         if (places.id === this.placesValue.id) {
@@ -133,7 +133,7 @@ export class AccountService {
   }
 
   delete(id: string) {
-    return this.http.delete(`${baseUrl}/account/${id}`)
+    return this.http.delete(`${baseUrl}/${id}`)
       .pipe(finalize(() => {
         // auto logout if the logged in account was deleted
         if (id === this.accountValue.id) {
@@ -143,7 +143,7 @@ export class AccountService {
   }
 
   deletePlace(id: string) {
-    return this.http.delete(`${baseUrl}/place/${id}`);
+    return this.http.delete(`${baseUrl}/${id}`);
   }
 
   // helper methods
