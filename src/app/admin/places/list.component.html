@@ -1,0 +1,85 @@
+﻿<div>
+
+  <div class="login-form text-center">
+    <h2 class="mb-3 font-weight-light text-uppercase text-center">Locais</h2>
+    <p class="mt-3 font-weight-normal text-center">
+      Todas as contas seguras (somente administrador):
+    </p>
+    <button routerLink="add" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
+      style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">Criar Local</button>
+      <button routerLink="/admin" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
+      style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">Sair</button>
+  </div>
+
+  <div>
+
+    <div class="container-table100">
+      <div class="wrap-table100">
+        <div class="table">
+
+          <div class="row header">
+            <div class="cell" style="width:10%">
+              id
+            </div>
+            <div class="cell" style="width:20%">
+              Titulo
+            </div>
+            <div class="cell" style="width:20%">
+              Lugar
+            </div>
+            <div class="cell" style="width:20%">
+              Rua
+            </div>
+            <div class="cell" style="width:10%">
+              Bairro
+            </div>
+            <div class="cell" style="width:10%">
+              Cidade
+            </div>
+            <div class="cell" style="width:10%">
+              Estado
+            </div>
+            <div class="cell" style="width:30%">
+
+            </div>
+          </div>
+
+          <div *ngFor="let value of places" class="row">
+            <div class="cell" data-title="id">
+              {{value.id}}
+            </div>
+            <div class="cell" data-title="Titulo">
+              {{value.title}}
+            </div>
+            <div class="cell" data-title="Lugar">
+              {{value.place}}
+            </div>
+            <div class="cell" data-title="Rua">
+              {{value.street}}
+            </div>
+            <div class="cell" data-title="Bairro">
+              {{value.district}}
+            </div>
+            <div class="cell" data-title="Cidade">
+              {{value.city}}
+            </div>
+            <div class="cell" data-title="Estado">
+              {{value.state}}
+            </div>
+            <div class="cell" style="white-space: nowrap">
+
+              <button routerLink="edit/{{value.id}}" class="btn btn-sm btn-submit mr-3">Editar</button>
+
+              <button (click)="deletePlaces(value.id)" class="btn btn-sm btn-delete mr-1"
+                [disabled]="value.isDeleting">
+                <span *ngIf="value.isDeleting" class="spinner-border spinner-border-sm"></span>
+                <span *ngIf="!value.isDeleting">Deletar</span>
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

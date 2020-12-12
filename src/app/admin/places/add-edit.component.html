@@ -1,0 +1,70 @@
+﻿<div class="mt-5">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-4 login-form text-center">
+    <h2 class="mb-5 font-weight-light text-uppercase" *ngIf="isAddMode">Criar Local</h2>
+    <h2 class="mb-5 font-weight-light text-uppercase" *ngIf="!isAddMode">Editar Local</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <input type="text" formControlName="title" class="form-control" placeholder="Titulo"
+          class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+          <div *ngIf="f.title.errors.required">Insira o Titulo</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <input type="text" formControlName="place" class="form-control" placeholder="Local"
+          class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.place.errors }" />
+        <div *ngIf="submitted && f.place.errors" class="invalid-feedback">
+          <div *ngIf="f.place.errors.required">Insira o local</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <input type="text" formControlName="street" class="form-control" placeholder="Rua"
+          class="form-control rounded-pill form-control-lg"
+          [ngClass]="{ 'is-invalid': submitted && f.street.errors }" />
+        <div *ngIf="submitted && f.street.errors" class="invalid-feedback">
+          <div *ngIf="f.street.errors.required">Insira a Rua</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <input type="text" formControlName="district" class="form-control" placeholder="Bairro"
+          class="form-control rounded-pill form-control-lg"
+          [ngClass]="{ 'is-invalid': submitted && f.district.errors }" />
+        <div *ngIf="submitted && f.district.errors" class="invalid-feedback">
+          <div *ngIf="f.district.errors.required">Insira o Bairro</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <input type="text" formControlName="city" class="form-control" placeholder="Cidade"
+          class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+        <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+          <div *ngIf="f.city.errors.required">Insira a Cidade</div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <input type="text" formControlName="state" class="form-control" placeholder="Estado"
+          class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
+        <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+          <div *ngIf="f.state.errors.required">Insira o Estado</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button [disabled]="loading" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
+        style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Salvar
+      </button>
+      <button routerLink="/admin/places" class="btn mt-3 rounded-pill btn-lg btn-cancel text-uppercase"
+        style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">Cancelar</button>
+    </div>
+  </form>
+</div>
