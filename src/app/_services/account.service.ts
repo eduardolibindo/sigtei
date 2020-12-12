@@ -6,6 +6,7 @@ import { map, finalize } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { Account } from '../_models';
+import { Places } from '../_models';
 
 const baseUrl = `${environment.apiUrl}/accounts`;
 
@@ -14,16 +15,26 @@ export class AccountService {
   private accountSubject: BehaviorSubject<Account>;
   public account: Observable<Account>;
 
+  private placesSubject: BehaviorSubject<Places>;
+  public places: Observable<Places>;
+
   constructor(
     private router: Router,
     private http: HttpClient
   ) {
     this.accountSubject = new BehaviorSubject<Account>(null);
     this.account = this.accountSubject.asObservable();
+
+    this.placesSubject = new BehaviorSubject<Places>(null);
+    this.places = this.placesSubject.asObservable();
   }
 
   public get accountValue(): Account {
     return this.accountSubject.value;
+  }
+
+  public get placesValue(): Places {
+    return this.placesSubject.value;
   }
 
   login(email: string, password: string) {
@@ -72,19 +83,31 @@ export class AccountService {
   }
 
   getAll() {
-    return this.http.get<Account[]>(baseUrl);
+    return this.http.get<Account[]>(`${baseUrl}/account`);
+  }
+
+  getplaceAll() {
+    return this.http.get<Places[]>(`${baseUrl}/place`);
   }
 
   getById(id: string) {
-    return this.http.get<Account>(`${baseUrl}/${id}`);
+    return this.http.get<Account>(`${baseUrl}/account/${id}`);
+  }
+
+  getplaceById(id: string) {
+    return this.http.get<Places>(`${baseUrl}/place/${id}`);
   }
 
   create(params) {
-    return this.http.post(baseUrl, params);
+    return this.http.post(`${baseUrl}/account`, params);
+  }
+
+  createPlace(params) {
+    return this.http.post(`${baseUrl}/place`, params);
   }
 
   update(id, params) {
-    return this.http.put(`${baseUrl}/${id}`, params)
+    return this.http.put(`${baseUrl}/account/${id}`, params)
       .pipe(map((account: any) => {
         // update the current account if it was updated
         if (account.id === this.accountValue.id) {
@@ -96,14 +119,31 @@ export class AccountService {
       }));
   }
 
+  updatePlace(id, params) {
+    return this.http.put(`${baseUrl}/place/${id}`, params)
+      .pipe(map((places: any) => {
+        // update the current places if it was updated
+        if (places.id === this.placesValue.id) {
+          // publish updated places to subscribers
+          places = { ...this.placesValue, ...places };
+          this.placesSubject.next(places);
+        }
+        return places;
+      }));
+  }
+
   delete(id: string) {
-    return this.http.delete(`${baseUrl}/${id}`)
+    return this.http.delete(`${baseUrl}/account/${id}`)
       .pipe(finalize(() => {
         // auto logout if the logged in account was deleted
         if (id === this.accountValue.id) {
           this.logout();
         }
       }));
+  }
+
+  deletePlace(id: string) {
+    return this.http.delete(`${baseUrl}/place/${id}`);
   }
 
   // helper methods

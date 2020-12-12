@@ -17,7 +17,6 @@ import { fakeBackendProvider } from './_helpers';
 import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor, appInitializer } from './_helpers';
 import { AccountService } from './_services/account.service';
-import { PlacesService } from './_services/places.service';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { AlertComponent } from './_components';

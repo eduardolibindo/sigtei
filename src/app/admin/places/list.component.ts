@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { PlacesService } from './../../_services/places.service';
+import { AccountService } from './../../_services/account.service';
 
 
 @Component({
@@ -9,23 +9,23 @@ import { PlacesService } from './../../_services/places.service';
   styleUrls: ['./list.component.css', './main.css']
 })
 export class ListComponent implements OnInit {
-    places: any[];
+  places: any[];
 
-    constructor(private placesService: PlacesService) {}
+  constructor(private accountService: AccountService) { }
 
-    ngOnInit() {
-        this.placesService.getAll()
-            .pipe(first())
-            .subscribe(places => this.places = places);
-    }
+  ngOnInit() {
+    this.accountService.getplaceAll()
+      .pipe(first())
+      .subscribe(places => this.places = places);
+  }
 
-    deletePlaces(id: string) {
-        const place = this.places.find(x => x.id === id);
-        place.isDeleting = true;
-        this.placesService.delete(id)
-            .pipe(first())
-            .subscribe(() => {
-                this.places = this.places.filter(x => x.id !== id)
-            });
-    }
+  deletePlaces(id: string) {
+    const place = this.places.find(x => x.id === id);
+    place.isDeleting = true;
+    this.accountService.deletePlace(id)
+      .pipe(first())
+      .subscribe(() => {
+        this.places = this.places.filter(x => x.id !== id)
+      });
+  }
 }

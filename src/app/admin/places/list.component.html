@@ -44,36 +44,36 @@
             </div>
           </div>
 
-          <div *ngFor="let places of places" class="row">
+          <div *ngFor="let place of places" class="row">
             <div class="cell" data-title="id">
-              {{places.id}}
+              {{place.id}}
             </div>
             <div class="cell" data-title="Titulo">
-              {{places.title}}
+              {{place.title}}
             </div>
             <div class="cell" data-title="Lugar">
-              {{places.place}}
+              {{place.place}}
             </div>
             <div class="cell" data-title="Rua">
-              {{places.street}}
+              {{place.street}}
             </div>
             <div class="cell" data-title="Bairro">
-              {{places.district}}
+              {{place.district}}
             </div>
             <div class="cell" data-title="Cidade">
-              {{places.city}}
+              {{place.city}}
             </div>
             <div class="cell" data-title="Estado">
-              {{places.state}}
+              {{place.state}}
             </div>
             <div class="cell" style="white-space: nowrap">
 
-              <button routerLink="edit/{{places.id}}" class="btn btn-sm btn-submit mr-3">Editar</button>
+              <button routerLink="edit/{{place.id}}" class="btn btn-sm btn-submit mr-3">Editar</button>
 
-              <button (click)="deletePlaces(places.id)" class="btn btn-sm btn-delete mr-1"
-                [disabled]="places.isDeleting">
-                <span *ngIf="places.isDeleting" class="spinner-border spinner-border-sm"></span>
-                <span *ngIf="!places.isDeleting">Deletar</span>
+              <button (click)="deletePlaces(place.id)" class="btn btn-sm btn-delete mr-1"
+                [disabled]="place.isDeleting">
+                <span *ngIf="place.isDeleting" class="spinner-border spinner-border-sm"></span>
+                <span *ngIf="!place.isDeleting">Deletar</span>
               </button>
 
             </div>
