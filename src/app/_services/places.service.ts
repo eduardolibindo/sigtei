@@ -11,7 +11,6 @@ const baseUrl = `${environment.apiUrl}/places`;
 
 @Injectable({ providedIn: 'root' })
 export class PlacesService {
-
   private placesSubject: BehaviorSubject<Places>;
   public places: Observable<Places>;
 
