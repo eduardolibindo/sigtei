@@ -20,8 +20,8 @@ export class ListComponent implements OnInit {
     }
 
     deletePlaces(id: string) {
-        const places = this.places.find(x => x.id === id);
-        places.isDeleting = true;
+        const place = this.places.find(x => x.id === id);
+        place.isDeleting = true;
         this.placesService.delete(id)
             .pipe(first())
             .subscribe(() => {

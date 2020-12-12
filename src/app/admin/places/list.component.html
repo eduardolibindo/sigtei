@@ -3,7 +3,7 @@
   <div class="login-form text-center">
     <h2 class="mb-3 font-weight-light text-uppercase text-center">Locais</h2>
     <p class="mt-3 font-weight-normal text-center">
-      Todas as contas seguras (somente administrador):
+      Todas os Locais seguros (somente administrador):
     </p>
     <button routerLink="add" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
       style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">Criar Local</button>
@@ -44,36 +44,36 @@
             </div>
           </div>
 
-          <div *ngFor="let value of places" class="row">
+          <div *ngFor="let places of places" class="row">
             <div class="cell" data-title="id">
-              {{value.id}}
+              {{places.id}}
             </div>
             <div class="cell" data-title="Titulo">
-              {{value.title}}
+              {{places.title}}
             </div>
             <div class="cell" data-title="Lugar">
-              {{value.place}}
+              {{places.place}}
             </div>
             <div class="cell" data-title="Rua">
-              {{value.street}}
+              {{places.street}}
             </div>
             <div class="cell" data-title="Bairro">
-              {{value.district}}
+              {{places.district}}
             </div>
             <div class="cell" data-title="Cidade">
-              {{value.city}}
+              {{places.city}}
             </div>
             <div class="cell" data-title="Estado">
-              {{value.state}}
+              {{places.state}}
             </div>
             <div class="cell" style="white-space: nowrap">
 
-              <button routerLink="edit/{{value.id}}" class="btn btn-sm btn-submit mr-3">Editar</button>
+              <button routerLink="edit/{{places.id}}" class="btn btn-sm btn-submit mr-3">Editar</button>
 
-              <button (click)="deletePlaces(value.id)" class="btn btn-sm btn-delete mr-1"
-                [disabled]="value.isDeleting">
-                <span *ngIf="value.isDeleting" class="spinner-border spinner-border-sm"></span>
-                <span *ngIf="!value.isDeleting">Deletar</span>
+              <button (click)="deletePlaces(places.id)" class="btn btn-sm btn-delete mr-1"
+                [disabled]="places.isDeleting">
+                <span *ngIf="places.isDeleting" class="spinner-border spinner-border-sm"></span>
+                <span *ngIf="!places.isDeleting">Deletar</span>
               </button>
 
             </div>
