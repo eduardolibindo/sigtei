@@ -87,7 +87,7 @@ export class AccountService {
   }
 
   getplaceAll() {
-    return this.http.get<Places[]>(baseUrl);
+    return this.http.get<Places[]>(`${baseUrl}/place-all`);
   }
 
   getById(id: string) {
@@ -95,7 +95,7 @@ export class AccountService {
   }
 
   getplaceById(id: string) {
-    return this.http.get<Places>(`${baseUrl}/${id}`);
+    return this.http.get<Places>(`${baseUrl}/place-by-id/${id}`);
   }
 
   create(params) {
@@ -103,7 +103,7 @@ export class AccountService {
   }
 
   createPlace(params) {
-    return this.http.post(baseUrl, params);
+    return this.http.post(`${baseUrl}/place-all`, params);
   }
 
   update(id, params) {
@@ -120,7 +120,7 @@ export class AccountService {
   }
 
   updatePlace(id, params) {
-    return this.http.put(`${baseUrl}/${id}`, params)
+    return this.http.put(`${baseUrl}/update-place/${id}`, params)
       .pipe(map((places: any) => {
         // update the current places if it was updated
         if (places.id === this.placesValue.id) {
@@ -143,7 +143,7 @@ export class AccountService {
   }
 
   deletePlace(id: string) {
-    return this.http.delete(`${baseUrl}/${id}`);
+    return this.http.delete(`${baseUrl}/delete-place/${id}`);
   }
 
   // helper methods
