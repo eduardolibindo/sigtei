@@ -9,6 +9,7 @@ import { Account } from '../_models';
 import { Places } from '../_models';
 
 const baseUrl = `${environment.apiUrl}/accounts`;
+const placesUrl = `${environment.apiUrl}/places`;
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -87,7 +88,7 @@ export class AccountService {
   }
 
   getplaceAll() {
-    return this.http.get<Places[]>(`${baseUrl}/place-all`);
+    return this.http.get<Places[]>(placesUrl);
   }
 
   getById(id: string) {
@@ -95,7 +96,7 @@ export class AccountService {
   }
 
   getplaceById(id: string) {
-    return this.http.get<Places>(`${baseUrl}/place-by-id/${id}`);
+    return this.http.get<Places>(`${placesUrl}/${id}`);
   }
 
   create(params) {
@@ -103,7 +104,7 @@ export class AccountService {
   }
 
   createPlace(params) {
-    return this.http.post(`${baseUrl}/place-all`, params);
+    return this.http.post(placesUrl, params);
   }
 
   update(id, params) {
@@ -120,7 +121,7 @@ export class AccountService {
   }
 
   updatePlace(id, params) {
-    return this.http.put(`${baseUrl}/update-place/${id}`, params)
+    return this.http.put(`${placesUrl}/${id}`, params)
       .pipe(map((places: any) => {
         // update the current places if it was updated
         if (places.id === this.placesValue.id) {
@@ -143,7 +144,7 @@ export class AccountService {
   }
 
   deletePlace(id: string) {
-    return this.http.delete(`${baseUrl}/delete-place/${id}`);
+    return this.http.delete(`${placesUrl}/${id}`);
   }
 
   // helper methods
