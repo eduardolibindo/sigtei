@@ -52,7 +52,7 @@ export class AccountService {
     this.stopRefreshTokenTimer();
     this.accountSubject.next(null);
     this.router.navigate(['/account/login']);
-  }
+}
 
   refreshToken() {
     return this.http.post<any>(`${baseUrl}/refresh-token`, {}, { withCredentials: true })
