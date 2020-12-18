@@ -9,23 +9,23 @@ import { AccountService } from './../../_services/account.service';
   styleUrls: ['./list.component.css', './main.css']
 })
 export class ListComponent implements OnInit {
-  places: any[];
+  schedules: any[];
 
   constructor(private accountService: AccountService) { }
 
   ngOnInit() {
-    this.accountService.getplaceAll()
+    this.accountService.getscheduleAll()
       .pipe(first())
-      .subscribe(places => this.places = places);
+      .subscribe(schedules => this.schedules = schedules);
   }
 
-  deletePlaces(id: string) {
-    const place = this.places.find(x => x.id === id);
-    place.isDeleting = true;
-    this.accountService.deletePlace(id)
+  deleteSchedules(id: string) {
+    const schedule = this.schedules.find(x => x.id === id);
+    schedule.isDeleting = true;
+    this.accountService.deleteSchedule(id)
       .pipe(first())
       .subscribe(() => {
-        this.places = this.places.filter(x => x.id !== id);
+        this.schedules = this.schedules.filter(x => x.id !== id);
       });
   }
 }

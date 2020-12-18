@@ -7,9 +7,11 @@ import { map, finalize } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Account } from '../_models';
 import { Places } from '../_models';
+import { Schedules } from '../_models';
 
 const baseUrl = `${environment.apiUrl}/accounts`;
 const placesUrl = `${environment.apiUrl}/places`;
+const schedulesUrl = `${environment.apiUrl}/schedules`;
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -18,6 +20,9 @@ export class AccountService {
 
   private placesSubject: BehaviorSubject<Places>;
   public places: Observable<Places>;
+
+  private schedulesSubject: BehaviorSubject<Schedules>;
+  public schedules: Observable<Schedules>;
 
   constructor(
     private router: Router,
@@ -28,6 +33,9 @@ export class AccountService {
 
     this.placesSubject = new BehaviorSubject<Places>(null);
     this.places = this.placesSubject.asObservable();
+
+    this.schedulesSubject = new BehaviorSubject<Schedules>(null);
+    this.schedules = this.schedulesSubject.asObservable();
   }
 
   public get accountValue(): Account {
@@ -36,6 +44,10 @@ export class AccountService {
 
   public get placesValue(): Places {
     return this.placesSubject.value;
+  }
+
+  public get schedulesValue(): Schedules {
+    return this.schedulesSubject.value;
   }
 
   login(email: string, password: string) {
@@ -91,6 +103,10 @@ export class AccountService {
     return this.http.get<Places[]>(placesUrl);
   }
 
+  getscheduleAll() {
+    return this.http.get<Schedules[]>(schedulesUrl);
+  }
+
   getById(id: string) {
     return this.http.get<Account>(`${baseUrl}/${id}`);
   }
@@ -99,12 +115,20 @@ export class AccountService {
     return this.http.get<Places>(`${placesUrl}/${id}`);
   }
 
+  getscheduleById(id: string) {
+    return this.http.get<Schedules>(`${schedulesUrl}/${id}`);
+  }
+
   create(params) {
     return this.http.post(baseUrl, params);
   }
 
   createPlace(params) {
     return this.http.post(placesUrl, params);
+  }
+
+  createSchedule(params) {
+    return this.http.post(schedulesUrl, params);
   }
 
   update(id, params) {
@@ -133,6 +157,19 @@ export class AccountService {
       }));
   }
 
+  updateSchedule(id, params) {
+    return this.http.put(`${schedulesUrl}/${id}`, params)
+      .pipe(map((schedules: any) => {
+        // update the current account if it was updated
+        if (schedules.id === this.schedulesValue.id) {
+          // publish updated account to subscribers
+          schedules = { ...this.accountValue, ...schedules };
+          this.accountSubject.next(schedules);
+        }
+        return schedules;
+      }));
+  }
+
   delete(id: string) {
     return this.http.delete(`${baseUrl}/${id}`)
       .pipe(finalize(() => {
@@ -145,6 +182,10 @@ export class AccountService {
 
   deletePlace(id: string) {
     return this.http.delete(`${placesUrl}/${id}`);
+  }
+
+  deleteSchedule(id: string) {
+    return this.http.delete(`${schedulesUrl}/${id}`);
   }
 
   // helper methods

@@ -2,6 +2,17 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-4 login-form text-center">
     <h2 class="mb-5 font-weight-light text-uppercase" *ngIf="isAddMode">Criar Local</h2>
     <h2 class="mb-5 font-weight-light text-uppercase" *ngIf="!isAddMode">Editar Local</h2>
+    <div class="form-group">
+      <select formControlName="type" class="form-control" class="form-control rounded-pill form-control-lg"
+        [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+        <option value="" disabled selected>tipo</option>
+        <option value="Saida">Saida</option>
+        <option value="Chegada">Chegada</option>
+      </select>
+      <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+        <div *ngIf="f.type.errors.required">Selecione o tipo</div>
+      </div>
+    </div>
     <div class="form-row">
       <div class="form-group">
         <input type="text" formControlName="title" class="form-control" placeholder="Titulo"

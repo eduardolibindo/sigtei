@@ -35,15 +35,11 @@ export class AddEditComponent implements OnInit {
     this.form = this.formBuilder.group({
       type: ['', Validators.required],
       title: ['', Validators.required],
-      place: ['', Validators.required],
-      street: ['', Validators.required],
-      district: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required]
+      schedule: ['', Validators.required],
     });
 
     if (!this.isAddMode) {
-      this.accountService.getplaceById(this.id)
+      this.accountService.getscheduleById(this.id)
         .pipe(first())
         .subscribe(x => this.form.patchValue(x));
     }
@@ -65,14 +61,14 @@ export class AddEditComponent implements OnInit {
 
     this.loading = true;
     if (this.isAddMode) {
-      this.createPlaces();
+      this.createSchedules();
     } else {
-      this.updatePlaces();
+      this.updateSchedules();
     }
   }
 
-  private createPlaces() {
-    this.accountService.createPlace(this.form.value)
+  private createSchedules() {
+    this.accountService.createSchedule(this.form.value)
       .pipe(first())
       .subscribe({
         next: () => {
@@ -86,8 +82,8 @@ export class AddEditComponent implements OnInit {
       });
   }
 
-  private updatePlaces() {
-    this.accountService.updatePlace(this.id, this.form.value)
+  private updateSchedules() {
+    this.accountService.updateSchedule(this.id, this.form.value)
       .pipe(first())
       .subscribe({
         next: () => {
