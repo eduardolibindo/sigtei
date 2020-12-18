@@ -133,14 +133,14 @@ export class AccountService {
 
   update(id, params) {
     return this.http.put(`${baseUrl}/${id}`, params)
-      .pipe(map((account: any) => {
+      .pipe(map((accounts: any) => {
         // update the current account if it was updated
-        if (account.id === this.accountValue.id) {
+        if (accounts.id === this.accountValue.id) {
           // publish updated account to subscribers
-          account = { ...this.accountValue, ...account };
-          this.accountSubject.next(account);
+          accounts = { ...this.accountValue, ...accounts };
+          this.accountSubject.next(accounts);
         }
-        return account;
+        return accounts;
       }));
   }
 
