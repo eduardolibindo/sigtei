@@ -1,10 +1,25 @@
-import { Component } from '@angular/core';
+import { Schedules } from './../_models/schedules';
+import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
+import { AccountService } from '../_services/account.service';
 
-import { AccountService } from '../_services';
+@Component({
+  selector: 'app-details',
+  templateUrl: './details.component.html',
+  styleUrls: ['./details.component.css']
+})
 
-@Component({ templateUrl: 'details.component.html' })
 export class DetailsComponent {
-    account = this.accountService.accountValue;
+  Schedule: Schedules;
+  schedules: any[];
 
-    constructor(private accountService: AccountService) { }
+  // account = this.accountService.accountValue;
+  constructor(private accountService: AccountService) {
+    this.accountService.schedules.subscribe(x => this.Schedule = x);
+  }
+  ngOnInit() {
+    this.accountService.getscheduleAll()
+      .pipe(first())
+      .subscribe(schedules => this.schedules = schedules);
+  }
 }

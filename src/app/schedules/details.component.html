@@ -1,20 +1,34 @@
 <h1>Horários</h1>
-<h4>Horário de partida</h4>
-<p>
-  <strong>Horário: </strong>17:30<br />
-</p>
+<div *ngFor="let schedule of schedules">
+  <div *ngIf="schedule.type === 'Partida' ">
+    <h4>Horário de {{schedule.type}}</h4>
+    <p>
+      <strong>Horário: </strong>{{schedule.schedule}}<br />
+    </p>
+    <span></span><br />
+  </div>
+</div>
 
 <span></span><br />
 
-<h4>Horário de chegada</h4>
-<p>
-  <strong>Horário: </strong>19:30<br />
-</p>
+<div *ngFor="let schedule of schedules">
+  <div *ngIf="schedule.type === 'Chegada' ">
+    <h4>Horário de {{schedule.type}}</h4>
+    <p>
+      <strong>Horário: </strong>{{schedule.schedule}}<br />
+    </p>
+    <span></span><br />
+  </div>
+</div>
 
 <span></span><br />
 
-<h4>Horário de saida</h4>
-<p>
-  <strong>Horário: </strong>22:50<br />
-</p>
-
+<div *ngFor="let schedule of schedules">
+  <div *ngIf="schedule.type === 'Saida' ">
+    <h4>Horário de {{schedule.type}}</h4>
+    <p>
+      <strong>Horário: </strong>{{schedule.schedule}}<br />
+    </p>
+    <span></span><br />
+  </div>
+</div>
