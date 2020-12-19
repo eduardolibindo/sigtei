@@ -1,20 +1,58 @@
 <h1>Lista de Estudantes</h1>
-<h4>Lista de Estudantes de partida</h4>
-<p>
-  <strong>Horário: </strong>17:30<br />
-</p>
+<div>
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table">
+        <div class="row header">
+          <div class="cell" style="width:30%">
+            Nome
+          </div>
+          <div class="cell" style="width:30%">
+            RG
+          </div>
+          <div class="cell" style="width:30%">
+            Intituição
+          </div>
+          <div class="cell" style="width:30%">
+            Curso
+          </div>
+          <div class="cell" style="width:30%">
+            Endereço
+          </div>
+          <div class="cell" style="width:30%">
 
-<span></span><br />
+          </div>
+        </div>
 
-<h4>Lista de Estudantes de chegada</h4>
-<p>
-  <strong>Horário: </strong>19:30<br />
-</p>
+        <div *ngFor="let list of lists" class="row">
+          <div class="cell" data-title="Nome">
+            {{list.title}} {{list.firstName}} {{list.lastName}}
+          </div>
+          <div class="cell" data-title="Email">
+            {{list.rg}}
+          </div>
+          <div class="cell" data-title="Email">
+            {{list.institution}}
+          </div>
+          <div class="cell" data-title="Email">
+            {{list.course}}
+          </div>
+          <div class="cell" data-title="Tipo de Usuário">
+            {{list.address}}
+          </div>
+          <div class="cell" style="white-space: nowrap">
 
-<span></span><br />
+            <button routerLink="edit/{{list.id}}" class="btn btn-sm btn-submit mr-3">Editar</button>
 
-<h4>Lista de Estudantes de saida</h4>
-<p>
-  <strong>Horário: </strong>22:50<br />
-</p>
+            <button (click)="deleteLists(list.id)" class="btn btn-sm btn-delete mr-1"
+              [disabled]="list.isDeleting">
+              <span *ngIf="list.isDeleting" class="spinner-border spinner-border-sm"></span>
+              <span *ngIf="!list.isDeleting">Deletar</span>
+            </button>
 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

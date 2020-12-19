@@ -14,7 +14,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './scan.component.html',
   styleUrls: ['./scan.component.scss', './scan.component.css']
 })
-export class ScanComponent {
+export class ScanComponent implements OnInit {
   account = this.accountService.accountValue;
   list: any[];
   availableDevices: MediaDeviceInfo[];
@@ -41,7 +41,7 @@ export class ScanComponent {
     private accountService: AccountService,
     private studentlistService: StudentlistService) { }
 
-  gOnInit() {
+  ngOnInit() {
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
       firstName: ['', Validators.required],
