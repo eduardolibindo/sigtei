@@ -18,11 +18,11 @@
 <div class="card text-center">
   <h1 class="mt-1 font-weight-light text-uppercase text-center">ID Estudantil</h1>
   <div>
-    <ngx-qrcode [elementType]="elementType" [errorCorrectionLevel]="correctionLevel" [value]="dataString" cssClass="bshadow">
+    <ngx-qrcode [elementType]="elementType" [errorCorrectionLevel]="correctionLevel" [value]="value" cssClass="bshadow">
     </ngx-qrcode>
   </div>
   <div class="mt-3 font-weight-normal">
-    <!-- <p class="text-uppercase text-center"><strong>ID: </strong>{{account.jwtToken}}<br  /></p> -->
+    <p class="text-uppercase text-center"><strong>ID: </strong>{{account.id}}<br  /></p>
     <p class="text-uppercase text-center"><strong>Nome: </strong>{{account.firstName}} {{account.lastName}}</p>
   </div>
 </div>
