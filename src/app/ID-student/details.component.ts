@@ -11,7 +11,7 @@ export class DetailsComponent {
     account = this.accountService.accountValue;
 
     elementType = NgxQrcodeElementTypes.URL;
-    correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+    correctionLevel = NgxQrcodeErrorCorrectionLevels.MEDIUM;
     value = this.account.id;
 
     data = [{
