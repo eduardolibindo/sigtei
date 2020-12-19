@@ -73,9 +73,16 @@
         </button>
       </header>
 
-      <zxing-scanner [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
-        [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
-        (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
+      <zxing-scanner
+        [torch]="torchEnabled"
+        [(device)]="currentDevice"
+        (scanSuccess)="onCodeResult($event)"
+        [formats]="formatsEnabled"
+        [tryHarder]="tryHarder"
+        (permissionResponse)="onHasPermission($event)"
+        (camerasFound)="onCamerasFound($event)"
+        (torchCompatible)="onTorchCompatible($event)">
+      </zxing-scanner>
 
       <section class="results" *ngIf="qrResultString">
         <div>
