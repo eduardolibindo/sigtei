@@ -8,6 +8,20 @@ import { FormatsDialogComponent } from '../formats-dialog/formats-dialog.compone
 import { AccountService } from '../../_services/account.service';
 import { StudentlistService } from 'src/app/_services/student-list.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from 'src/app/_services';
+
+interface MyObj {
+  ID: string;
+  TITLE: string;
+  FIRSTNAME: string;
+  LASTNAME: string;
+  EMAIL: string;
+  RG: string;
+  INSTITUTION: string;
+  COURSE: string;
+  PHONE: string;
+  ADDRESS: string;
+}
 
 @Component({
   selector: 'app-scan',
@@ -16,7 +30,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ScanComponent implements OnInit {
   account = this.accountService.accountValue;
-  list: any[];
+  // list: any[];
   availableDevices: MediaDeviceInfo[];
   currentDevice: MediaDeviceInfo = null;
 
@@ -28,9 +42,12 @@ export class ScanComponent implements OnInit {
   ];
 
   form: FormGroup;
+  loading = false;
+  submitted = false;
   hasDevices: boolean;
   hasPermission: boolean;
   qrResultString: string;
+  estudante: string;
   torchEnabled = false;
   torchAvailable$ = new BehaviorSubject<boolean>(false);
   tryHarder = false;
@@ -39,20 +56,21 @@ export class ScanComponent implements OnInit {
     private formBuilder: FormBuilder,
     private readonly _dialog: MatDialog,
     private accountService: AccountService,
-    private studentlistService: StudentlistService) { }
+    private studentlistService: StudentlistService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      title: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      rg: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      institution: ['', Validators.required],
-      course: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
-      address: ['', Validators.required]
-    });
+    // this.form = this.formBuilder.group({
+    //   title: [this.account.title, Validators.required],
+    //   firstName: [this.account.firstName, Validators.required],
+    //   lastName: [this.account.lastName, Validators.required],
+    //   email: [this.account.email, [Validators.required, Validators.email]],
+    //   rg: [this.account.rg, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+    //   institution: [this.account.institution, Validators.required],
+    //   course: [this.account.course, Validators.required],
+    //   phone: [this.account.phone, [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
+    //   address: [this.account.address, Validators.required]
+    // });
   }
 
   clearResult(): void {
@@ -67,9 +85,47 @@ export class ScanComponent implements OnInit {
   onCodeResult(resultString: string) {
     this.qrResultString = resultString;
 
-    this.accountService.getById(resultString).pipe(first()).subscribe(x => this.form.patchValue(x));
+    let list: MyObj = JSON.parse(this.qrResultString);
 
-    this.studentlistService.createStudentList(this.form.value);
+    this.form = this.formBuilder.group({
+      title: [list.TITLE, Validators.required],
+      firstName: [list.FIRSTNAME, Validators.required],
+      lastName: [list.LASTNAME, Validators.required],
+      email: [list.EMAIL, [Validators.required, Validators.email]],
+      rg: [list.RG, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      institution: [list.INSTITUTION, Validators.required],
+      course: [list.COURSE, Validators.required],
+      phone: [list.PHONE, [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
+      address: [list.ADDRESS, Validators.required]
+    });
+
+    this.onSubmit()
+  }
+
+  onSubmit() {
+    this.submitted = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.studentlistService.createStudentList(this.form.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.alertService.success('Atualização bem sucedida', { keepAfterRouteChange: true });
+          // this.router.navigate(['../'], { relativeTo: this.route });
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      });
 
   }
 
