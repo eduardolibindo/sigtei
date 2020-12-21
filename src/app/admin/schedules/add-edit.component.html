@@ -25,10 +25,10 @@
     </div>
     <div class="form-row">
       <div class="form-group">
-        <input type="text" formControlName="schedule" class="form-control" placeholder="Local"
+        <input type="text" formControlName="schedule" class="form-control" placeholder="Horário"
           class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.schedule.errors }" />
         <div *ngIf="submitted && f.schedule.errors" class="invalid-feedback">
-          <div *ngIf="f.schedule.errors.required">Insira o local</div>
+          <div *ngIf="f.schedule.errors.required">Insira o Horário</div>
         </div>
       </div>
     </div>
