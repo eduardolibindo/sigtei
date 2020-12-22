@@ -13,42 +13,33 @@
         <div *ngIf="f.type.errors.required">Selecione o tipo</div>
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group">
-        <input type="text" formControlName="title" class="form-control" placeholder="Titulo"
-          class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
-        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
-          <div *ngIf="f.title.errors.required">Insira o Titulo</div>
-        </div>
+    <div class="form-group">
+      <input type="text" formControlName="title" class="form-control" placeholder="Titulo"
+        class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+        <div *ngIf="f.title.errors.required">Insira o Titulo</div>
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group">
-        <input type="text" formControlName="place" class="form-control" placeholder="Local"
-          class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.place.errors }" />
-        <div *ngIf="submitted && f.place.errors" class="invalid-feedback">
-          <div *ngIf="f.place.errors.required">Insira o local</div>
-        </div>
+    <div class="form-group">
+      <input type="text" formControlName="place" class="form-control" placeholder="Local"
+        class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.place.errors }" />
+      <div *ngIf="submitted && f.place.errors" class="invalid-feedback">
+        <div *ngIf="f.place.errors.required">Insira o local</div>
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group">
-        <input type="text" formControlName="street" class="form-control" placeholder="Rua"
-          class="form-control rounded-pill form-control-lg"
-          [ngClass]="{ 'is-invalid': submitted && f.street.errors }" />
-        <div *ngIf="submitted && f.street.errors" class="invalid-feedback">
-          <div *ngIf="f.street.errors.required">Insira a Rua</div>
-        </div>
+    <div class="form-group">
+      <input type="text" formControlName="street" class="form-control" placeholder="Rua"
+        class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.street.errors }" />
+      <div *ngIf="submitted && f.street.errors" class="invalid-feedback">
+        <div *ngIf="f.street.errors.required">Insira a Rua</div>
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group">
-        <input type="text" formControlName="district" class="form-control" placeholder="Bairro"
-          class="form-control rounded-pill form-control-lg"
-          [ngClass]="{ 'is-invalid': submitted && f.district.errors }" />
-        <div *ngIf="submitted && f.district.errors" class="invalid-feedback">
-          <div *ngIf="f.district.errors.required">Insira o Bairro</div>
-        </div>
+    <div class="form-group">
+      <input type="text" formControlName="district" class="form-control" placeholder="Bairro"
+        class="form-control rounded-pill form-control-lg"
+        [ngClass]="{ 'is-invalid': submitted && f.district.errors }" />
+      <div *ngIf="submitted && f.district.errors" class="invalid-feedback">
+        <div *ngIf="f.district.errors.required">Insira o Bairro</div>
       </div>
     </div>
     <div class="form-row">
@@ -67,7 +58,6 @@
         </div>
       </div>
     </div>
-
     <div class="form-group">
       <button [disabled]="loading" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
         style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">

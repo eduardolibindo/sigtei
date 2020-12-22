@@ -7,7 +7,7 @@
     </p>
     <button routerLink="add" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
       style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">Criar Local</button>
-      <button routerLink="/admin" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
+    <button routerLink="/admin" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
       style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">Sair</button>
   </div>
 
@@ -18,25 +18,25 @@
         <div class="table">
 
           <div class="row header">
-            <div class="cell" style="width:10%">
+            <div class="cell" style="width:15%">
               Tipo
             </div>
-            <div class="cell" style="width:20%">
+            <div class="cell" style="width:15%">
               Titulo
             </div>
-            <div class="cell" style="width:20%">
+            <div class="cell" style="width:15%">
               Lugar
             </div>
             <div class="cell" style="width:20%">
               Rua
             </div>
-            <div class="cell" style="width:10%">
+            <div class="cell" style="width:15%">
               Bairro
             </div>
-            <div class="cell" style="width:10%">
+            <div class="cell" style="width:15%">
               Cidade
             </div>
-            <div class="cell" style="width:10%">
+            <div class="cell" style="width:20%">
               Estado
             </div>
             <div class="cell" style="width:30%">
@@ -70,8 +70,7 @@
 
               <button routerLink="edit/{{place.id}}" class="btn btn-sm btn-submit mr-3">Editar</button>
 
-              <button (click)="deletePlaces(place.id)" class="btn btn-sm btn-delete mr-1"
-                [disabled]="place.isDeleting">
+              <button (click)="deletePlaces(place.id)" class="btn btn-sm btn-delete mr-1" [disabled]="place.isDeleting">
                 <span *ngIf="place.isDeleting" class="spinner-border spinner-border-sm"></span>
                 <span *ngIf="!place.isDeleting">Deletar</span>
               </button>

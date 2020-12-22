@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,16 +12,29 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/_services';
 
 interface MyObj {
-  ID: string;
-  TITLE: string;
-  FIRSTNAME: string;
-  LASTNAME: string;
-  EMAIL: string;
-  RG: string;
-  INSTITUTION: string;
-  COURSE: string;
-  PHONE: string;
-  ADDRESS: string;
+  id: string;
+  title: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  rg: string;
+  institution: string;
+  course: string;
+  phone: string;
+  address: string;
+}
+
+interface ReadonlyMyObj {
+  readonly id: string;
+  readonly title: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly email: string;
+  readonly rg: string;
+  readonly institution: string;
+  readonly course: string;
+  readonly phone: string;
+  readonly address: string;
 }
 
 @Component({
@@ -30,7 +44,6 @@ interface MyObj {
 })
 export class ScanComponent implements OnInit {
   account = this.accountService.accountValue;
-  // list: any[];
   availableDevices: MediaDeviceInfo[];
   currentDevice: MediaDeviceInfo = null;
 
@@ -57,7 +70,9 @@ export class ScanComponent implements OnInit {
     private readonly _dialog: MatDialog,
     private accountService: AccountService,
     private studentlistService: StudentlistService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     // this.form = this.formBuilder.group({
@@ -83,51 +98,71 @@ export class ScanComponent implements OnInit {
   }
 
   onCodeResult(resultString: string) {
-    this.qrResultString = resultString;
+    this.estudante = resultString;
 
-    let list: MyObj = JSON.parse(this.qrResultString);
-
-    this.form = this.formBuilder.group({
-      title: [list.TITLE, Validators.required],
-      firstName: [list.FIRSTNAME, Validators.required],
-      lastName: [list.LASTNAME, Validators.required],
-      email: [list.EMAIL, [Validators.required, Validators.email]],
-      rg: [list.RG, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      institution: [list.INSTITUTION, Validators.required],
-      course: [list.COURSE, Validators.required],
-      phone: [list.PHONE, [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
-      address: [list.ADDRESS, Validators.required]
+    let qrResultString: MyObj  = JSON.parse(resultString, (key, value) => {
+      if (typeof value === 'string') {
+        return value.toLowerCase();
+      }
+      return value;
     });
 
-    this.onSubmit()
-  }
+    let obj: ReadonlyMyObj = qrResultString;
 
-  onSubmit() {
-    this.submitted = true;
+    this.form = this.formBuilder.group({
+      title: [obj.title, Validators.required],
+      firstName: [obj.firstName, Validators.required],
+      lastName: [obj.lastName, Validators.required],
+      email: [obj.email, [Validators.required]],
+      rg: [obj.rg, [Validators.required]],
+      institution: [obj.institution, Validators.required],
+      course: [obj.course, Validators.required],
+      phone: [obj.phone, [Validators.required]],
+      address: [obj.address, Validators.required]
+    });
 
-    // reset alerts on submit
-    this.alertService.clear();
-
-    // stop here if form is invalid
-    if (this.form.invalid) {
-      return;
-    }
-
+    // this.onSubmit()
     this.loading = true;
     this.studentlistService.createStudentList(this.form.value)
       .pipe(first())
       .subscribe({
         next: () => {
-          this.alertService.success('Atualização bem sucedida', { keepAfterRouteChange: true });
-          // this.router.navigate(['../'], { relativeTo: this.route });
+          this.alertService.success('Cadastro bem sucedido', { keepAfterRouteChange: true });
+          this.router.navigate(['../'], { relativeTo: this.route });
         },
         error: error => {
           this.alertService.error(error);
           this.loading = false;
         }
       });
-
   }
+
+  // onSubmit() {
+  //   this.submitted = true;
+
+  //   // reset alerts on submit
+  //   this.alertService.clear();
+
+  //   // stop here if form is invalid
+  //   if (this.form.invalid) {
+  //     return;
+  //   }
+
+  //   this.loading = true;
+  //   this.studentlistService.createStudentList(this.form.value)
+  //     .pipe(first())
+  //     .subscribe({
+  //       next: () => {
+  //         this.alertService.success('Cadastro bem sucedido', { keepAfterRouteChange: true });
+  //         // this.router.navigate(['../'], { relativeTo: this.route });
+  //       },
+  //       error: error => {
+  //         this.alertService.error(error);
+  //         this.loading = false;
+  //       }
+  //     });
+
+  // }
 
   onDeviceSelectChange(selected: string) {
     const device = this.availableDevices.find(x => x.deviceId === selected);

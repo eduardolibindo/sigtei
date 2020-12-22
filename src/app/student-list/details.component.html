@@ -7,10 +7,10 @@
           <div class="cell" style="width:30%">
             Nome
           </div>
-          <div class="cell" style="width:30%">
+          <div class="cell" style="width:20%">
             RG
           </div>
-          <div class="cell" style="width:30%">
+          <div class="cell" style="width:20%">
             Intituição
           </div>
           <div class="cell" style="width:30%">
@@ -26,23 +26,23 @@
 
         <div *ngFor="let list of lists" class="row">
           <div class="cell" data-title="Nome">
-            {{list.title}} {{list.firstName}} {{list.lastName}}
+            {{list.firstName}} {{list.lastName}}
           </div>
-          <div class="cell" data-title="Email">
+          <div class="cell" data-title="RG">
             {{list.rg}}
           </div>
-          <div class="cell" data-title="Email">
+          <div class="cell" data-title="Instituição">
             {{list.institution}}
           </div>
-          <div class="cell" data-title="Email">
+          <div class="cell" data-title="Curso">
             {{list.course}}
           </div>
-          <div class="cell" data-title="Tipo de Usuário">
+          <div class="cell" data-title="Endereço">
             {{list.address}}
           </div>
           <div class="cell" style="white-space: nowrap">
 
-            <button routerLink="edit/{{list.id}}" class="btn btn-sm btn-submit mr-3">Editar</button>
+            <!-- <button routerLink="edit/{{list.id}}" class="btn btn-sm btn-submit mr-3">Editar</button> -->
 
             <button (click)="deleteLists(list.id)" class="btn btn-sm btn-delete mr-1"
               [disabled]="list.isDeleting">
