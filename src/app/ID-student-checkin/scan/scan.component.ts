@@ -110,6 +110,7 @@ export class ScanComponent implements OnInit {
     let obj: ReadonlyMyObj = qrResultString;
 
     this.form = this.formBuilder.group({
+      id: [obj.id, Validators.required],
       title: [obj.title, Validators.required],
       firstName: [obj.firstName, Validators.required],
       lastName: [obj.lastName, Validators.required],
