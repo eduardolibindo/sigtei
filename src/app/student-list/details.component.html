@@ -44,7 +44,7 @@
 
             <!-- <button routerLink="edit/{{list.id}}" class="btn btn-sm btn-submit mr-3">Editar</button> -->
 
-            <button (click)="deleteLists(list.idStudent)" class="btn btn-sm btn-delete mr-1"
+            <button (click)="deleteLists(list.id)" class="btn btn-sm btn-delete mr-1"
               [disabled]="list.isDeleting">
               <span *ngIf="list.isDeleting" class="spinner-border spinner-border-sm"></span>
               <span *ngIf="!list.isDeleting">Deletar</span>
