@@ -1,4 +1,5 @@
 export class StudentList {
+  id: string;
   idStudent: string;
   title: string;
   firstName: string;
@@ -9,5 +10,4 @@ export class StudentList {
   course: string;
   phone: string;
   address: string;
-
 }

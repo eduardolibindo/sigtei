@@ -21,13 +21,13 @@ export class DetailsComponent implements OnInit {
       .subscribe(lists => this.lists = lists);
   }
 
-  deleteLists(idStudent: string) {
-    const list = this.lists.find(x => x.idStudent === idStudent);
+  deleteLists(id: string) {
+    const list = this.lists.find(x => x.id === id);
     list.isDeleting = true;
-    this.studentlistService.deleteStudentList(idStudent)
+    this.studentlistService.deleteStudentList(id)
       .pipe(first())
       .subscribe(() => {
-        this.lists = this.lists.filter(x => x.idStudent !== idStudent);
+        this.lists = this.lists.filter(x => x.id !== id);
       });
   }
 }

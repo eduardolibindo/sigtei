@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'account', loadChildren: accountModule },
   { path: 'profile', loadChildren: profileModule, canActivate: [AuthGuard] },
-  { path: 'admin', loadChildren: adminModule, canActivate: [AuthGuard], data: { roles: [Role.Admin, Role.Motorista] } },
+  { path: 'admin', loadChildren: adminModule, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
   { path: 'places', loadChildren: placesModule, canActivate: [AuthGuard] },
   { path: 'schedules', loadChildren: schedulesModule, canActivate: [AuthGuard] },
   { path: 'id-student', loadChildren: idstudentModule, canActivate: [AuthGuard], data: { roles: [Role.Estudante, Role.Admin] } },

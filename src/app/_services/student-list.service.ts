@@ -31,19 +31,19 @@ export class StudentlistService {
     return this.http.get<StudentList[]>(studentlistUrl);
   }
 
-  getstudentlistById(idStudent: string) {
-    return this.http.get<StudentList>(`${studentlistUrl}/${idStudent}`);
+  getstudentlistById(id: string) {
+    return this.http.get<StudentList>(`${studentlistUrl}/${id}`);
   }
 
   createStudentList(params) {
     return this.http.post(studentlistUrl, params);
   }
 
-  updateStudentList(idStudent, params) {
-    return this.http.put(`${studentlistUrl}/${idStudent}`, params)
+  updateStudentList(id, params) {
+    return this.http.put(`${studentlistUrl}/${id}`, params)
       .pipe(map((studentlists: any) => {
         // update the current account if it was updated
-        if (studentlists.idStudent === this.studentlistValue.idStudent) {
+        if (studentlists.id === this.studentlistValue.id) {
           // publish updated account to subscribers
           studentlists = { ...this.studentlistValue, ...studentlists };
           this.studentlistSubject.next(studentlists);
@@ -52,8 +52,8 @@ export class StudentlistService {
       }));
   }
 
-  deleteStudentList(idStudent: string) {
-    return this.http.delete(`${studentlistUrl}/${idStudent}`);
+  deleteStudentList(id: string) {
+    return this.http.delete(`${studentlistUrl}/${id}`);
   }
 
 
