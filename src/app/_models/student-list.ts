@@ -1,5 +1,4 @@
 export class StudentList {
-  id: string;
   idStudent: string;
   title: string;
   firstName: string;
