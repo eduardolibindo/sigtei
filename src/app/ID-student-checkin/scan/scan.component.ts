@@ -12,7 +12,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/_services';
 
 interface MyObj {
-  id: string;
   idStudent: string;
   title: string;
   firstName: string;
@@ -26,7 +25,6 @@ interface MyObj {
 }
 
 interface ReadonlyMyObj {
-  readonly id: string;
   readonly idStudent: string;
   readonly title: string;
   readonly firstName: string;
