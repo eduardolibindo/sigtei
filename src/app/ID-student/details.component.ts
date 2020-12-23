@@ -15,7 +15,7 @@ export class DetailsComponent {
     value = this.account.id;
 
     data = {
-      id: this.account.id,
+      idStudent: this.account.id,
       title: this.account.title,
       firstName: this.account.firstName,
       lastName: this.account.lastName,

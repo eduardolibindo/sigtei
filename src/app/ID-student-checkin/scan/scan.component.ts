@@ -13,6 +13,7 @@ import { AlertService } from 'src/app/_services';
 
 interface MyObj {
   id: string;
+  idStudent: string;
   title: string;
   firstName: string;
   lastName: string;
@@ -26,6 +27,7 @@ interface MyObj {
 
 interface ReadonlyMyObj {
   readonly id: string;
+  readonly idStudent: string;
   readonly title: string;
   readonly firstName: string;
   readonly lastName: string;
@@ -75,17 +77,6 @@ export class ScanComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    // this.form = this.formBuilder.group({
-    //   title: [this.account.title, Validators.required],
-    //   firstName: [this.account.firstName, Validators.required],
-    //   lastName: [this.account.lastName, Validators.required],
-    //   email: [this.account.email, [Validators.required, Validators.email]],
-    //   rg: [this.account.rg, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-    //   institution: [this.account.institution, Validators.required],
-    //   course: [this.account.course, Validators.required],
-    //   phone: [this.account.phone, [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
-    //   address: [this.account.address, Validators.required]
-    // });
   }
 
   clearResult(): void {
@@ -110,7 +101,7 @@ export class ScanComponent implements OnInit {
     let obj: ReadonlyMyObj = qrResultString;
 
     this.form = this.formBuilder.group({
-      id: [obj.id, Validators.required],
+      idStudent: [obj.idStudent, Validators.required],
       title: [obj.title, Validators.required],
       firstName: [obj.firstName, Validators.required],
       lastName: [obj.lastName, Validators.required],
@@ -122,7 +113,6 @@ export class ScanComponent implements OnInit {
       address: [obj.address, Validators.required]
     });
 
-    // this.onSubmit()
     this.loading = true;
     this.studentlistService.createStudentList(this.form.value)
       .pipe(first())
@@ -137,33 +127,6 @@ export class ScanComponent implements OnInit {
         }
       });
   }
-
-  // onSubmit() {
-  //   this.submitted = true;
-
-  //   // reset alerts on submit
-  //   this.alertService.clear();
-
-  //   // stop here if form is invalid
-  //   if (this.form.invalid) {
-  //     return;
-  //   }
-
-  //   this.loading = true;
-  //   this.studentlistService.createStudentList(this.form.value)
-  //     .pipe(first())
-  //     .subscribe({
-  //       next: () => {
-  //         this.alertService.success('Cadastro bem sucedido', { keepAfterRouteChange: true });
-  //         // this.router.navigate(['../'], { relativeTo: this.route });
-  //       },
-  //       error: error => {
-  //         this.alertService.error(error);
-  //         this.loading = false;
-  //       }
-  //     });
-
-  // }
 
   onDeviceSelectChange(selected: string) {
     const device = this.availableDevices.find(x => x.deviceId === selected);
