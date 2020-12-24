@@ -1,15 +1,12 @@
-<h1>Lista de Estudantes</h1>
 <div>
   <div class="container-table100">
     <div class="wrap-table100" id="pdfTable" #pdfTable>
       <h1>Lista de Estudantes</h1>
       <p>{{dataTime}}</p>
-      <p>{{dataTime2}}</p>
-      <p>{{dataTime3}}</p>
       <table class="table">
         <thead class="row header">
-          <tr>
-            <th class="cell" style="width:30%">
+          <tr class="text-center">
+            <th class="cell" style="width:20%">
               Nome
             </th>
             <th class="cell" style="width:20%">
@@ -18,20 +15,20 @@
             <th class="cell" style="width:20%">
               Intituição
             </th>
-            <th class="cell" style="width:30%">
+            <th class="cell" style="width:20%">
               Curso
             </th>
-            <th class="cell" style="width:30%">
+            <th class="cell" style="width:20%">
               Endereço
             </th>
-            <th class="cell" style="width:30%">
-
+            <th class="cell" style="width:20%">
+              Opções
             </th>
           </tr>
         </thead>
 
         <tbody *ngFor="let list of lists" class="row">
-          <tr>
+          <tr class="text-center">
             <td class="cell" data-title="Nome">
               {{list.firstName}} {{list.lastName}}
             </td>
@@ -47,7 +44,7 @@
             <td class="cell" data-title="Endereço">
               {{list.address}}
             </td>
-            <td class="cell" style="white-space: nowrap">
+            <td class="cell" >
 
               <!-- <button routerLink="edit/{{list.id}}" class="btn btn-sm btn-submit mr-3">Editar</button> -->
 

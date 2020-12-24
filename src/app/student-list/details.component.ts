@@ -23,9 +23,11 @@ export class DetailsComponent implements OnInit {
   constructor(private accountService: AccountService, private studentlistService: StudentlistService) {
   }
 
-  dataTime2 = moment().locale()
-  dataTime = moment().format('LLLL');
-  dataTime3 = new Date();
+  // dataTime2 = moment().locale()
+  // dataTime = moment().format('LLLL');
+  // dataTime3 = new Date();
+
+ dataTime = new Date().toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   ngOnInit() {
     this.studentlistService.getstudentlistAll()
