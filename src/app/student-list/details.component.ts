@@ -7,7 +7,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import htmlToPdfmake from 'html-to-pdfmake';
-
+import * as moment from 'moment';
 import { AccountService } from '../_services';
 import { StudentlistService } from '../_services/student-list.service';
 
@@ -20,7 +20,12 @@ export class DetailsComponent implements OnInit {
   @ViewChild('pdfTable') pdfTable: ElementRef;
   lists: any[];
 
-  constructor(private accountService: AccountService, private studentlistService: StudentlistService) { }
+  constructor(private accountService: AccountService, private studentlistService: StudentlistService) {
+  }
+
+  dataTime2 = moment().locale()
+  dataTime = moment().format('LLLL');
+  dataTime3 = new Date();
 
   ngOnInit() {
     this.studentlistService.getstudentlistAll()
