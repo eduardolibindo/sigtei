@@ -1,6 +1,12 @@
 import { first } from 'rxjs/operators';
 import { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef  } from '@angular/core';
+
+import jsPDF from 'jspdf';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import htmlToPdfmake from 'html-to-pdfmake';
 
 import { AccountService } from '../_services';
 import { StudentlistService } from '../_services/student-list.service';
@@ -11,6 +17,7 @@ import { StudentlistService } from '../_services/student-list.service';
   styleUrls: ['./details.component.css', './main.css']
 })
 export class DetailsComponent implements OnInit {
+  @ViewChild('pdfTable') pdfTable: ElementRef;
   lists: any[];
 
   constructor(private accountService: AccountService, private studentlistService: StudentlistService) { }
@@ -29,5 +36,18 @@ export class DetailsComponent implements OnInit {
       .subscribe(() => {
         this.lists = this.lists.filter(x => x.id !== id);
       });
+  }
+
+  public downloadAsPDF() {
+    const doc = new jsPDF();
+    //get table html
+    const pdfTable = this.pdfTable.nativeElement;
+    //html to pdf format
+    var html = htmlToPdfmake(pdfTable.innerHTML);
+    var win = window.open('', '_self');
+
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).print({}, win);
+
   }
 }

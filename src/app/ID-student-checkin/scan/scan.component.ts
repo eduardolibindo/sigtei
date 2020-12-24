@@ -78,7 +78,8 @@ export class ScanComponent implements OnInit {
   }
 
   clearResult(): void {
-    this.qrResultString = null;
+    this.estudante = null;
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   onCamerasFound(devices: MediaDeviceInfo[]): void {
@@ -87,7 +88,7 @@ export class ScanComponent implements OnInit {
   }
 
   onCodeResult(resultString: string) {
-    this.estudante = resultString;
+    // this.estudante = resultString;
 
     let qrResultString: MyObj  = JSON.parse(resultString, (key, value) => {
       if (typeof value === 'string') {
@@ -97,6 +98,8 @@ export class ScanComponent implements OnInit {
     });
 
     let obj: ReadonlyMyObj = qrResultString;
+
+    this.estudante = '' + obj.firstName + ' ' + obj.lastName + '';
 
     this.form = this.formBuilder.group({
       idStudent: [obj.idStudent, Validators.required],

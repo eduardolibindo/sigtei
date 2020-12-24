@@ -27,8 +27,8 @@ import { RouterModule } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
 
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
-import { ZXingScannerModule } from 'angular-weblineindia-qrcode-scanner';;
-import { ServiceWorkerModule } from '@angular/service-worker'
+import { ZXingScannerModule } from 'angular-weblineindia-qrcode-scanner';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
