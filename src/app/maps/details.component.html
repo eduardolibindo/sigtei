@@ -6,24 +6,26 @@
       <strong>Vizualisar mapas</strong>
     </p>
 
-    <button routerLink="map-places" *ngIf="isEstudante"
-      class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
-      style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
-      Mapa Motorista
-    </button>
-
-    <button routerLink="map" *ngIf="isMotorista"
+    <button routerLink="map-places" *ngIf="isMotorista"
       class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
       style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
       Mapa locais alunos
     </button>
 
-    <button routerLink="map-places" *ngIf="isAdmin" class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
+    <button routerLink="map" *ngIf="isEstudante"
+      class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
       style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
       Mapa Motorista
     </button>
-    
-    <button routerLink="map" *ngIf="isAdmin" class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
+
+    <button routerLink="map-places" *ngIf="isAdmin"
+      class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
+      style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
+      Mapa Motorista
+    </button>
+
+    <button routerLink="map" *ngIf="isAdmin"
+      class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
       style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
       Mapa locais alunos
     </button>
