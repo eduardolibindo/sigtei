@@ -13,6 +13,7 @@ const schedulesModule = () => import('./schedules/schedules.module').then(x => x
 const idstudentcheckinModule = () => import('./ID-student-checkin/ID-student-checkin.module').then(x => x.IDstudentcheckinModule);
 const idstudentModule = () => import('./ID-student/ID-student.module').then(x => x.IDstudentModule);
 const studentlistModule = () => import('./student-list/student-list.module').then(x => x.StudentlistModule);
+const mapsModule = () => import('./maps/maps.module').then(x => x.MapsModule);
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -27,6 +28,7 @@ const routes: Routes = [
     canActivate: [AuthGuard], data: { roles: [Role.Motorista, Role.Admin] }
   },
   { path: 'student-list', loadChildren: studentlistModule, canActivate: [AuthGuard], data: { roles: [Role.Motorista, Role.Admin] } },
+  { path: 'maps', loadChildren: mapsModule, canActivate: [AuthGuard], data: { roles: [Role.Estudante, Role.Admin] } },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

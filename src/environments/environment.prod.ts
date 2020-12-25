@@ -11,5 +11,7 @@ export const environment = {
     measurementId: 'G-S6FPLQ3HTQ'
   },
   // apiUrl: 'http://localhost:5000'
-  apiUrl: 'https://sigtei-api.herokuapp.com'
+  apiUrl: 'https://sigtei-api.herokuapp.com',
+  positionstack_apikey: '11b38d0e89b7b65c4dbc932ed50e5135',
+  map_url: 'https://api.positionstack.com/v1'
 };
