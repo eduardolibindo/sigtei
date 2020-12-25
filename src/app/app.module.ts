@@ -1,5 +1,5 @@
 ﻿import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule,  } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -29,11 +29,13 @@ import { AngularFireModule } from '@angular/fire';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { ZXingScannerModule } from 'angular-weblineindia-qrcode-scanner';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
     imports: [
         BrowserModule,
+        CommonModule,
         RouterModule.forRoot([]),
         AngularFireModule.initializeApp(environment.firebase),
         BrowserAnimationsModule,

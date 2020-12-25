@@ -28,7 +28,7 @@ const routes: Routes = [
     canActivate: [AuthGuard], data: { roles: [Role.Motorista, Role.Admin] }
   },
   { path: 'student-list', loadChildren: studentlistModule, canActivate: [AuthGuard], data: { roles: [Role.Motorista, Role.Admin] } },
-  { path: 'maps', loadChildren: mapsModule, canActivate: [AuthGuard], data: { roles: [Role.Estudante, Role.Admin] } },
+  { path: 'maps', loadChildren: mapsModule, canActivate: [AuthGuard] },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

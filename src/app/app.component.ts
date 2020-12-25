@@ -1,7 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-
 import { AccountService } from './_services';
 import { Account, Role } from './_models';
 
