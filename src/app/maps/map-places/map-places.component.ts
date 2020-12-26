@@ -4,7 +4,7 @@ import { google } from 'google-maps';
 import { StudentlistService } from '../../_services/student-list.service';
 import { first } from 'rxjs/operators';
 
-declare var google:google;
+declare var google: google;
 
 @Component({
   selector: 'app-map-places',
@@ -13,7 +13,7 @@ declare var google:google;
 })
 export class MapPlacesComponent implements OnInit {
   lists: any[];
-  texto : string = 'Mapa da localização dos alunos';
+  texto = 'Mapa da localização dos alunos';
   lat: number;
   lng: number;
   zoom: number;
@@ -29,37 +29,43 @@ export class MapPlacesComponent implements OnInit {
     private studentlistService: StudentlistService
   ) { }
 
+  // tslint:disable-next-line: typedef
   ngOnInit() {
-    //load Places Autocomplete
+    // load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       this.setCurrentLocation();
+      // tslint:disable-next-line: new-parens
       this.geoCoder = new google.maps.Geocoder;
 
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-      autocomplete.addListener("place_changed", () => {
+      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
+      autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          // get the place result
+          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
 
-          //verify result
+          // verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
 
-          //set latitude, longitude and zoom
+          // set latitude, longitude and zoom
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng();
           this.zoom = 15;
         });
       });
     });
+  }
 
+  // tslint:disable-next-line: typedef
+  getaddressAll() {
     this.studentlistService.getaddressAll()
-    .pipe(first())
-    .subscribe(lists => this.lists = lists);
+      .pipe(first())
+      .subscribe(lists => this.lists = lists);
   }
 
   // Get Current Location Coordinates
+  // tslint:disable-next-line: typedef
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -71,6 +77,7 @@ export class MapPlacesComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line: typedef
   markerDragEnd($event: MouseEvent) {
     console.log($event);
     this.lat = $event.coords.lat;
@@ -78,8 +85,9 @@ export class MapPlacesComponent implements OnInit {
     this.getAddress(this.lat, this.lng);
   }
 
+  // tslint:disable-next-line: typedef
   getAddress(latitude, longitude) {
-    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+    this.geoCoder.geocode({ location: { lat: latitude, lng: longitude } }, (results, status) => {
       console.log(results);
       console.log(status);
       if (status === 'OK') {

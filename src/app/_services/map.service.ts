@@ -1,30 +1,63 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {environment} from '../../environments/environment';
+import { MapsAPILoader } from '@agm/core';
+import { Observable, Subject, of, from } from 'rxjs';
+import { filter, catchError, tap, map, switchMap } from 'rxjs/operators';
+import { Location } from '../_models/location';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
+  lat: number;
+  lng: number;
 
-  private baseUrl: string = environment.map_url;
+  private geocoder: any;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private mapLoader: MapsAPILoader) { }
 
-  public getCoordinates(query: string) {
-    query = query.trim();
-    const options = query ?
-      {
-        params: new HttpParams()
-          .set('access_key', environment.positionstack_apikey)
-          .set('query', query)
-          .set('limit', '10')
-          .set('output', 'json')
-      } : {};
+  private initGeocoder() {
+    console.log('Init geocoder!');
+    this.geocoder = new google.maps.Geocoder();
+  }
 
-    return this.httpClient.get(
-      this.baseUrl + '/forward',
-      options
-    );
+  private waitForMapsToLoad(): Observable<boolean> {
+    if (!this.geocoder) {
+      return from(this.mapLoader.load())
+        .pipe(
+          tap(() => this.initGeocoder()),
+          map(() => true)
+        );
+    }
+    return of(true);
+  }
+
+  geocodeAddress(location: string) {
+    this.geocoder.geocode({ address: location }, (results, status) => {
+      console.log(results);
+      console.log(status);
+      if (status === google.maps.GeocoderStatus.OK) {
+        if (results[0]) {
+          this.lat = results[0].geometry.location.lat();
+          this.lng = results[0].geometry.location.lng();
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+
+      //   console.log('Geocoding complete!');
+      //   observer.next({
+      //     lat: results[0].geometry.location.lat(),
+      //     lng: results[0].geometry.location.lng()
+      //   });
+      // } else {
+      //   console.log('Error - ', results, ' & Status - ', status);
+      //   observer.next({ lat: 0, lng: 0 });
+      // }
+      // observer.complete();
+
+    });
   }
 }
