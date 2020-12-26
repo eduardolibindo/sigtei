@@ -15,7 +15,7 @@ const routes: Routes = [
         path: '', component: LayoutComponent,
         children: [
             { path: '', component: DetailsComponent },
-            { path: 'map', component: MapComponent, canActivate: [AuthGuard], data: { roles: [Role.Estudante, Role.Admin] } },
+            { path: 'map', component: MapComponent, canActivate: [AuthGuard], data: { roles: [Role.Estudante, Role.Motorista, Role.Admin] } },
             { path: 'map-places', component: MapPlacesComponent, canActivate: [AuthGuard], data: { roles: [Role.Motorista, Role.Admin] } }
         ]
     }

@@ -1,5 +1,39 @@
-<h1> {{texto}}</h1>
+<!-- <h1> {{texto}}</h1>
 
 <agm-map [latitude]="lat" [zoom]="zoom" [longitude]="lng">
   <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
+</agm-map> -->
+
+<div class="container">
+
+  <h1>{{texto}}</h1>
+
+  <div class="form-group">
+    <label>Entre com o Endereço</label>
+    <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
+      placeholder="Pesquisar localização mais próxima" autocorrect="off" autocapitalize="off" spellcheck="off"
+      type="text" #search>
+  </div>
+
+  <agm-map style="height:500px" [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+    <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)">
+    </agm-marker>
+  </agm-map>
+
+  <h5>Address: {{address}}</h5>
+  <div>Latitude: {{lat}}</div>
+  <div>Longitude: {{lng}}</div>
+</div>
+
+<div class="login-form text-center">
+  <button routerLink="/maps" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
+    style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">Sair</button>
+</div>
+
+<div>
+  <div *ngFor="let list of lists" class="row">
+    <div class="cell" data-title="Endereço">
+      {{list.address}}
+    </div>
+  </div>
+</div>

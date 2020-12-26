@@ -31,6 +31,10 @@ export class StudentlistService {
     return this.http.get<StudentList[]>(studentlistUrl);
   }
 
+  getaddressAll() {
+    return this.http.get<StudentList[]>(`${studentlistUrl}/address`);
+  }
+
   getstudentlistById(id: string) {
     return this.http.get<StudentList>(`${studentlistUrl}/${id}`);
   }

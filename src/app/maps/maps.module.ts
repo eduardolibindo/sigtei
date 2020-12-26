@@ -16,7 +16,9 @@ import { MapPlacesComponent } from './map-places/map-places.component';
         ReactiveFormsModule,
         MapsRoutingModule,
         FormsModule,
-        AgmCoreModule.forRoot({apiKey: 'AIzaSyCwiM4LzyXBZGC7Qp1TZZCgFTRd3IAbpvM'})
+        AgmCoreModule.forRoot({apiKey: 'AIzaSyCwiM4LzyXBZGC7Qp1TZZCgFTRd3IAbpvM',
+        libraries: ['places']
+      })
     ],
     declarations: [
         LayoutComponent,

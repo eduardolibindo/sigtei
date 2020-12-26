@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -6,13 +6,27 @@ import { Component } from '@angular/core';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent {
+export class MapComponent implements OnInit {
 
   texto : string = 'Mapa da localização do motorista';
-  lat: number = -23.8779431;
-  lng: number = -49.8046873;
-  zoom: number = 15;
+  lat: number;
+  lng: number;
+  zoom: number;
 
   constructor() { }
+
+  ngOnInit() {
+    this.setCurrentLocation();
+  }
+
+  private setCurrentLocation() {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+        this.zoom = 15;
+      });
+    }
+  }
 
 }
