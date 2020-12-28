@@ -60,6 +60,9 @@ export class StudentlistService {
     return this.http.delete(`${studentlistUrl}/${id}`);
   }
 
+  deleteListAll() {
+    return this.http.delete(studentlistUrl);
+  }
 
 
 

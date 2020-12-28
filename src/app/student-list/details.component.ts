@@ -1,6 +1,6 @@
 import { first } from 'rxjs/operators';
 import { OnInit } from '@angular/core';
-import { Component, ViewChild, ElementRef  } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 
 import jsPDF from 'jspdf';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -10,6 +10,7 @@ import htmlToPdfmake from 'html-to-pdfmake';
 import * as moment from 'moment';
 import { AccountService } from '../_services';
 import { StudentlistService } from '../_services/student-list.service';
+import { LocalStorageService } from '../_services/local-storage.service';
 
 @Component({
   selector: 'app-details',
@@ -19,15 +20,24 @@ import { StudentlistService } from '../_services/student-list.service';
 export class DetailsComponent implements OnInit {
   @ViewChild('pdfTable') pdfTable: ElementRef;
   lists: any[];
+  currentTutorial = null;
+  currentIndex = -1;
 
-  constructor(private accountService: AccountService, private studentlistService: StudentlistService) {
-  }
+  account = this.accountService.accountValue;
+  name = '' + this.account.firstName + ' ' + this.account.lastName + '';
+
+  localStorageChanges$ = this.localStorageService.changes$;
+
+  constructor(
+    private accountService: AccountService,
+    private studentlistService: StudentlistService,
+    private localStorageService: LocalStorageService) { }
 
   // dataTime2 = moment().locale()
   // dataTime = moment().format('LLLL');
   // dataTime3 = new Date();
 
- dataTime = new Date().toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  dataTime = new Date().toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   ngOnInit() {
     this.studentlistService.getstudentlistAll()
@@ -45,16 +55,64 @@ export class DetailsComponent implements OnInit {
       });
   }
 
+  retrieveLists(): void {
+    this.studentlistService.getstudentlistAll()
+      .subscribe(
+        data => {
+          this.lists = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
+  refreshList(): void {
+    this.retrieveLists();
+    this.currentTutorial = null;
+    this.currentIndex = -1;
+  }
+
+  deleteListAll(): void {
+    this.studentlistService.deleteListAll()
+      .subscribe(
+        response => {
+          console.log(response);
+          this.refreshList();
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
   public downloadAsPDF() {
     const doc = new jsPDF();
-    //get table html
+    // get table html
     const pdfTable = this.pdfTable.nativeElement;
-    //html to pdf format
+    // html to pdf format
     var html = htmlToPdfmake(pdfTable.innerHTML);
     var win = window.open('', '_self');
 
-    const documentDefinition = { content: html };
-    pdfMake.createPdf(documentDefinition).print({}, win);
+    const documentDefinition = {
+      info: {
+        title: 'Lista',
+        author: this.name,
+        subject: 'Lista de Presença dos Estudantes do Transporte Intermunicipal de Itaqui',
+        keywords: 'lista',
+      },
+      content: html
+    };
+
+    var [month, date, year] = new Date().toLocaleDateString("en-US").split("/");
+    var [hour, minute, second] = new Date().toLocaleTimeString("pt-BR").split(/:| /);
+
+    pdfMake.createPdf(documentDefinition).download(`Lista de Presença ${date}/${month}/${year} - ${hour}:${minute}:${second}`);
 
   }
+
+  persist(key: string, value: any) {
+    this.localStorageService.set(key, value);
+  }
+
 }

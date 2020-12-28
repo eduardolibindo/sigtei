@@ -3,6 +3,14 @@
     <div class="wrap-table100" id="pdfTable" #pdfTable>
       <h1>Lista de Estudantes</h1>
       <p>{{dataTime}}</p>
+      <p>Motorista: {{name}}</p>
+
+      <input type="text" placeholder="Placa do Veiculo" (input)="persist('test', $event.target.value)">
+
+      <div *ngIf=" localStorageChanges$ | async as localStorageChanges">
+        <p>Placa: <span class="text-uppercase">{{ localStorageChanges.value.toUpperCase() }}</span></p>
+      </div>
+
       <table class="table">
         <thead class="row header">
           <tr class="text-center">
@@ -44,7 +52,7 @@
             <td class="cell" data-title="Endereço">
               {{list.address}}
             </td>
-            <td class="cell" >
+            <td class="cell">
 
               <!-- <button routerLink="edit/{{list.id}}" class="btn btn-sm btn-submit mr-3">Editar</button> -->
 
@@ -58,6 +66,14 @@
         </tbody>
       </table>
     </div>
-    <button class="btn btn-primary" (click)="downloadAsPDF()">Exportar Lista para PDF</button>
   </div>
+
+  <div class="text-center">
+    <button class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
+      style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;" (click)="downloadAsPDF()">Exportar Lista para
+      PDF</button>
+    <button class="btn mt-3 rounded-pill btn-lg btn-delete text-uppercase"
+      style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;" (click)="deleteListAll()">Apagar Lista</button>
+  </div>
+
 </div>
