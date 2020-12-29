@@ -46,6 +46,7 @@
     "ngx-qrcode2": "^9.0.0",
     "pdfmake": "^0.1.68",
     "rxjs": "~6.6.0",
+    "socket.io-client": "^3.0.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { io } from 'socket.io-client';
 
-
+const SOCKET_ENDPOINT = 'https://sigtei-api.herokuapp.com';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -12,11 +13,21 @@ export class MapComponent implements OnInit {
   lat: number;
   lng: number;
   zoom: number;
+  socket;
 
   constructor() { }
 
   ngOnInit() {
     this.setCurrentLocation();
+    this.setupSocketConnection()
+  }
+
+  setupSocketConnection() {
+    this.socket = io(SOCKET_ENDPOINT);
+    this.socket.on('marker', data => {
+      
+    });
+
   }
 
   private setCurrentLocation() {
@@ -28,5 +39,7 @@ export class MapComponent implements OnInit {
       });
     }
   }
+
+
 
 }
