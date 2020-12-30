@@ -45,6 +45,8 @@
     "nemex-angular2-realtimegeolocation": "0.0.6",
     "ngx-qrcode2": "^9.0.0",
     "pdfmake": "^0.1.68",
+    "pusher-angular": "^1.0.0",
+    "pusher-js": "^7.0.2",
     "rxjs": "~6.6.0",
     "socket.io-client": "^3.0.4",
     "tslib": "^2.0.0",
