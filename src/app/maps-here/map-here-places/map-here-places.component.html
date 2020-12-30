@@ -1,1 +1,18 @@
-oi
+
+<div class="main">
+  <h3>Motorista</h3>
+
+  <agm-map [latitude]="center.lat" [longitude]="center.lng" [zoom]="zoom">
+    <agm-marker [latitude]="center.lat" [longitude]="center.lng"></agm-marker>
+    <agm-polygon [paths]="polygon"></agm-polygon>
+  </agm-map>
+
+  <h4>Alertas de localização</h4>
+  <div class="alert" [hidden]="!showAlert">
+    <p>Este usuário deixou o perimetro</p>
+  </div>
+
+  <div class="location alert" [hidden]="!showLocationUpdate">
+    <p>A localização deste usuário mudou</p>
+  </div>
+</div>

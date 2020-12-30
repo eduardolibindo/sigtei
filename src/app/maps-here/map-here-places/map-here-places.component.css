@@ -1,3 +1,39 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+h3 {
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.alert {
+  background: #f14343;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+p{
+  margin: 0;
+}
+
+.location{
+  background: green;
+  margin-top: 20px;
+}
+
+agm-map {
+  height: 400px;
+  width: 600px;
+}
+
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
 body{
   font-family: 'Poppins', sans-serif;
