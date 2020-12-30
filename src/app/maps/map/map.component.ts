@@ -25,7 +25,7 @@ export class MapComponent implements OnInit {
   setupSocketConnection() {
     this.socket = io(SOCKET_ENDPOINT);
     this.socket.on('marker', data => {
-      
+
     });
 
   }

@@ -61,6 +61,14 @@
 
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active" *ngIf="isAdmin">Mapa</a>
 
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps-here" routerLinkActive="active" *ngIf="isEstudante">Mapa Here</a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps-here" routerLinkActive="active" *ngIf="isMotorista">Mapa Here</a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps-here" routerLinkActive="active" *ngIf="isAdmin">Mapa Here</a>
+
+
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/admin" routerLinkActive="active"
         *ngIf="isAdmin">Admin</a>
 

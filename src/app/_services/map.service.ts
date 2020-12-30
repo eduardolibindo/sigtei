@@ -47,17 +47,7 @@ export class MapService {
         window.alert('Geocoder failed due to: ' + status);
       }
 
-      //   console.log('Geocoding complete!');
-      //   observer.next({
-      //     lat: results[0].geometry.location.lat(),
-      //     lng: results[0].geometry.location.lng()
-      //   });
-      // } else {
-      //   console.log('Error - ', results, ' & Status - ', status);
-      //   observer.next({ lat: 0, lng: 0 });
-      // }
-      // observer.complete();
-
     });
   }
+  
 }

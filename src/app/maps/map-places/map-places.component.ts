@@ -1,107 +1,211 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
-import { MapsAPILoader, MouseEvent } from '@agm/core';
-import { google } from 'google-maps';
-import { StudentlistService } from '../../_services/student-list.service';
-import { first } from 'rxjs/operators';
+import { Component, Input, ViewChild, NgZone, OnInit } from '@angular/core';
+import { MapsAPILoader, AgmMap, GoogleMapsAPIWrapper, MouseEvent } from '@agm/core';
 
-declare var google: google;
+declare var google: any;
+
+interface Marker {
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable: boolean;
+}
+
+interface Location {
+  lat: number;
+  lng: number;
+  viewport?: Object;
+  zoom: number;
+  address_level_1?: string;
+  address_level_2?: string;
+  address_country?: string;
+  address_zip?: string;
+  address_state?: string;
+  marker?: Marker;
+}
 
 @Component({
   selector: 'app-map-places',
   templateUrl: './map-places.component.html',
   styleUrls: ['./map-places.component.css']
 })
-export class MapPlacesComponent implements OnInit {
-  lists: any[];
-  texto = 'Mapa da localização dos alunos';
-  lat: number;
-  lng: number;
-  zoom: number;
-  address: string;
-  private geoCoder;
 
-  @ViewChild('search')
-  public searchElementRef: ElementRef;
+export class MapPlacesComponent implements OnInit {
+  texto = 'Mapa da localização dos alunos';
+  circleRadius: number = 2000;
+  geocoder: any;
+
+  public location: Location = {
+    lat: -29.135762228832924,
+    lng: -56.54889502311831,
+    marker: {
+      lat: -29.135762228832924,
+      lng: -56.54889502311831,
+      draggable: true
+    },
+    zoom: 14
+  };
+
+
+
+  @ViewChild(AgmMap) map: AgmMap;
+
 
   constructor(
-    private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone,
-    private studentlistService: StudentlistService
-  ) { }
-
-  // tslint:disable-next-line: typedef
-  ngOnInit() {
-    // load Places Autocomplete
-    this.mapsAPILoader.load().then(() => {
-      this.setCurrentLocation();
-      // tslint:disable-next-line: new-parens
-      this.geoCoder = new google.maps.Geocoder;
-
-      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-      autocomplete.addListener('place_changed', () => {
-        this.ngZone.run(() => {
-          // get the place result
-          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
-          // verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-
-          // set latitude, longitude and zoom
-          this.lat = place.geometry.location.lat();
-          this.lng = place.geometry.location.lng();
-          this.zoom = 15;
-        });
-      });
+    public mapsApiLoader: MapsAPILoader,
+    private zone: NgZone,
+    private wrapper: GoogleMapsAPIWrapper) {
+    this.mapsApiLoader = mapsApiLoader;
+    this.zone = zone;
+    this.wrapper = wrapper;
+    this.mapsApiLoader.load().then(() => {
+      this.geocoder = new google.maps.Geocoder();
     });
   }
 
-  // tslint:disable-next-line: typedef
-  getaddressAll() {
-    this.studentlistService.getaddressAll()
-      .pipe(first())
-      .subscribe(lists => this.lists = lists);
+  ngOnInit() {
+    this.location.marker.draggable = true;
   }
 
-  // Get Current Location Coordinates
-  // tslint:disable-next-line: typedef
-  private setCurrentLocation() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-        this.zoom = 15;
-        this.getAddress(this.lat, this.lng);
-      });
+  updateOnMap() {
+    let full_address: string = this.location.address_level_1 || ""
+    if (this.location.address_level_2) full_address = full_address + " " + this.location.address_level_2
+    if (this.location.address_state) full_address = full_address + " " + this.location.address_state
+    if (this.location.address_country) full_address = full_address + " " + this.location.address_country
+
+    this.findLocation(full_address);
+  }
+
+  findLocation(address) {
+    if (!this.geocoder) this.geocoder = new google.maps.Geocoder()
+    this.geocoder.geocode({
+      'address': address
+    }, (results, status) => {
+      console.log(results);
+      if (status == google.maps.GeocoderStatus.OK) {
+        for (var i = 0; i < results[0].address_components.length; i++) {
+          let types = results[0].address_components[i].types
+
+          if (types.indexOf('locality') != -1) {
+            this.location.address_level_2 = results[0].address_components[i].long_name
+          }
+          if (types.indexOf('country') != -1) {
+            this.location.address_country = results[0].address_components[i].long_name
+          }
+          if (types.indexOf('postal_code') != -1) {
+            this.location.address_zip = results[0].address_components[i].long_name
+          }
+          if (types.indexOf('administrative_area_level_1') != -1) {
+            this.location.address_state = results[0].address_components[i].long_name
+          }
+        }
+
+        if (results[0].geometry.location) {
+          this.location.lat = results[0].geometry.location.lat();
+          this.location.lng = results[0].geometry.location.lng();
+          this.location.marker.lat = results[0].geometry.location.lat();
+          this.location.marker.lng = results[0].geometry.location.lng();
+          this.location.marker.draggable = true;
+          this.location.viewport = results[0].geometry.viewport;
+        }
+
+        this.map.triggerResize()
+      } else {
+        alert("Sorry, this search produced no results.");
+      }
+    })
+  }
+
+  clickedMarker(label: string, index: number) {
+    console.log(`clicked the marker: ${label || index}`)
+  }
+
+  mapClicked($event: MouseEvent) {
+    this.markers.push({
+      lat: $event.coords.lat,
+      lng: $event.coords.lng,
+      draggable: false
+    });
+  }
+
+  markerDragEnd(m: Marker, $event: MouseEvent) {
+    this.location.marker.lat = $event.coords.lat;
+    this.location.marker.lng = $event.coords.lng;
+    this.findAddressByCoordinates();
+    console.log('dragEnd', m, $event);
+  }
+
+  markers: Marker[] = [
+	  {
+		  lat: -29.127939913588087,
+		  lng: -56.55371355529949,
+		  label: 'Eduardo Libindo',
+		  draggable: false
+	  },
+	  {
+		  lat: -29.1333755375587,
+		  lng: -56.558391327801935,
+		  label: 'Estudante Sigtei 1',
+		  draggable: false
+	  },
+	  {
+		  lat: -29.137723829809183,
+		  lng: -56.55182528016088,
+		  label: 'Estudante Sigtei 2',
+		  draggable: false
+	  }
+  ]
+
+  findAddressByCoordinates() {
+    this.geocoder.geocode({
+      'location': {
+        lat: this.location.marker.lat,
+        lng: this.location.marker.lng
+      }
+    }, (results, status) => {
+      this.decomposeAddressComponents(results);
+    })
+  }
+
+  decomposeAddressComponents(addressArray) {
+    if (addressArray.length == 0) return false;
+    let address = addressArray[0].address_components;
+
+    for (let element of address) {
+      if (element.length == 0 && !element['types']) continue
+
+      if (element['types'].indexOf('street_number') > -1) {
+        this.location.address_level_1 = element['long_name'];
+        continue;
+      }
+      if (element['types'].indexOf('route') > -1) {
+        this.location.address_level_1 += ', ' + element['long_name'];
+        continue;
+      }
+      if (element['types'].indexOf('locality') > -1) {
+        this.location.address_level_2 = element['long_name'];
+        continue;
+      }
+      if (element['types'].indexOf('administrative_area_level_1') > -1) {
+        this.location.address_state = element['long_name'];
+        continue;
+      }
+      if (element['types'].indexOf('country') > -1) {
+        this.location.address_country = element['long_name'];
+        continue;
+      }
+      if (element['types'].indexOf('postal_code') > -1) {
+        this.location.address_zip = element['long_name'];
+        continue;
+      }
     }
   }
 
-  // tslint:disable-next-line: typedef
-  markerDragEnd($event: MouseEvent) {
-    console.log($event);
-    this.lat = $event.coords.lat;
-    this.lng = $event.coords.lng;
-    this.getAddress(this.lat, this.lng);
+  milesToRadius(value) {
+    this.circleRadius = value / 0.00062137;
   }
 
-  // tslint:disable-next-line: typedef
-  getAddress(latitude, longitude) {
-    this.geoCoder.geocode({ location: { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
-      if (status === 'OK') {
-        if (results[0]) {
-          this.zoom = 12;
-          this.address = results[0].formatted_address;
-        } else {
-          window.alert('No results found');
-        }
-      } else {
-        window.alert('Geocoder failed due to: ' + status);
-      }
-
-    });
+  circleRadiusInMiles() {
+    return this.circleRadius * 0.00062137;
   }
 
 }
