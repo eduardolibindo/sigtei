@@ -5,11 +5,11 @@ import { environment } from 'src/environments/environment';
 const ping = `${environment.apiUrl}/ping`;
 
 @Component({
-  selector: 'app-map-here',
-  templateUrl: './map-here.component.html',
-  styleUrls: ['./map-here.component.css']
+  selector: 'app-map-location',
+  templateUrl: './map-location.component.html',
+  styleUrls: ['./map-location.component.css']
 })
-export class MapHereComponent implements OnInit {
+export class MapLocationComponent implements OnInit {
 
   public constructor(private http: HttpClient) {}
 

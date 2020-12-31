@@ -14,7 +14,7 @@ const idstudentcheckinModule = () => import('./ID-student-checkin/ID-student-che
 const idstudentModule = () => import('./ID-student/ID-student.module').then(x => x.IDstudentModule);
 const studentlistModule = () => import('./student-list/student-list.module').then(x => x.StudentlistModule);
 const mapsModule = () => import('./maps/maps.module').then(x => x.MapsModule);
-const mapshereModule = () => import('./maps-here/maps-here.module').then(x => x.MapsHereModule);
+const mapdriverlocationModule = () => import('./map-driver-location/map-driver-location.module').then(x => x.MapDriverLocationModule);
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -30,7 +30,7 @@ const routes: Routes = [
   },
   { path: 'student-list', loadChildren: studentlistModule, canActivate: [AuthGuard], data: { roles: [Role.Motorista, Role.Admin] } },
   { path: 'maps', loadChildren: mapsModule, canActivate: [AuthGuard] },
-  { path: 'maps-here', loadChildren: mapshereModule, canActivate: [AuthGuard] },
+  { path: 'map-driver-location', loadChildren: mapdriverlocationModule, canActivate: [AuthGuard] },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

@@ -3,36 +3,36 @@
     <h1 class="mt-1 font-weight-light text-uppercase text-center">Map Sigtei</h1>
 
     <p class="mt-3 font-weight-normal text-center">
-      <strong>Vizualisar mapas</strong>
+      <strong>visualizar mapas</strong>
     </p>
 
-    <button routerLink="map-here-places" *ngIf="isMotorista"
+    <button routerLink="map-driver" *ngIf="isMotorista"
       class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
       style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
-      Mapa locais alunos
+      Mapa Localização do Ônibus
     </button>
 
-    <button routerLink="map-here" *ngIf="isMotorista"
-      class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
-      style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
-      Mapa Motorista
-    </button>
-
-    <button routerLink="map-here" *ngIf="isEstudante"
+    <button routerLink="map-location" *ngIf="isMotorista"
       class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
       style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
       Mapa Motorista
     </button>
 
-    <button routerLink="map-here-places" *ngIf="isAdmin"
+    <button routerLink="map-driver" *ngIf="isEstudante"
       class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
       style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
-      Mapa Motorista
+      Mapa Localização do Ônibus
     </button>
 
-    <button routerLink="map-here" *ngIf="isAdmin" class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
+    <button routerLink="map-driver" *ngIf="isAdmin"
+      class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
       style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
-      Mapa locais alunos
+      Mapa Localização do Ônibus
+    </button>
+
+    <button routerLink="map-location" *ngIf="isAdmin" class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
+      style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
+      Mapa Motorista
     </button>
 
   </div>

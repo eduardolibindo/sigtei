@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { MapsAPILoader } from '@agm/core';
+import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { PusherService } from '../../_services/pusher.service';
 
 declare const google;
 
 @Component({
-  selector: 'app-map-here-places',
-  templateUrl: './map-here-places.component.html',
-  styleUrls: ['./map-here-places.component.css']
+  selector: 'app-map-driver',
+  templateUrl: './map-driver.component.html',
+  styleUrls: ['./map-driver.component.css']
 })
 
-export class MapHerePlacesComponent implements OnInit {
+export class MapDriverComponent implements OnInit {
 
   constructor(private loader: MapsAPILoader, private pusher: PusherService) {}
 
   theRanchPolygon;
   showAlert = false;
   showLocationUpdate = false;
-  zoom = 16;
+  zoom = 15;
+  label = 'Ônibus';
   center = {
     lat: -29.134398,
     lng: -56.551694,
@@ -53,6 +54,10 @@ export class MapHerePlacesComponent implements OnInit {
         this.showAlert = true;
       }
     });
+  }
+
+  clickedMarker(label: string) {
+    console.log(`clicked the marker: ${label}`)
   }
 
 

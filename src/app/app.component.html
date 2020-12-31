@@ -55,18 +55,18 @@
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/schedules" routerLinkActive="active">Horários</a>
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/places" routerLinkActive="active">Locais</a>
 
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active" *ngIf="isEstudante">Mapa</a>
+      <!-- <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active" *ngIf="isEstudante">Mapa </a> -->
 
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active" *ngIf="isMotorista">Mapa</a>
 
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active" *ngIf="isAdmin">Mapa</a>
 
 
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps-here" routerLinkActive="active" *ngIf="isEstudante">Mapa Here</a>
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active" *ngIf="isEstudante">Mapa Motorista</a>
 
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps-here" routerLinkActive="active" *ngIf="isMotorista">Mapa Here</a>
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active" *ngIf="isMotorista">Mapa Motorista</a>
 
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps-here" routerLinkActive="active" *ngIf="isAdmin">Mapa Here</a>
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active" *ngIf="isAdmin">Mapa Motorista</a>
 
 
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/admin" routerLinkActive="active"

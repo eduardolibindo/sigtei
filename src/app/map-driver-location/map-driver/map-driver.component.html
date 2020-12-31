@@ -1,0 +1,18 @@
+
+<div class="main">
+  <h3>Mapa da localização do ônibus</h3>
+
+  <agm-map style="height:500px" [latitude]="center.lat" [longitude]="center.lng" [zoom]="zoom">
+    <agm-marker [latitude]="center.lat" [longitude]="center.lng" [label]="label" (markerClick)="clickedMarker(label)"></agm-marker>
+    <agm-polygon [paths]="polygon"></agm-polygon>
+  </agm-map>
+
+  <h4>Alerta de localização</h4>
+  <div class="alert" [hidden]="!showAlert">
+    <p>Este veículo deixou o perimetro da cidade</p>
+  </div>
+
+  <div class="location alert" [hidden]="!showLocationUpdate">
+    <p>A localização do veículo mudou</p>
+  </div>
+</div>
