@@ -1,7 +1,8 @@
 import { Component, Input, ViewChild, NgZone, OnInit, OnChanges } from '@angular/core';
 import { MapsAPILoader, AgmMap, GoogleMapsAPIWrapper, MouseEvent } from '@agm/core';
+import { google } from 'google-maps';
 
-declare var google: any;
+declare var google: google;
 
 @Component({
   selector: 'app-map-places',
@@ -26,17 +27,19 @@ export class MapPlacesComponent implements OnInit {
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
-      const waypts = [];
-      const checkboxArray: any[] = [
-        'winnipeg', 'regina', 'calgary'
-      ];
-      for (var i = 0; i < checkboxArray.length; i++) {
+      const waypts: google.maps.DirectionsWaypoint[] = [];
+      const checkboxArray = document.getElementById(
+        "waypoints"
+      ) as HTMLSelectElement;
 
-        waypts.push({
-          location: checkboxArray[i],
-          stopover: true
-        });
-
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < checkboxArray.length; i++) {
+        if (checkboxArray.options[i].selected) {
+          waypts.push({
+            location: (checkboxArray[i] as HTMLOptionElement).value,
+            stopover: true,
+          });
+        }
       }
 
       directionsService.route({
