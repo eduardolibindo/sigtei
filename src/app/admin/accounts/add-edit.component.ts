@@ -39,7 +39,7 @@ export class AddEditComponent implements OnInit {
             institution: ['', Validators.required],
             course: ['', Validators.required],
             phone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
-            address: ['', Validators.required],
+            location: ['', Validators.required],
             role: ['', Validators.required],
             password: ['', [Validators.minLength(6), this.isAddMode ? Validators.required : Validators.nullValidator]],
             confirmPassword: ['']

@@ -21,7 +21,7 @@ interface MyObj {
   institution: string;
   course: string;
   phone: string;
-  address: string;
+  location: string;
 }
 
 interface ReadonlyMyObj {
@@ -34,7 +34,7 @@ interface ReadonlyMyObj {
   readonly institution: string;
   readonly course: string;
   readonly phone: string;
-  readonly address: string;
+  readonly location: string;
 }
 
 @Component({
@@ -111,7 +111,7 @@ export class ScanComponent implements OnInit {
       institution: [obj.institution, Validators.required],
       course: [obj.course, Validators.required],
       phone: [obj.phone, [Validators.required]],
-      address: [obj.address, Validators.required]
+      location: [obj.location, Validators.required]
     });
 
     this.loading = true;

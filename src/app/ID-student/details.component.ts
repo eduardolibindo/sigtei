@@ -24,7 +24,7 @@ export class DetailsComponent {
       institution: this.account.institution,
       course: this.account.course,
       phone: this.account.phone,
-      address: this.account.address
+      location: this.account.location
     };
 
     dataString = JSON.stringify(this.data);

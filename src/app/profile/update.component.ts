@@ -36,7 +36,7 @@ export class UpdateComponent implements OnInit {
       institution: [this.account.institution, Validators.required],
       course: [this.account.course, Validators.required],
       phone: [this.account.phone, [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
-      address: [this.account.address, Validators.required],
+      location: [this.account.location, Validators.required],
       password: ['', [Validators.minLength(6)]],
       confirmPassword: ['']
     }, {

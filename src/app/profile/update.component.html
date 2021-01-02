@@ -182,11 +182,11 @@
       </div>
     </div>
     <div class="form-group">
-      <input type="text" formControlName="address" class="form-control" placeholder="Endereço"
-        class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
-      <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
-        <div *ngIf="f.address.errors.required">Insira o endereço</div>
-        <div *ngIf="f.address.errors.address">O Endereço deve ser um local válido</div>
+      <input type="text" formControlName="location" class="form-control" placeholder="Endereço"
+        class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.location.errors }" />
+      <div *ngIf="submitted && f.location.errors" class="invalid-feedback">
+        <div *ngIf="f.location.errors.required">Insira o endereço</div>
+        <div *ngIf="f.location.errors.location">O Endereço deve ser um local válido</div>
       </div>
     </div>
     <h3 class="mt-4 font-weight-light text-uppercase">Mudar senha</h3>

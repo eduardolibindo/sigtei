@@ -9,5 +9,5 @@ export class StudentList {
   institution: string;
   course: string;
   phone: string;
-  address: string;
+  location: string;
 }

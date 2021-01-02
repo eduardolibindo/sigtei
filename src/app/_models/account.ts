@@ -10,7 +10,7 @@ export class Account {
     institution: string;
     course: string;
     phone: string;
-    address: string;
+    location: string;
     role: Role;
     jwtToken?: string;
 

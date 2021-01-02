@@ -1,11 +1,12 @@
 <agm-map [latitude]="lat" [longitude]="lng">
   <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints"
     [optimizeWaypoints]="optimizeWaypoints" [provideRouteAlternatives]="provideRouteAlternatives"
-    [avoidHighways]="avoidHighways" [avoidTolls]="avoidTolls" [travelMode]="travelMode" [renderOptions]="renderOptions" [visible]="visible" [panel]="myPanel" [infoWindow]="infoWindow">
+    [avoidHighways]="avoidHighways" [avoidTolls]="avoidTolls" [travelMode]="travelMode" [renderOptions]="renderOptions"
+    [visible]="visible" [panel]="myPanel" [infoWindow]="infoWindow" [renderOptions]="renderOptions">
   </agm-direction>
 </agm-map>
 
-<section style="display: flex; align-content: center; align-items: center; height: 60px;">
+<!-- <section style="display: flex; align-content: center; align-items: center; height: 60px;">
   <label style="margin: 10px;">Modo de viagem:</label>
   <mat-radio-group style="margin: 10px;" [(ngModel)]="travelMode">
     <mat-radio-button value='DRIVING'>
@@ -21,7 +22,7 @@
       Caminhada
     </mat-radio-button>
   </mat-radio-group>
-</section>
+</section> -->
 
 <div>
   <!-- <label>Otimização dos pontos de passagem: </label> -->
@@ -48,6 +49,12 @@
 <div>
   <!-- <label>Fornecimento de rotas alternativas: </label> -->
   <mat-slide-toggle [(ngModel)]="visible" style="margin: 10px;">Visível</mat-slide-toggle>
+</div>
+
+<div *ngFor="let list of waypoints" class="row">
+  <div class="cell" data-title="Endereço">
+    {{list.location}}
+  </div>
 </div>
 
 <div #myPanel></div>
