@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { MouseEvent, AgmMap } from '@agm/core';
 import { TravelMarker, TravelMarkerOptions, TravelData, TravelEvents, EventType } from 'travel-marker';
 import locationData from './loc.json';
+import { google } from 'google-maps';
 
-declare var google: any;
+declare var google: google;
 
 @Component({
   selector: 'app-map',
@@ -42,9 +43,9 @@ export class MapComponent {
       map: this.map
     });
 
-    const waypts = [];
+    const waypts: google.maps.DirectionsWaypoint[] = [];
     const checkboxArray: any[] = [
-      'winnipeg', 'regina', 'calgary'
+      'itaqui, rs', 'uruguaiana, rs', 'são borja, rs'
     ];
     for (var i = 0; i < checkboxArray.length; i++) {
 

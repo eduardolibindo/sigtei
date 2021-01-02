@@ -1,16 +1,57 @@
-<div id="map"></div>
-<b>Waypoints:</b> <br />
-        <i>(Ctrl+Click or Cmd+Click for multiple selection)</i> <br />
-        <select multiple id="waypoints">
-          <option value="montreal, quebec">Montreal, QBC</option>
-          <option value="toronto, ont">Toronto, ONT</option>
-          <option value="chicago, il">Chicago</option>
-          <option value="winnipeg, mb">Winnipeg</option>
-          <option value="fargo, nd">Fargo</option>
-          <option value="calgary, ab">Calgary</option>
-          <option value="spokane, wa">Spokane</option>
-        </select>
-        <br />
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints"
+    [optimizeWaypoints]="optimizeWaypoints" [provideRouteAlternatives]="provideRouteAlternatives"
+    [avoidHighways]="avoidHighways" [avoidTolls]="avoidTolls" [travelMode]="travelMode" [renderOptions]="renderOptions" [visible]="visible" [panel]="myPanel" [infoWindow]="infoWindow">
+  </agm-direction>
+</agm-map>
+
+<section style="display: flex; align-content: center; align-items: center; height: 60px;">
+  <label style="margin: 10px;">Modo de viagem:</label>
+  <mat-radio-group style="margin: 10px;" [(ngModel)]="travelMode">
+    <mat-radio-button value='DRIVING'>
+      Dirigindo
+    </mat-radio-button>
+    <mat-radio-button value='BICYCLING'>
+      Ciclismo
+    </mat-radio-button>
+    <mat-radio-button value='TRANSIT'>
+      Transito
+    </mat-radio-button>
+    <mat-radio-button value='WALKING'>
+      Caminhada
+    </mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<div>
+  <!-- <label>Otimização dos pontos de passagem: </label> -->
+  <mat-slide-toggle [(ngModel)]="provideRouteAlternatives" style="margin: 10px;">Otimização dos pontos de passagem
+  </mat-slide-toggle>
+</div>
+
+<div>
+  <!-- <label>Fornecimento de rotas alternativas: </label> -->
+  <mat-slide-toggle [(ngModel)]="optimizeWaypoints" style="margin: 10px;">Fornecimento de rotas alternativas
+  </mat-slide-toggle>
+</div>
+
+<div>
+  <!-- <label>Fornecimento de rotas alternativas: </label> -->
+  <mat-slide-toggle [(ngModel)]="avoidHighways" style="margin: 10px;">Evitar auto-estradas</mat-slide-toggle>
+</div>
+
+<div>
+  <!-- <label>Fornecimento de rotas alternativas: </label> -->
+  <mat-slide-toggle [(ngModel)]="avoidTolls" style="margin: 10px;">Evitar pedágios</mat-slide-toggle>
+</div>
+
+<div>
+  <!-- <label>Fornecimento de rotas alternativas: </label> -->
+  <mat-slide-toggle [(ngModel)]="visible" style="margin: 10px;">Visível</mat-slide-toggle>
+</div>
+
+<div #myPanel></div>
+
 <div class="login-form text-center">
   <button routerLink="/maps" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
     style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">Sair</button>
