@@ -2,6 +2,9 @@ import { first } from 'rxjs/operators';
 import { OnInit } from '@angular/core';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 
+import {DomSanitizer} from '@angular/platform-browser';
+import {MatIconRegistry} from '@angular/material/icon';
+
 import jsPDF from 'jspdf';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -22,6 +25,7 @@ export class DetailsComponent implements OnInit {
   lists: any[];
   currentTutorial = null;
   currentIndex = -1;
+  placa = 'Placa';
 
   account = this.accountService.accountValue;
   name = '' + this.account.firstName + ' ' + this.account.lastName + '';
@@ -31,7 +35,13 @@ export class DetailsComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private studentlistService: StudentlistService,
-    private localStorageService: LocalStorageService) { }
+    private localStorageService: LocalStorageService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer) {
+      iconRegistry.addSvgIcon(
+        'thumbs-up',
+        sanitizer.bypassSecurityTrustResourceUrl('../../assets/cancel.svg'));
+    }
 
   // dataTime2 = moment().locale()
   // dataTime = moment().format('LLLL');

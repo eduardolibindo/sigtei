@@ -60,7 +60,7 @@ export class ScanComponent implements OnInit {
   hasDevices: boolean;
   hasPermission: boolean;
   qrResultString: string;
-  estudante: string;
+  estudante: any;
   torchEnabled = false;
   torchAvailable$ = new BehaviorSubject<boolean>(false);
   tryHarder = false;
@@ -111,7 +111,8 @@ export class ScanComponent implements OnInit {
       institution: [obj.institution, Validators.required],
       course: [obj.course, Validators.required],
       phone: [obj.phone, [Validators.required]],
-      location: [obj.location, Validators.required]
+      location: [obj.location, Validators.required],
+      label: [this.estudante, Validators.required]
     });
 
     this.loading = true;

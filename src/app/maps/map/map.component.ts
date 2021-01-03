@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MouseEvent, AgmMap } from '@agm/core';
 import { TravelMarker, TravelMarkerOptions, TravelData, TravelEvents, EventType } from 'travel-marker';
 import locationData from './loc.json';
 import { google } from 'google-maps';
+import { StudentlistService } from 'src/app/_services/student-list.service';
 
 declare var google: google;
 
@@ -11,18 +12,21 @@ declare var google: google;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent {
+export class MapComponent implements OnInit {
+  waypoints: any[];
   // google maps zoom level
-  zoom: number = 15;
+  zoom: number = 14;
 
   // initial center position for the map
-  lat: number = 51.512802;
-  lng: number = -0.091324;
+  lat: number = -29.136974;
+  lng: number = -56.549621;
 
   map: any;
   line: any;
   directionsService: any;
   marker: TravelMarker = null;
+
+  constructor(private studentlistService: StudentlistService) { }
 
   // speedMultiplier to control animation speed
   speedMultiplier = 1;
@@ -30,8 +34,8 @@ export class MapComponent {
   onMapReady(map: any) {
     console.log(map);
     this.map = map;
-    // this.calcRoute();
-    this.mockDirections();
+    this.calcRoute();
+    // this.mockDirections();
     // this.initEvents();
   }
 
@@ -43,25 +47,12 @@ export class MapComponent {
       map: this.map
     });
 
-    const waypts: google.maps.DirectionsWaypoint[] = [];
-    const checkboxArray: any[] = [
-      'itaqui, rs', 'uruguaiana, rs', 'são borja, rs'
-    ];
-    for (var i = 0; i < checkboxArray.length; i++) {
-
-      waypts.push({
-        location: checkboxArray[i],
-        stopover: true
-      });
-
-    }
-
-    const start = new google.maps.LatLng(51.513237, -0.099102);
-    const end = new google.maps.LatLng(51.514786, -0.080799);
+    const start = new google.maps.LatLng(-29.144011, -56.531227);
+    const end = new google.maps.LatLng(-29.121408, -56.557359);
     const request = {
       origin: start,
       destination: end,
-      waypoints: waypts,
+      waypoints: this.waypoints,
       travelMode: google.maps.TravelMode.BICYCLING
     };
     this.directionsService = new google.maps.DirectionsService();
@@ -174,6 +165,12 @@ export class MapComponent {
   slow() {
     this.speedMultiplier /= 2;
     this.marker.setSpeedMultiplier(this.speedMultiplier)
+  }
+
+  ngOnInit() {
+    this.studentlistService.getaddressAll()
+      .pipe()
+      .subscribe(lists => this.waypoints = lists);
   }
 
   initEvents() {

@@ -9,10 +9,6 @@ import { Observable } from 'rxjs';
 
 declare var google: google;
 
-interface Waypoint {
-  location: string;
-}
-
 @Component({
   selector: 'app-map-places',
   templateUrl: './map-places.component.html',
@@ -20,11 +16,11 @@ interface Waypoint {
 })
 
 export class MapPlacesComponent implements OnInit {
+  waypoint: any[];
   waypoints: any[];
 
   constructor(private studentlistService: StudentlistService) { }
 
-  public infoWindow: InfoWindow = undefined;
   public origin: any;
   public destination: any;
   public travelMode: String = 'DRIVING';
@@ -36,16 +32,33 @@ export class MapPlacesComponent implements OnInit {
   visible = true; // default: true
 
   public renderOptions: any = {
+    draggable: false,
+    suppressMarkers: false,
+    suppressInfoWindows: false,
     markerOptions: { // effect all markers
-      icon: {
-        url: '../../../assets/icon.png',
-      }
-    }
+      icon: '../../../assets/icon.png',
+    },
   };
 
+  public markerOptions: {};
+
+  // public markerOptions = { // effect all markers
+  //   origin: {
+  //     infoWindow: 'Inicio',
+  //     icon: '../../../assets/icon_origin.png',
+  //   },
+  //   destination: {
+  //     infoWindow: 'Fim',
+  //     icon: '../../../assets/icon_destination.png',
+  //   },
+  //   waypoints: {
+  //     icon: '../../../assets/icon.png',
+  //   },
+  // };
+
   title: string = 'Google Map';
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lat: number = -29.136974;
+  lng: number = -56.549621;
 
   // public waypoints: any = [
   //   {
@@ -65,7 +78,13 @@ export class MapPlacesComponent implements OnInit {
   ngOnInit() {
     this.studentlistService.getaddressAll()
       .pipe()
+      .subscribe(lists => this.waypoint = lists);
+
+    this.studentlistService.getlabelAll()
+      .pipe()
       .subscribe(lists => this.waypoints = lists);
+
+    this.markerOptions = {waypoints: this.waypoints};
 
     this.getDirection();
   }

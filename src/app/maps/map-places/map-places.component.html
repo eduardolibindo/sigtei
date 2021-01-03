@@ -1,8 +1,8 @@
 <agm-map [latitude]="lat" [longitude]="lng">
-  <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints"
+  <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoint"
     [optimizeWaypoints]="optimizeWaypoints" [provideRouteAlternatives]="provideRouteAlternatives"
-    [avoidHighways]="avoidHighways" [avoidTolls]="avoidTolls" [travelMode]="travelMode" [renderOptions]="renderOptions"
-    [visible]="visible" [panel]="myPanel" [infoWindow]="infoWindow" [renderOptions]="renderOptions">
+    [avoidHighways]="avoidHighways" [avoidTolls]="avoidTolls" [travelMode]="travelMode" [visible]="visible"
+    [panel]="myPanel" [renderOptions]="renderOptions" [markerOptions]="markerOptions">
   </agm-direction>
 </agm-map>
 
@@ -51,9 +51,15 @@
   <mat-slide-toggle [(ngModel)]="visible" style="margin: 10px;">Visível</mat-slide-toggle>
 </div>
 
-<div *ngFor="let list of waypoints" class="row">
+<div *ngFor="let list of waypoint" class="row">
   <div class="cell" data-title="Endereço">
     {{list.location}}
+  </div>
+</div>
+
+<div *ngFor="let list of waypoints" class="row">
+  <div class="cell" data-title="Label">
+    {{list.label}}
   </div>
 </div>
 

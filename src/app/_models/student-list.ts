@@ -10,4 +10,5 @@ export class StudentList {
   course: string;
   phone: string;
   location: string;
+  label: string;
 }
