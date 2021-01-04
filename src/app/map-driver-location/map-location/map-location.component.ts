@@ -21,12 +21,38 @@ export class MapLocationComponent implements OnInit {
 
   ngOnInit() {
     if ('geolocation' in navigator) {
-      navigator.geolocation.watchPosition((position) => {
-        this.pingServer({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
+      navigator.geolocation.watchPosition(this.geoSucess, this.catchError, {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 3000
       });
+    } else {
+      alert('Ops! Este navegador não oferece suporte para geolocalização de HTML.');
+    }
+}
+
+geoSucess = (position) => {
+  this.pingServer({
+    lat: position.coords.latitude,
+    lng: position.coords.longitude,
+  });
+}
+
+catchError = (error) => {
+    switch (error.code)
+    {
+    case error.TIMEOUT:
+      alert('A solicitação para obter a localização do usuário foi cancelada porque demorou muito.');
+      break;
+    case error.POSITION_UNAVAILABLE:
+      alert('As informações de localização não estão disponíveis.');
+      break;
+    case error.PERMISSION_DENIED:
+      alert('A permissão para compartilhar informações de localização foi negada!');
+      break;
+    default:
+      alert('Ocorreu um erro desconhecido.');
     }
   }
+
 }
