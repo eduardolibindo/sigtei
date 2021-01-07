@@ -69,6 +69,11 @@
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active" *ngIf="isAdmin">Mapa Motorista</a>
 
 
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/notification" routerLinkActive="active" *ngIf="isMotorista">Notificação</a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/notification" routerLinkActive="active" *ngIf="isAdmin">Notificação</a>
+
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/admin" routerLinkActive="active"
         *ngIf="isAdmin">Admin</a>
 
@@ -101,7 +106,7 @@
         </li>
       </ul> -->
 
-      <span class="toolbar-spacer"></span>
+      <!-- <span class="toolbar-spacer"></span>
 
       <ul class="nav">
         <li class="nav-item">
@@ -124,7 +129,7 @@
             <i class="material-icons" routerLink="/home">person</i>
           </a>
         </li>
-      </ul>
+      </ul> -->
 
     </mat-toolbar>
 

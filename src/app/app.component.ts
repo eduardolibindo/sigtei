@@ -21,25 +21,24 @@ export class AppComponent {
   constructor(
     private router: Router,
     private accountService: AccountService,
-    public swPush: SwPush,
-    public pushService: PushNotificationService
+    public swPush: SwPush
     )
   {
       this.accountService.account.subscribe(x => this.account = x);
   }
 
-  submitSubscription(){
-    if (this.swPush.isEnabled) {
-      this.swPush
-        .requestSubscription({
-          serverPublicKey: VAPID_PUBLIC
-        })
-        .then(subscription => {
-          this.pushService.sendSubscriptionToTheServer(subscription).subscribe();
-        })
-        .catch(console.error);
-    }
-  }
+  // submitSubscription(){
+  //   if (this.swPush.isEnabled) {
+  //     this.swPush
+  //       .requestSubscription({
+  //         serverPublicKey: VAPID_PUBLIC
+  //       })
+  //       .then(subscription => {
+  //         this.pushService.sendSubscriptionToTheServer(subscription).subscribe();
+  //       })
+  //       .catch(console.error);
+  //   }
+  // }
 
   get isAdmin() {
     return this.account && this.account.role === Role.Admin;

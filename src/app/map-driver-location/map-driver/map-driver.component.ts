@@ -57,7 +57,7 @@ export class MapDriverComponent implements OnInit {
   }
 
   clickedMarker(label: string) {
-    console.log(`clicked the marker: ${label}`)
+    console.log(`clicked the marker: ${label}`);
   }
 
 

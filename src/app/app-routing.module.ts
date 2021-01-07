@@ -15,6 +15,7 @@ const idstudentModule = () => import('./ID-student/ID-student.module').then(x =>
 const studentlistModule = () => import('./student-list/student-list.module').then(x => x.StudentlistModule);
 const mapsModule = () => import('./maps/maps.module').then(x => x.MapsModule);
 const mapdriverlocationModule = () => import('./map-driver-location/map-driver-location.module').then(x => x.MapDriverLocationModule);
+const notificationModule = () => import('./notification/notification.module').then(x => x.NotificationModule);
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'student-list', loadChildren: studentlistModule, canActivate: [AuthGuard], data: { roles: [Role.Motorista, Role.Admin] } },
   { path: 'maps', loadChildren: mapsModule, canActivate: [AuthGuard] },
   { path: 'map-driver-location', loadChildren: mapdriverlocationModule, canActivate: [AuthGuard] },
+  { path: 'notification', loadChildren: notificationModule, canActivate: [AuthGuard] },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

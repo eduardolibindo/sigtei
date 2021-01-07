@@ -30,7 +30,6 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { ZXingScannerModule } from 'angular-weblineindia-qrcode-scanner';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { CommonModule } from '@angular/common';
-import { PushNotificationService } from './_services/pushNotification.service';
 
 
 @NgModule({
@@ -66,7 +65,7 @@ import { PushNotificationService } from './_services/pushNotification.service';
 
         // provider used to create fake backend
         // fakeBackendProvider
-        PushNotificationService
+
     ],
     bootstrap: [AppComponent]
 })
