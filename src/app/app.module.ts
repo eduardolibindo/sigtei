@@ -1,4 +1,5 @@
-﻿import { NgModule, APP_INITIALIZER } from '@angular/core';
+﻿import { NgxPushNotificationService } from 'ngx-push-notification';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule,  } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,6 +31,7 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { ZXingScannerModule } from 'angular-weblineindia-qrcode-scanner';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { CommonModule } from '@angular/common';
+import { PusherService } from './_services/pusher.service';
 
 
 @NgModule({
@@ -63,9 +65,11 @@ import { CommonModule } from '@angular/common';
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
+
         // provider used to create fake backend
         // fakeBackendProvider
-
+        PusherService,
+        NgxPushNotificationService
     ],
     bootstrap: [AppComponent]
 })

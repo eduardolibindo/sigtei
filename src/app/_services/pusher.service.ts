@@ -10,10 +10,16 @@ export class PusherService {
       cluster: 'us2',
     });
     this.channel = this.pusherClient.subscribe('location');
+    this.channel1 = this.pusherClient.subscribe('notification');
   }
   channel;
+  channel1;
 
   public init() {
     return this.channel;
+  }
+
+  public init1() {
+    return this.channel1;
   }
 }

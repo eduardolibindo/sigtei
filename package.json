@@ -47,6 +47,7 @@
     "ngx-push-notification": "0.0.8",
     "ngx-qrcode2": "^9.0.0",
     "pdfmake": "^0.1.68",
+    "popper.js": "^1.16.1",
     "pusher-angular": "^1.0.0",
     "pusher-js": "^7.0.2",
     "rxjs": "~6.6.0",

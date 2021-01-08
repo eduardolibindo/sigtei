@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-// import { NgxPushNotificationService } from 'ngx-push-notification';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { first } from 'rxjs/operators';
 
-const ping = `${environment.apiUrl}/notify`;
+const notify = `${environment.apiUrl}/notify`;
 
 @Component({
   selector: 'app-details',
@@ -14,43 +13,34 @@ const ping = `${environment.apiUrl}/notify`;
 
 export class DetailsComponent implements OnInit {
 
+  options = {
+    title: 'Lokesh',
+    body: 'Browser Notification..!',
+    icon: '../../favicon.ico'
+  };
+
   constructor(
-    // private ngxPushNotificationService: NgxPushNotificationService,
     private http: HttpClient
   ) { }
 
   ngOnInit() { }
 
-  pingServer(notification) {
+  notifyServer(notification) {
     this.http
-      .post(ping, notification)
-      .subscribe((res) => { });
+      .post(notify, notification)
+      .subscribe((res) => {});
   }
 
-  // notify() {
-  //   this.ngxPushNotificationService.showNotification({
-  //     title: 'Ola camarada',
-  //     body: 'Fuck you broh',
-  //     icon: '../../favicon.ico'
-  //   }).subscribe((res: any) => {
-  //     if (res.type === 'show') {
-  //       console.log('show');
-  //     } else if (res.type === 'click') {
-  //       console.log('click');
-  //     } else {
-  //       console.log('close');
-  //     }
-  //   });
-  // }
+  sendNodeNotification(notification) {
+    this.notifyServer({
+      title: notification.title,
+      body: notification.body,
+      icon: notification.icon
+    });
+  }
 
-  notification() {
-    this.pingServer(
-      {
-        title: 'Ola camarada',
-        body: 'Fuck you broh',
-        icon: '../../favicon.ico'
-      }
-    );
+  setNotification() {
+    this.sendNodeNotification({title: 'Lokesh', body: 'Browser Notification..!', icon: '../../favicon.ico'});
   }
 
 }

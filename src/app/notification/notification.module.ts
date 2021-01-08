@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { NotificationRoutingModule } from './notification-routing.module';
 import { LayoutComponent } from './layout.component';
 import { DetailsComponent } from './details.component';
+import { PusherService } from '../_services/pusher.service';
 // import { NgxPushNotificationService } from 'ngx-push-notification';
 
 
@@ -18,6 +19,6 @@ import { DetailsComponent } from './details.component';
         LayoutComponent,
         DetailsComponent,
     ],
-    // providers:[NgxPushNotificationService],
+    providers: [PusherService]
 })
 export class NotificationModule { }
