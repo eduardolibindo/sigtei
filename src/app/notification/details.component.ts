@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { first } from 'rxjs/operators';
+import { AngularFireMessaging } from '@angular/fire/messaging';
 
 const notify = `${environment.apiUrl}/notify`;
 
@@ -20,7 +21,8 @@ export class DetailsComponent implements OnInit {
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private afMessaging: AngularFireMessaging
   ) { }
 
   ngOnInit() { }
@@ -41,6 +43,18 @@ export class DetailsComponent implements OnInit {
 
   setNotification() {
     this.sendNodeNotification({title: 'Lokesh', body: 'Browser Notification..!', icon: '../../favicon.ico'});
+  }
+
+  requestPushNotificationsPermission() { // requesting permission
+    this.afMessaging.requestToken // getting tokens
+      .subscribe(
+        (token) => { // USER-REQUESTED-TOKEN
+          console.log('Permission granted! Save to the server!', token);
+        },
+        (error) => {
+          console.error("Permission denied!", error);
+        }
+      );
   }
 
 }

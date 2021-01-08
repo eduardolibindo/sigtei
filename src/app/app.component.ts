@@ -5,6 +5,7 @@ import { AccountService } from './_services';
 import { Account, Role } from './_models';
 import { SwPush } from '@angular/service-worker';
 import { PusherService } from './_services/pusher.service';
+import { MessagingService } from './_services/messaging.service';
 
 interface MyObj {
   title: string;
@@ -37,13 +38,15 @@ export class AppComponent implements OnInit {
   titulo: string;
   corpo: string;
   icone: string;
+  message;
 
   constructor(
     private router: Router,
     private accountService: AccountService,
     public swPush: SwPush,
     private pusher: PusherService,
-    private ngxPushNotificationService: NgxPushNotificationService
+    private ngxPushNotificationService: NgxPushNotificationService,
+    private messagingService: MessagingService
   ) {
     this.accountService.account.subscribe(x => this.account = x);
   }
@@ -62,6 +65,11 @@ export class AppComponent implements OnInit {
       // const option = JSON.stringify(notification);
       // this.date = option;
     });
+
+    const userId = 'user001';
+    this.messagingService.requestPermission(userId)
+    this.messagingService.receiveMessage()
+    this.message = this.messagingService.currentMessage
   }
 
   showDesktopNotification(titulo, corpo, icone) {

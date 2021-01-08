@@ -26,12 +26,16 @@ import { from } from 'rxjs';
 import { UsersComponent } from './users/users.component';
 import { RouterModule } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { ZXingScannerModule } from 'angular-weblineindia-qrcode-scanner';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { PusherService } from './_services/pusher.service';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { MessagingService } from './_services/messaging.service';
 
 
 @NgModule({
@@ -39,6 +43,9 @@ import { PusherService } from './_services/pusher.service';
         BrowserModule,
         CommonModule,
         RouterModule.forRoot([]),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
+        AngularFireMessagingModule,
         AngularFireModule.initializeApp(environment.firebase),
         BrowserAnimationsModule,
         FormsModule,
@@ -53,7 +60,7 @@ import { PusherService } from './_services/pusher.service';
         MatIconModule,
         NgxQRCodeModule,
         ZXingScannerModule,
-        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
+        ServiceWorkerModule.register('combined-sw.js', { enabled: environment.production })],
     declarations: [
         AppComponent,
         AlertComponent,
@@ -69,7 +76,9 @@ import { PusherService } from './_services/pusher.service';
         // provider used to create fake backend
         // fakeBackendProvider
         PusherService,
-        NgxPushNotificationService
+        NgxPushNotificationService,
+        MessagingService,
+        AsyncPipe
     ],
     bootstrap: [AppComponent]
 })
