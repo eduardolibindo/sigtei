@@ -6,3 +6,4 @@ export * from './barcode-formats';
 export * from './schedules';
 export * from './student-list';
 export * from './location';
+export * from './notification';

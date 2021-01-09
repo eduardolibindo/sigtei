@@ -1,89 +1,32 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { AngularFireMessaging } from '@angular/fire/messaging';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertService } from '../_services';
-import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationService } from '../_services/notification.service';
 
-const notify = `${environment.apiUrl}/notify`;
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css']
+  styleUrls: ['./details.component.css', './main.css']
 })
 
 export class DetailsComponent implements OnInit {
-  formGroup: FormGroup;
-  loading = false;
-  submitted = false;
+  notifications: any[];
 
-  options = {
-    title: 'Lokesh',
-    body: 'Browser Notification..!'
-  };
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private cd: ChangeDetectorRef,
-    private alertService: AlertService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private http: HttpClient,
-    private afMessaging: AngularFireMessaging
-  ) { }
+  constructor(private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.formGroup = this.formBuilder.group({
-      title: ['', Validators.required],
-      body: ['', Validators.required],
-    });
+    this.notificationService.getnotificationAll()
+      .pipe(first())
+      .subscribe(notifications => this.notifications = notifications);
   }
 
-  get f() { return this.formGroup.controls; }
-
-  onSubmit() {
-    this.submitted = true;
-
-    this.alertService.clear();
-
-    if (this.formGroup.invalid) {
-      return;
-    }
-
-    this.sendNodeNotification(this.options = {title: this.f.title.value, body: this.f.body.value});
-
+  deleteNotification(id: string) {
+    const notification = this.notifications.find(x => x.id === id);
+    notification.isDeleting = true;
+    this.notificationService.deleteNotification(id)
+      .pipe(first())
+      .subscribe(() => {
+        this.notifications = this.notifications.filter(x => x.id !== id);
+      });
   }
-
-  notifyServer(notification) {
-    this.http
-      .post(notify, notification)
-      .subscribe((res) => { });
-  }
-
-  sendNodeNotification(notification) {
-    this.notifyServer({
-      title: notification.title,
-      body: notification.body
-    });
-  }
-
-  setNotification() {
-    this.sendNodeNotification(this.options);
-  }
-
-  requestPushNotificationsPermission() { // requesting permission
-    this.afMessaging.requestToken // getting tokens
-      .subscribe(
-        (token) => { // USER-REQUESTED-TOKEN
-          console.log('Permission granted! Save to the server!', token);
-        },
-        (error) => {
-          console.error('Permission denied!', error);
-        }
-      );
-  }
-
 }

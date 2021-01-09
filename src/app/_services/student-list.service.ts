@@ -68,19 +68,4 @@ export class StudentlistService {
     return this.http.delete(studentlistUrl);
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
