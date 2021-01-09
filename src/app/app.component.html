@@ -57,22 +57,28 @@
 
       <!-- <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active" *ngIf="isEstudante">Mapa </a> -->
 
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active" *ngIf="isMotorista">Mapa</a>
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active"
+        *ngIf="isMotorista">Mapa</a>
 
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active" *ngIf="isAdmin">Mapa</a>
 
 
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active" *ngIf="isEstudante">Mapa Motorista</a>
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active"
+        *ngIf="isEstudante">Mapa Motorista</a>
 
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active" *ngIf="isMotorista">Mapa Motorista</a>
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active"
+        *ngIf="isMotorista">Mapa Motorista</a>
 
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active" *ngIf="isAdmin">Mapa Motorista</a>
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active"
+        *ngIf="isAdmin">Mapa Motorista</a>
 
 
 
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="/notification" routerLinkActive="active" *ngIf="isMotorista">Notificação</a>
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/notification" routerLinkActive="active"
+        *ngIf="isMotorista">Notificação</a>
 
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="/notification" routerLinkActive="active" *ngIf="isAdmin">Notificação</a>
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/notification" routerLinkActive="active"
+        *ngIf="isAdmin">Notificação</a>
 
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/admin" routerLinkActive="active"
         *ngIf="isAdmin">Admin</a>
@@ -90,8 +96,14 @@
         <mat-icon>menu</mat-icon>
       </button>
 
-      <!-- <ul class="nav" *ngIf="account">
-        <li class="nav-item">
+      <button mat-icon-button (click)="enableNotification()">
+        <mat-icon>notifications</mat-icon>
+      </button>
+
+      <!-- <span class="toolbar-spacer"></span>
+
+      <ul class="nav" *ngIf="account">
+       <li class="nav-item">
           <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active">Home</a>
         </li>
         <li class="nav-item">
@@ -102,16 +114,25 @@
           <a class="nav-item nav-link" routerLink="/admin" routerLinkActive="active" *ngIf="isAdmin">Admin</a>
         </li>
         <li class="nav-item">
-          <a class="nav-item nav-link text-danger" (click)="logout()">Sair</a>
+          <a class="nav-item nav-link text-danger" (click)="permissionNotification()">Ativar Notificação</a>
         </li>
-      </ul> -->
+        <li class="nav-item">
+          <a class="nav-item nav-link">{{ message | async | json }}</a>
+        </li>
 
-      <span class="toolbar-spacer"></span>
+        <li class="nav-item">
+          <a class="nav-item nav-link text-danger" (click)="permissionNotification()">
+            <i class="material-icons">notifications</i>
+          </a>
+        </li>
+
+      </ul>-->
+
+      <!-- <span class="toolbar-spacer"></span>
 
       <ul class="nav">
         <li class="nav-item dropdown">
-          <a aria-expanded="false" aria-haspopup="true" class="nav-link" data-toggle="dropdown"
-            id="navbarDropdownMenuLink">
+          <a aria-expanded="false" (click)="permissionNotification()" aria-haspopup="true" class="nav-link" data-toggle="dropdown">
             <i class="material-icons">notifications</i>
             <span class="notification">1</span>
           </a>
@@ -119,14 +140,26 @@
             <a class="dropdown-item">{{titulo}}</a>
             <a class="dropdown-item">{{corpo}}</a>
             <a class="dropdown-item">{{icone}}</a>
+            <a class="dropdown-item"><img src="{{icone}}"></a>
             <a class="dropdown-item">{{ message | async | json }}</a>
           </div>
         </li>
-      </ul>
-
+      </ul> -->
     </mat-toolbar>
 
     <div class="main-content">
+
+      <div class="text-center">
+        <div class="text-center">
+          <span class="text-uppercase">{{data}}</span>
+        </div>
+        <span class="toolbar-spacer"></span><br>
+        <div class="text-center">
+          <span class="text-uppercase">{{titulo}}</span>
+          <span class="toolbar-spacer"></span><br>
+          <span class="text-uppercase">{{corpo}}</span>
+        </div>
+      </div>
 
       <!-- main app container -->
       <div class="app-container" [ngClass]="{ 'bg-light': account }">
