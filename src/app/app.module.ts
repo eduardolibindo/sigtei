@@ -35,6 +35,8 @@ import { PusherService } from './_services/pusher.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { MessagingService } from './_services/messaging.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -57,6 +59,8 @@ import { MessagingService } from './_services/messaging.service';
         MatListModule,
         MatButtonModule,
         MatIconModule,
+        MatSnackBarModule,
+        MatDialogModule,
         NgxQRCodeModule,
         ZXingScannerModule,
         ServiceWorkerModule.register('combined-sw.js', { enabled: environment.production })],

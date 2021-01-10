@@ -5,6 +5,10 @@ import { Account, Role } from './_models';
 import { SwPush } from '@angular/service-worker';
 import { PusherService } from './_services/pusher.service';
 import { MessagingService } from './_services/messaging.service';
+import { NotificationService } from './_services/notification.service';
+import { first } from 'rxjs/operators';
+
+declare var jQuery: any;
 
 const VAPID_PUBLIC = 'BKqOvOXQusxAXzOiRd9_v9aBuQln1CwnnpShklyLvf4BvWIAniKwIC-0M8T2R2XKxc3_QZiDC2OnF1I_NHIPIro';
 
@@ -24,6 +28,8 @@ export class AppComponent implements OnInit {
   corpo: string;
   data: string;
 
+  notifications: any[];
+
   message;
 
   constructor(
@@ -31,7 +37,8 @@ export class AppComponent implements OnInit {
     private accountService: AccountService,
     public swPush: SwPush,
     private pusher: PusherService,
-    private messagingService: MessagingService
+    private messagingService: MessagingService,
+    private notificationService: NotificationService
   ) {
     this.accountService.account.subscribe(x => this.account = x);
   }
@@ -52,9 +59,30 @@ export class AppComponent implements OnInit {
 
     this.messagingService.receiveMessage();
     this.message = this.messagingService.currentMessage;
+
+    this.notificationService.getnotificationAll()
+      .pipe(first())
+      .subscribe(notifications => this.notifications = notifications);
+
+    // (function ($) {
+    //   $(document).ready(function () {
+    //     $('.toast').toast('show');
+    //   });
+    // })(jQuery);
   }
 
-  enableNotification(){
+  myFunction() {
+    // Get the snackbar DIV
+    const x = document.getElementById('snackbar');
+
+    // Add the "show" class to DIV
+    x.className = 'show';
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(() => { x.className = x.className.replace('show', ''); }, 3000);
+  }
+
+  enableNotification() {
     const userId = 'user001';
     this.messagingService.requestPermission(userId);
   }

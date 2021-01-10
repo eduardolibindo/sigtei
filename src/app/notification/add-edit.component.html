@@ -1,4 +1,6 @@
 ﻿<div class="mt-5">
+  <p>{{id}}</p>
+  <p>{{isAddMode}}</p>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-4 login-form text-center">
     <h2 class="mb-5 font-weight-light text-uppercase" *ngIf="isAddMode">Criar Notificação</h2>
     <h2 class="mb-5 font-weight-light text-uppercase" *ngIf="!isAddMode">Editar Notificação</h2>
@@ -6,9 +8,9 @@
       <select formControlName="title" class="form-control" class="form-control rounded-pill form-control-lg"
         [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
         <option value="" disabled selected>Titulo</option>
-        <option value="Partida">Aviso</option>
-        <option value="Chegada">Atenção</option>
-        <option value="Saida">Recado Urgente</option>
+        <option value="Aviso">Aviso</option>
+        <option value="Atenção">Atenção</option>
+        <option value="Recado Urgente">Recado Urgente</option>
       </select>
       <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
         <div *ngIf="f.title.errors.required">Selecione o titulo</div>

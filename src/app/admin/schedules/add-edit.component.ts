@@ -29,7 +29,7 @@ export class AddEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
+    this.id = this.route.snapshot.params.id;
     this.isAddMode = !this.id;
 
     this.form = this.formBuilder.group({
@@ -72,7 +72,7 @@ export class AddEditComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          this.alertService.success('Local criado com Sucesso', { keepAfterRouteChange: true });
+          this.alertService.success('Horário criado com Sucesso', { keepAfterRouteChange: true });
           this.router.navigate(['../'], { relativeTo: this.route });
         },
         error: error => {

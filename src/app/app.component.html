@@ -92,14 +92,28 @@
 
     <mat-toolbar color="secondary">
 
-      <button mat-icon-button (click)="sidenav.toggle()">
+      <button mat-icon-button class="example-icon" (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
+      <span>Sigtei</span>
+      <span style="flex: 1 1 auto;"></span>
+      <div>
+        <button mat-icon-button class="example-icon favorite-icon show-toast" (click)="myFunction()">
+          <mat-icon matBadge="1" matBadgeColor="warn">notifications</mat-icon>
+        </button>
+      </div>
 
-      <button mat-icon-button (click)="enableNotification()">
-        <mat-icon>notifications</mat-icon>
-      </button>
+      <div id="snackbar" *ngFor="let notification of notifications">
+        <img src="{{notification.icon}}">
+        <p>
+          {{notification.title}}
+        </p><br>
+        <p>
+          {{notification.body}}
+        </p>
+      </div>
 
+      <!-- <div id="snackbar">Some text some message..</div> -->
       <!-- <span class="toolbar-spacer"></span>
 
       <ul class="nav" *ngIf="account">
@@ -148,18 +162,6 @@
     </mat-toolbar>
 
     <div class="main-content">
-
-      <div class="text-center">
-        <div class="text-center">
-          <span class="text-uppercase">{{data}}</span>
-        </div>
-        <span class="toolbar-spacer"></span><br>
-        <div class="text-center">
-          <span class="text-uppercase">{{titulo}}</span>
-          <span class="toolbar-spacer"></span><br>
-          <span class="text-uppercase">{{corpo}}</span>
-        </div>
-      </div>
 
       <!-- main app container -->
       <div class="app-container" [ngClass]="{ 'bg-light': account }">

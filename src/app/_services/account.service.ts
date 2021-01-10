@@ -135,11 +135,9 @@ export class AccountService {
     return this.http.put(`${baseUrl}/${id}`, params)
       .pipe(map((accounts: any) => {
         // update the current account if it was updated
-        if (accounts.id === this.accountValue.id) {
           // publish updated account to subscribers
           accounts = { ...this.accountValue, ...accounts };
           this.accountSubject.next(accounts);
-        }
         return accounts;
       }));
   }
@@ -148,12 +146,10 @@ export class AccountService {
     return this.http.put(`${placesUrl}/${id}`, params)
       .pipe(map((places: any) => {
         // update the current places if it was updated
-        if (places.id === this.placesValue.id) {
           // publish updated places to subscribers
           places = { ...this.placesValue, ...places };
           this.placesSubject.next(places);
-        }
-        return places;
+          return places;
       }));
   }
 
@@ -161,12 +157,10 @@ export class AccountService {
     return this.http.put(`${schedulesUrl}/${id}`, params)
       .pipe(map((schedules: any) => {
         // update the current account if it was updated
-        if (schedules.id === this.schedulesValue.id) {
           // publish updated account to subscribers
           schedules = { ...this.accountValue, ...schedules };
           this.accountSubject.next(schedules);
-        }
-        return schedules;
+          return schedules;
       }));
   }
 
