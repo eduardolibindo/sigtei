@@ -1,9 +1,8 @@
 ﻿<div class="mt-5">
-  <p>{{id}}</p>
-  <p>{{isAddMode}}</p>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-4 login-form text-center">
     <h2 class="mb-5 font-weight-light text-uppercase" *ngIf="isAddMode">Criar Notificação</h2>
     <h2 class="mb-5 font-weight-light text-uppercase" *ngIf="!isAddMode">Editar Notificação</h2>
+
     <div class="form-group">
       <select formControlName="title" class="form-control" class="form-control rounded-pill form-control-lg"
         [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
@@ -16,6 +15,7 @@
         <div *ngIf="f.title.errors.required">Selecione o titulo</div>
       </div>
     </div>
+
     <div class="form-group">
       <input type="text" formControlName="body" class="form-control" placeholder="Corpo"
         class="form-control rounded-pill form-control-lg" [ngClass]="{ 'is-invalid': submitted && f.body.errors }" />
@@ -23,6 +23,7 @@
         <div *ngIf="f.body.errors.required">Insira o corpo da notificação</div>
       </div>
     </div>
+
     <div class="form-group">
       <input type="text" formControlName="icon" class="form-control" placeholder="Icone"
         class="form-control rounded-pill form-control-lg"
@@ -31,6 +32,20 @@
         <div *ngIf="f.icon.errors.required">Insira o diretorio do icone</div>
       </div>
     </div>
+    <img src="../../aviso.ico" alt="">
+    <div class="form-group">
+      <select formControlName="icon" class="form-control" class="form-control rounded-pill form-control-lg"
+        [ngClass]="{ 'is-invalid': submitted && f.icon.errors }">
+        <option value="" disabled selected>Icone</option>
+        <option value="../../../aviso.ico">Aviso</option>
+        <option value="../../../atencao.ico">Atenção</option>
+        <option value="../../../urgente.ico">Recado Urgente</option>
+      </select>
+      <div *ngIf="submitted && f.icon.errors" class="invalid-feedback">
+        <div *ngIf="f.icon.errors.required">Selecione um icone</div>
+      </div>
+    </div>
+
     <div class="form-group">
       <button [disabled]="loading" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
         style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
@@ -40,5 +55,6 @@
       <button routerLink="/notification" class="btn mt-3 rounded-pill btn-lg btn-cancel text-uppercase"
         style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">Cancelar</button>
     </div>
+
   </form>
 </div>

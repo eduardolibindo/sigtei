@@ -95,7 +95,7 @@
       <button mat-icon-button class="example-icon" (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Sigtei</span>
+      <span class="font-weight-light text-uppercase text-center">Menu</span>
       <span style="flex: 1 1 auto;"></span>
       <div>
         <button mat-icon-button class="example-icon favorite-icon show-toast" (click)="myFunction()">
@@ -104,13 +104,13 @@
       </div>
 
       <div id="snackbar" *ngFor="let notification of notifications">
-        <img src="{{notification.icon}}">
-        <p>
+        <img src="{{notification.icon}}"><br>
+        <span class="font-weight-light text-uppercase text-center">
           {{notification.title}}
-        </p><br>
-        <p>
+        </span><br>
+        <span class="font-weight-light text-uppercase text-center">
           {{notification.body}}
-        </p>
+        </span>
       </div>
 
       <!-- <div id="snackbar">Some text some message..</div> -->
