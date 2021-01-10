@@ -10,6 +10,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import {MatBadgeModule} from '@angular/material/badge';
+
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
@@ -61,6 +63,7 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatIconModule,
         MatSnackBarModule,
         MatDialogModule,
+        MatBadgeModule,
         NgxQRCodeModule,
         ZXingScannerModule,
         ServiceWorkerModule.register('combined-sw.js', { enabled: environment.production })],

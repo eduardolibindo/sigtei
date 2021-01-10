@@ -1,13 +1,13 @@
 <div>
   <div class="container-table100">
     <div class="wrap-table100" id="pdfTable" #pdfTable>
-      <h1>Lista de Estudantes</h1>
-      <p>{{dataTime}}</p>
-      <p>Motorista: {{name}}</p>
+      <h1 class="mt-1 font-weight-light text-uppercase text-center">Lista de Estudantes</h1>
+      <p class="font-weight-normal text-center">{{dataTime}}</p>
+      <p class="font-weight-normal text-center">Motorista: {{name}}</p>
 
       <!-- <input type="text" class="form-control rounded-pill form-control-lg" placeholder="Placa do Veiculo" (input)="persist('test', $event.target.value)"> -->
 
-      <mat-form-field style="width: 200px;">
+      <mat-form-field class="col align-self-center" style="text-align: center;">
         <input matInput type="text" [(ngModel)]="placa">
       </mat-form-field>
 
@@ -16,7 +16,7 @@
       </div> -->
 
       <div>
-        <p>Placa: <span class="text-uppercase">{{placa.toUpperCase()}}</span></p>
+        <p class="font-weight-normal text-center">Placa: <span class="text-uppercase">{{placa.toUpperCase()}}</span></p>
       </div>
 
       <table class="table">

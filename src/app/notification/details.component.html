@@ -1,18 +1,18 @@
 <div>
-
-  <div class="login-form text-center">
-    <h2 class="mb-3 font-weight-light text-uppercase text-center">Notificações</h2>
-    <p class="mt-3 font-weight-normal text-center">
-      Notificações para todos os Estudantes
-    </p>
-    <button routerLink="add" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
+  <div class="mt-5">
+    <div class="login-form text-center">
+      <h2 class="mt-1 font-weight-light text-uppercase text-center">Notificações</h2>
+      <p class="font-weight-normal text-center">
+        Notificações para todos os Estudantes
+      </p>
+      <!-- <button routerLink="add" class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
       style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
       Criar Notificação
-    </button>
+      </button> -->
+    </div>
   </div>
 
   <div>
-
     <div class="container-table100">
       <div class="wrap-table100">
         <div class="table">
@@ -47,11 +47,11 @@
 
               <button routerLink="edit/{{notification.id}}" class="btn btn-sm btn-submit mr-3">Editar</button>
 
-              <button (click)="deleteNotification(notification.id)" class="btn btn-sm btn-delete mr-1"
+              <!-- <button (click)="deleteNotification(notification.id)" class="btn btn-sm btn-delete mr-1"
                 [disabled]="notification.isDeleting">
                 <span *ngIf="notification.isDeleting" class="spinner-border spinner-border-sm"></span>
                 <span *ngIf="!notification.isDeleting">Deletar</span>
-              </button>
+              </button> -->
 
             </div>
           </div>

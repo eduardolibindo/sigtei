@@ -8,8 +8,6 @@ import { MessagingService } from './_services/messaging.service';
 import { NotificationService } from './_services/notification.service';
 import { first } from 'rxjs/operators';
 
-declare var jQuery: any;
-
 const VAPID_PUBLIC = 'BKqOvOXQusxAXzOiRd9_v9aBuQln1CwnnpShklyLvf4BvWIAniKwIC-0M8T2R2XKxc3_QZiDC2OnF1I_NHIPIro';
 
 @Component({
@@ -27,6 +25,9 @@ export class AppComponent implements OnInit {
   titulo: string;
   corpo: string;
   data: string;
+
+  hidden = false;
+  badgeContent = 1;
 
   notifications: any[];
 
@@ -63,23 +64,35 @@ export class AppComponent implements OnInit {
     this.notificationService.getnotificationAll()
       .pipe(first())
       .subscribe(notifications => this.notifications = notifications);
-
-    // (function ($) {
-    //   $(document).ready(function () {
-    //     $('.toast').toast('show');
-    //   });
-    // })(jQuery);
   }
 
   myFunction() {
-    // Get the snackbar DIV
-    const x = document.getElementById('snackbar');
+    if (this.badgeContent !== 0) {
+      this.hidden = !this.hidden;
+      // Get the snackbar DIV
+      const x = document.getElementById('snackbar');
 
-    // Add the "show" class to DIV
-    x.className = 'show';
+      // Add the "show" class to DIV
+      x.className = 'show';
 
-    // After 3 seconds, remove the show class from DIV
-    setTimeout(() => { x.className = x.className.replace('show', ''); }, 3000);
+      // After 3 seconds, remove the show class from DIV
+      setTimeout(() => { x.className = x.className.replace('show', ''); }, 3000);
+
+      this.badgeContent = 0;
+    } else {
+      // Get the snackbar DIV
+      const x = document.getElementById('snackbarOff');
+
+      // Add the "show" class to DIV
+      x.className = 'show';
+
+      // After 3 seconds, remove the show class from DIV
+      setTimeout(() => { x.className = x.className.replace('show', ''); }, 3000);
+    }
+  }
+
+  toggleBadgeVisibility() {
+    this.hidden = !this.hidden;
   }
 
   enableNotification() {

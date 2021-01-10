@@ -32,14 +32,14 @@
         <div *ngIf="f.icon.errors.required">Insira o diretorio do icone</div>
       </div>
     </div>
-    <img src="../../aviso.ico" alt="">
+
     <div class="form-group">
       <select formControlName="icon" class="form-control" class="form-control rounded-pill form-control-lg"
         [ngClass]="{ 'is-invalid': submitted && f.icon.errors }">
         <option value="" disabled selected>Icone</option>
-        <option value="../../../aviso.ico">Aviso</option>
-        <option value="../../../atencao.ico">Atenção</option>
-        <option value="../../../urgente.ico">Recado Urgente</option>
+        <option value="../../assets/icon_notification/aviso.ico">Aviso</option>
+        <option value="../../assets/icon_notification/atencao.ico">Atenção</option>
+        <option value="../../assets/icon_notification/urgente.ico">Recado Urgente</option>
       </select>
       <div *ngIf="submitted && f.icon.errors" class="invalid-feedback">
         <div *ngIf="f.icon.errors.required">Selecione um icone</div>

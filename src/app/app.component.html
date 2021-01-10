@@ -99,17 +99,25 @@
       <span style="flex: 1 1 auto;"></span>
       <div>
         <button mat-icon-button class="example-icon favorite-icon show-toast" (click)="myFunction()">
-          <mat-icon matBadge="1" matBadgeColor="warn">notifications</mat-icon>
+          <mat-icon [matBadge]="badgeContent" matBadgeColor="warn" [matBadgeHidden]="hidden">notifications</mat-icon>
         </button>
       </div>
 
-      <div id="snackbar" *ngFor="let notification of notifications">
-        <img src="{{notification.icon}}"><br>
-        <span class="font-weight-light text-uppercase text-center">
-          {{notification.title}}
-        </span><br>
-        <span class="font-weight-light text-uppercase text-center">
-          {{notification.body}}
+      <div *ngFor="let notification of notifications">
+        <div id="snackbar">
+          <img src="{{notification.icon}}">
+          <span>
+            {{notification.title}}
+          </span><br>
+          <span>
+            {{notification.body}}
+          </span>
+        </div>
+      </div>
+
+      <div id="snackbarOff">
+        <span>
+          Não tem Mensagem !
         </span>
       </div>
 
