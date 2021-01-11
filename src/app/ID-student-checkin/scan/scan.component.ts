@@ -89,6 +89,7 @@ export class ScanComponent implements OnInit {
 
   onCodeResult(resultString: string) {
     // this.estudante = resultString;
+    this.playAudio();
 
     let qrResultString: MyObj  = JSON.parse(resultString, (key, value) => {
       if (typeof value === 'string') {
@@ -124,10 +125,18 @@ export class ScanComponent implements OnInit {
           this.router.navigate(['../'], { relativeTo: this.route });
         },
         error: error => {
-          this.alertService.error(error);
+          this.alertService.error(error, { keepAfterRouteChange: true });
+          this.router.navigate(['../'], { relativeTo: this.route });
           this.loading = false;
         }
       });
+  }
+
+  playAudio(){
+    const audio = new Audio();
+    audio.src = '../../../assets/sounds/unsure-566.mp3';
+    audio.load();
+    audio.play();
   }
 
   onDeviceSelectChange(selected: string) {

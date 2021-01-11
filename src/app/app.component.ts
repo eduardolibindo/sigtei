@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from './_services';
 import { Account, Role } from './_models';
@@ -16,6 +16,29 @@ const VAPID_PUBLIC = 'BKqOvOXQusxAXzOiRd9_v9aBuQln1CwnnpShklyLvf4BvWIAniKwIC-0M8
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  constructor(
+    private router: Router,
+    private accountService: AccountService,
+    public swPush: SwPush,
+    private pusher: PusherService,
+    private messagingService: MessagingService,
+    private notificationService: NotificationService
+  ) {
+    this.accountService.account.subscribe(x => this.account = x);
+  }
+
+  get isAdmin() {
+    return this.account && this.account.role === Role.Admin;
+  }
+
+  get isEstudante() {
+    return this.account && this.account.role === Role.Estudante;
+  }
+
+  get isMotorista() {
+    return this.account && this.account.role === Role.Motorista;
+  }
   title = 'sigtei';
   Role = Role;
   account: Account;
@@ -33,16 +56,7 @@ export class AppComponent implements OnInit {
 
   message;
 
-  constructor(
-    private router: Router,
-    private accountService: AccountService,
-    public swPush: SwPush,
-    private pusher: PusherService,
-    private messagingService: MessagingService,
-    private notificationService: NotificationService
-  ) {
-    this.accountService.account.subscribe(x => this.account = x);
-  }
+  @ViewChild('audioOption') audioPlayerRef: ElementRef;
 
   ngOnInit() {
     const channel = this.pusher.init1();
@@ -68,9 +82,12 @@ export class AppComponent implements OnInit {
 
   myFunction() {
     if (this.badgeContent !== 0) {
+      // this.playAudio();
+      this.audioPlayerRef.nativeElement.play();
       this.hidden = !this.hidden;
       // Get the snackbar DIV
       const x = document.getElementById('snackbar');
+      const y = document.getElementById('audio');
 
       // Add the "show" class to DIV
       x.className = 'show';
@@ -80,6 +97,8 @@ export class AppComponent implements OnInit {
 
       this.badgeContent = 0;
     } else {
+      // this.playAudio();
+      this.audioPlayerRef.nativeElement.play();
       // Get the snackbar DIV
       const x = document.getElementById('snackbarOff');
 
@@ -91,6 +110,13 @@ export class AppComponent implements OnInit {
     }
   }
 
+  playAudio(){
+    const audio = new Audio();
+    audio.src = '../assets/sounds/intuition-561.mp3';
+    audio.load();
+    audio.play();
+  }
+
   toggleBadgeVisibility() {
     this.hidden = !this.hidden;
   }
@@ -98,18 +124,6 @@ export class AppComponent implements OnInit {
   enableNotification() {
     const userId = 'user001';
     this.messagingService.requestPermission(userId);
-  }
-
-  get isAdmin() {
-    return this.account && this.account.role === Role.Admin;
-  }
-
-  get isEstudante() {
-    return this.account && this.account.role === Role.Estudante;
-  }
-
-  get isMotorista() {
-    return this.account && this.account.role === Role.Motorista;
   }
 
   logout() {

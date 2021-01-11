@@ -105,6 +105,9 @@
 
       <div *ngFor="let notification of notifications">
         <div id="snackbar">
+          <audio #audioOption>
+            <source src='../assets/sounds/intuition-561.mp3' type="audio/mp3">
+          </audio>
           <img src="{{notification.icon}}">
           <span>
             {{notification.title}}
@@ -116,6 +119,9 @@
       </div>
 
       <div id="snackbarOff">
+        <audio #audioOption>
+          <source src='../assets/sounds/intuition-561.mp3' type="audio/mp3">
+        </audio>
         <span>
           Não tem Mensagem !
         </span>
