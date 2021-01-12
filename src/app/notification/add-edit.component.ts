@@ -27,7 +27,7 @@ export class AddEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params.id;
+    this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
 
     this.form = this.formBuilder.group({
@@ -87,6 +87,10 @@ export class AddEditComponent implements OnInit {
         next: () => {
           this.alertService.success('Notificação Feita com Sucesso', { keepAfterRouteChange: true });
           this.router.navigate(['../../'], { relativeTo: this.route });
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
         }
       });
   }
