@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'student-list', loadChildren: studentlistModule, canActivate: [AuthGuard], data: { roles: [Role.Motorista, Role.Admin] } },
   { path: 'maps', loadChildren: mapsModule, canActivate: [AuthGuard] },
   { path: 'map-driver-location', loadChildren: mapdriverlocationModule, canActivate: [AuthGuard] },
-  { path: 'notification', loadChildren: notificationModule, canActivate: [AuthGuard] },
+  { path: 'notification', loadChildren: notificationModule, canActivate: [AuthGuard], data: { roles: [Role.Motorista, Role.Admin] } },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

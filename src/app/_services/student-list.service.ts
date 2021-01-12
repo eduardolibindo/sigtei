@@ -9,7 +9,7 @@ import { StudentList } from '../_models';
 
 const studentlistUrl = `${environment.apiUrl}/student-list`;
 
-@Injectable({ providedIn: "root"})
+@Injectable({ providedIn: 'root'})
 export class StudentlistService {
 
   private studentlistSubject: BehaviorSubject<StudentList>;

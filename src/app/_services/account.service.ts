@@ -138,7 +138,7 @@ export class AccountService {
           // publish updated account to subscribers
           accounts = { ...this.accountValue, ...accounts };
           this.accountSubject.next(accounts);
-        return accounts;
+          return accounts;
       }));
   }
 
