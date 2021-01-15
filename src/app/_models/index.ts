@@ -7,3 +7,4 @@ export * from './schedules';
 export * from './student-list';
 export * from './location';
 export * from './notification';
+export * from './file';

@@ -1,0 +1,14 @@
+﻿<div class="card">
+  <div class="card-header">List of Files</div>
+  <ul class="list-group list-group-flush" *ngFor="let file of fileUploads">
+    <li class="list-group-item">
+      <app-details [fileUpload]='file'></app-details>
+      <!-- <div>
+        <a href="{{ fileUpload.url }}">{{ fileUpload.name }}</a>
+        <button (click)="deleteFileUpload(fileUpload)" class="btn btn-danger btn-sm" style="float: right">
+          Delete
+        </button>
+      </div> -->
+    </li>
+  </ul>
+</div>
