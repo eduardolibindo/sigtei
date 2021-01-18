@@ -55,6 +55,26 @@ body{
   box-shadow: 0 0 0 0.2rem rgba(0,153,0,.55);
 }
 
+.btn-delete{
+  background: #FF0000;
+  border-color:#FF0000;
+  color:#fff;
+  font-size: 15px;
+  font-weight: 600;
+  min-height: 48px;
+}
+.btn-delete:focus,
+.btn-delete:hover,
+.btn-delete:active,
+.btn-delete:active:focus{
+  background: #D20000;
+  border-color: #D20000;
+  color:#fff;
+}
+.btn-delete:focus{
+  box-shadow: 0 0 0 0.2rem rgba(255,0,0,.55);
+}
+
 .btn-cancel{
   background: #2B262C;
   border-color:#2B262C;

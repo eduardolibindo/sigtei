@@ -25,13 +25,14 @@
       style="width:100%; height:100%; border: 1px solid">
       Atualizar perfil
     </button>
-
+    <br />
     <label>
-      <input type="file" class="text-nowrap text-truncate" (change)="selectFile($event)" />
+      <input type="file" class="form-control rounded-pill form-control-lg" (change)="selectFile($event)" />
     </label>
 
-    <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
-      Upload
+    <button class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
+      style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;" (click)="upload()">
+      Enviar
     </button>
 
     <div *ngIf="currentFileUpload" class="progress mt-2">
