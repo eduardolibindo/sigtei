@@ -14,8 +14,8 @@ import { DemoMaterialModule } from './material-module';
     DemoMaterialModule,
     CommonModule,
     ReactiveFormsModule,
-    StudentlistRoutingModule,
-    FormsModule
+    FormsModule,
+    StudentlistRoutingModule
   ],
   declarations: [
     LayoutComponent,

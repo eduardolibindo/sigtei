@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ListComponent } from './list.component';
 import { DetailsComponent } from './details.component';
+import { UploadComponent } from './upload.component';
 
 const routes: Routes = [
   // { path: '', component: DetailsComponent },
-  { path: '', component: ListComponent }
+  { path: '', component: ListComponent },
+  {path: 'upload', component: UploadComponent}
 ];
 
 @NgModule({
