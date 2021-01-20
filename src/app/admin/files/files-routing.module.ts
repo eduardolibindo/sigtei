@@ -6,6 +6,7 @@ import { DetailsComponent } from './list-files/details.component';
 import { UploadComponent } from './list-files/upload.component';
 import { LayoutComponent } from './layout.component';
 import { OverviewComponent } from './overview.component';
+import { AttestationFileComponent } from './attestation-file/attestation-file.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
     children: [
       { path: '', component: OverviewComponent },
       { path: 'list-files', component: ListComponent },
-      { path: 'upload', component: UploadComponent }
+      { path: 'upload', component: UploadComponent },
+      { path: 'attestation', component: AttestationFileComponent },
     ]
   }
 ];
