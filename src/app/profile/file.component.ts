@@ -4,6 +4,9 @@ import { AccountService, AlertService } from '../_services';
 import { FileUploadService } from '../_services/file-upload.service';
 import { FileUpload } from '../_models/file';
 import { ActivatedRoute, Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-file',
@@ -17,12 +20,16 @@ export class FileComponent {
   percentage: number;
   loading = false;
 
+  private basePath = '/uploads';
+  estudante: string;
+
   constructor(
     private accountService: AccountService,
     private uploadService: FileUploadService,
     private alertService: AlertService,
     private route: ActivatedRoute,
     private router: Router,
+    private storage: AngularFireStorage
   ) { }
 
   selectFile(event): void {
@@ -36,7 +43,7 @@ export class FileComponent {
     // https://github.com/bezkoder/angular-10-firebase-storage
 
     this.currentFileUpload = new FileUpload(file);
-    this.uploadService.pushFileToStorage(this.currentFileUpload)
+    this.pushFileToStorage(this.currentFileUpload)
     .subscribe({
       error: error => {
         this.alertService.error(error);
@@ -49,11 +56,25 @@ export class FileComponent {
       }
     });
   }
+
+  pushFileToStorage(fileUpload: FileUpload): Observable<number> {
+    this.estudante = '' + this.account.firstName + ' ' + this.account.lastName + '';
+    const filePath = `${this.basePath}/${this.estudante}`;
+    const storageRef = this.storage.ref(filePath);
+    const uploadTask = this.storage.upload(filePath, fileUpload.file);
+
+    uploadTask.snapshotChanges().pipe(
+      finalize(() => {
+        storageRef.getDownloadURL().subscribe(downloadURL => {
+          console.log('File available at', downloadURL);
+          fileUpload.url = downloadURL;
+          fileUpload.name = this.estudante;
+          this.uploadService.saveFileData(fileUpload);
+        });
+      })
+    ).subscribe();
+
+    return uploadTask.percentageChanges();
+  }
+
 }
-
-
-
-
-
-
-

@@ -11,21 +11,21 @@ const schedulesModule = () => import('./schedules/schedules.module').then(x => x
 const filesModule = () => import('./files/files.module').then(x => x.FilesModule);
 
 const routes: Routes = [
-    { path: '', component: SubNavComponent, outlet: 'subnav' },
-    {
-        path: '', component: LayoutComponent,
-        children: [
-            { path: '', component: OverviewComponent },
-            { path: 'accounts', loadChildren: accountsModule },
-            { path: 'places', loadChildren: placesModule },
-            { path: 'schedules', loadChildren: schedulesModule },
-            { path: 'files', loadChildren: filesModule },
-        ]
-    }
+  { path: '', component: SubNavComponent, outlet: 'subnav' },
+  {
+    path: '', component: LayoutComponent,
+    children: [
+      { path: '', component: OverviewComponent },
+      { path: 'accounts', loadChildren: accountsModule },
+      { path: 'places', loadChildren: placesModule },
+      { path: 'schedules', loadChildren: schedulesModule },
+      { path: 'files', loadChildren: filesModule },
+    ]
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class AdminRoutingModule { }

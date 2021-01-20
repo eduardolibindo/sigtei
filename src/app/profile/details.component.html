@@ -26,7 +26,11 @@
       Atualizar perfil
     </button>
     <button routerLink="file" class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
-      style="width:100%; height:100%; border: 1px solid">
+      style="width:100%; height:100%; border: 1px solid" *ngIf="isAdmin">
+      Atestado de Matricula
+    </button>
+    <button routerLink="file" class="btn mt-3 rounded-pill btn-lg btn-submit btn-block text-uppercase"
+      style="width:100%; height:100%; border: 1px solid" *ngIf="isEstudante">
       Atestado de Matricula
     </button>
 

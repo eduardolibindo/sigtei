@@ -1,18 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ListComponent } from './list.component';
-import { DetailsComponent } from './details.component';
-import { UploadComponent } from './upload.component';
+import { ListComponent } from './list-files/list.component';
+import { DetailsComponent } from './list-files/details.component';
+import { UploadComponent } from './list-files/upload.component';
+import { LayoutComponent } from './layout.component';
+import { OverviewComponent } from './overview.component';
 
 const routes: Routes = [
-  // { path: '', component: DetailsComponent },
-  { path: '', component: ListComponent },
-  {path: 'upload', component: UploadComponent}
+  {
+    path: '', component: LayoutComponent,
+    children: [
+      { path: '', component: OverviewComponent },
+      { path: 'list-files', component: ListComponent },
+      { path: 'upload', component: UploadComponent }
+    ]
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class FilesRoutingModule { }

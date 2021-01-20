@@ -1,4 +1,5 @@
 ﻿import { Component } from '@angular/core';
+import { Role } from '../_models/role';
 import { AccountService } from '../_services';
 
 
@@ -13,6 +14,15 @@ export class DetailsComponent {
   constructor(
     private accountService: AccountService,
   ) { }
+
+
+  get isAdmin() {
+    return this.account && this.account.role === Role.Admin;
+  }
+
+  get isEstudante() {
+    return this.account && this.account.role === Role.Estudante;
+  }
 
 }
 

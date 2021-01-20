@@ -4,10 +4,13 @@ import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { FilesRoutingModule } from './files-routing.module';
-import { ListComponent } from './list.component';
-import { DetailsComponent } from './details.component';
-import { UploadComponent } from './upload.component';
-import { DemoMaterialModule } from 'src/app/student-list/material-module';
+import { ListComponent } from './list-files/list.component';
+import { DetailsComponent } from './list-files/details.component';
+import { UploadComponent } from './list-files/upload.component';
+import { DemoMaterialModule } from './material.module';
+import { RouterModule } from '@angular/router';
+import { OverviewComponent } from './overview.component';
+import { LayoutComponent } from './layout.component';
 
 @NgModule({
   imports: [
@@ -15,14 +18,16 @@ import { DemoMaterialModule } from 'src/app/student-list/material-module';
     CommonModule,
     ReactiveFormsModule,
     FilesRoutingModule,
-    MatToolbarModule,
+    RouterModule,
     FormsModule,
   ],
   declarations: [
     ListComponent,
     DetailsComponent,
-    UploadComponent
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    UploadComponent,
+    OverviewComponent,
+    LayoutComponent
+
+  ]
 })
 export class FilesModule { }

@@ -33,7 +33,7 @@ private basePath = '/uploads';
     return uploadTask.percentageChanges();
   }
 
-  private saveFileData(fileUpload: FileUpload): void {
+  saveFileData(fileUpload: FileUpload): void {
     this.db.list(this.basePath).push(fileUpload);
   }
 

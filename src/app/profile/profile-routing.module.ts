@@ -7,18 +7,18 @@ import { UpdateComponent } from './update.component';
 import { FileComponent } from './file.component';
 
 const routes: Routes = [
-    {
-        path: '', component: LayoutComponent,
-        children: [
-            { path: '', component: DetailsComponent },
-            { path: 'update', component: UpdateComponent },
-            { path: 'file', component: FileComponent }
-        ]
-    }
+  {
+    path: '', component: LayoutComponent,
+    children: [
+      { path: '', component: DetailsComponent },
+      { path: 'update', component: UpdateComponent },
+      { path: 'file', component: FileComponent }
+    ]
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class ProfileRoutingModule { }

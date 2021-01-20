@@ -3,12 +3,12 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize, map } from 'rxjs/operators';
 import { FileUploadService } from 'src/app/_services/file-upload.service';
 import { FileService } from 'src/app/_services/file.service';
-import { FileUpload } from '../../_models/file';
+import { FileUpload } from '../../../_models/file';
 
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.css', './main.css']
+  styleUrls: ['./upload.component.css', '../styles/main.css']
 })
 export class UploadComponent implements OnInit {
 
