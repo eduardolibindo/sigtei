@@ -143,9 +143,16 @@ export class AttestationFileComponent {
       const filePath = `${this.basePath}`;
       const fileRef = this.storage.ref(filePath).child(`${this.student}`);
 
-      fileRef.putString(data, 'base64', {contentType: 'application/pdf'}).then(function (snapshot) {
-        console.log('Uploaded a base64url string!');
-      });
+      fileRef.putString(data, 'base64', {contentType: 'application/pdf'}).snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            this.url = url;
+            this.fileService.insertImageDetails(this.id,this.url);
+            alert('Upload Feito com Sucesso');
+          })
+        })
+      ).subscribe();
+
 
     });
 
@@ -176,7 +183,7 @@ export class AttestationFileComponent {
         })
       })
     ).subscribe();
-}
+  }
 
 view()
 {
