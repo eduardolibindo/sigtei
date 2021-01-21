@@ -9,12 +9,10 @@ import { AccountService } from 'src/app/_services/account.service';
 import { LocalStorageService } from 'src/app/_services/local-storage.service';
 import { StudentlistService } from 'src/app/_services/student-list.service';
 
-
-
 @Component({
   selector: 'app-attestation-file',
   templateUrl: './attestation-file.component.html',
-  styleUrls: ['./attestation-file.component.css','./main.css']
+  styleUrls: ['./attestation-file.component.css', './main.css']
 })
 export class AttestationFileComponent {
   @ViewChild('pdfTable') pdfTable: ElementRef;
@@ -93,7 +91,7 @@ export class AttestationFileComponent {
           text: `ITAQUI-RS, ${this.dataTime}`,
           style: 'footer',
           alignment: 'center'
-        },
+        }
       ],
       styles: {
         header: {
