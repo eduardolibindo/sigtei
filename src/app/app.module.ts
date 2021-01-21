@@ -1,4 +1,4 @@
-﻿import { NgModule, APP_INITIALIZER } from '@angular/core';
+﻿import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 import { BrowserModule,  } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -45,6 +45,7 @@ import { PusherService } from './_services/pusher.service';
 import { MessagingService } from './_services/messaging.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { GlobalErrorHandler } from './global-error-handler';
 
 @NgModule({
     imports: [
@@ -83,6 +84,7 @@ import { MatDialogModule } from '@angular/material/dialog';
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: ErrorHandler, useClass: GlobalErrorHandler },
 
         // provider used to create fake backend
         // fakeBackendProvider

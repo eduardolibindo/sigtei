@@ -12,7 +12,7 @@ import { FileUpload } from '../../../_models/file';
 })
 export class UploadComponent implements OnInit {
 
-  selectedImage: any = null;
+  selectedFile: any = null;
 
   private basePath = '/pdfs';
 
@@ -25,32 +25,32 @@ export class UploadComponent implements OnInit {
     @Inject(FileService) private fileService: FileService) { }
 
   ngOnInit():void {
-    this.fileService.getImageDetailList();
+
   }
 
   showPreview(event: any) {
-      this.selectedImage = event.target.files[0];
+      this.selectedFile = event.target.files[0];
   }
 
   save() {
-      var name = this.selectedImage.name;
+      var name = this.selectedFile.name;
       var n = new Date();
       const filePath = `${this.basePath}/${name}`;
       const fileRef = this.storage.ref(filePath);
-      this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+      this.storage.upload(filePath, this.selectedFile).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
             this.url = url;
-            this.fileService.insertImageDetails(this.id,this.url);
+
             alert('Upload Feito com Sucesso');
           })
         })
       ).subscribe();
   }
 
-  view()
-  {
-    this.fileService.getImage(this.file);
-  }
+  // view()
+  // {
+  //   this.fileService.getFile(this.file);
+  // }
 
 }

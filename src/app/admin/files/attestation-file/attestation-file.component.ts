@@ -10,7 +10,7 @@ import { LocalStorageService } from 'src/app/_services/local-storage.service';
 import { StudentlistService } from 'src/app/_services/student-list.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FileService } from 'src/app/_services/file.service';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-attestation-file',
@@ -20,7 +20,7 @@ import { finalize } from 'rxjs/operators';
 export class AttestationFileComponent {
   @ViewChild('pdfTable') pdfTable: ElementRef;
   account = this.accountService.accountValue;
-  name = '' + this.account.firstName + ' ' + this.account.lastName + '';
+  nameCpt = '' + this.account.firstName + ' ' + this.account.lastName + '';
 
   private basePath = '/atestados';
 
@@ -35,9 +35,12 @@ export class AttestationFileComponent {
 
   localStorageChanges$ = this.localStorageService.changes$;
   url: any;
+  name: any;
   id: any;
   file: any;
   selectedImage: any;
+  pdfview: any;
+  files: any[];
 
   constructor(
     private accountService: AccountService,
@@ -142,25 +145,18 @@ export class AttestationFileComponent {
 
       const filePath = `${this.basePath}`;
       const fileRef = this.storage.ref(filePath).child(`${this.student}`);
-
-      fileRef.putString(data, 'base64', {contentType: 'application/pdf'}).snapshotChanges().pipe(
+      fileRef.putString(data, 'base64', { contentType: 'application/pdf' }).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
             this.url = url;
-            this.fileService.insertImageDetails(this.id,this.url);
+            this.name = this.student;
+            this.fileService.saveFileData(this.student, this.name, this.url);
             alert('Upload Feito com Sucesso');
-          })
+          });
         })
       ).subscribe();
 
 
-    });
-
-    pdfDocGenerator.getDataUrl((dataUrl) => {
-      const targetElement = document.querySelector('#iframeContainer');
-      const iframe = document.createElement('iframe');
-      iframe.src = dataUrl;
-      targetElement.appendChild(iframe);
     });
 
   }
@@ -169,26 +165,36 @@ export class AttestationFileComponent {
     this.localStorageService.set(key, value);
   }
 
-  save() {
-    var name = this.selectedImage.name;
-    var n = new Date();
-    const filePath = `${this.basePath}/${name}`;
-    const fileRef = this.storage.ref(filePath);
-    this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
-      finalize(() => {
-        fileRef.getDownloadURL().subscribe((url) => {
-          this.url = url;
-          this.fileService.insertImageDetails(this.id,this.url);
-          alert('Upload Feito com Sucesso');
-        })
-      })
-    ).subscribe();
+  // save() {
+  //   var name = this.selectedImage.name;
+  //   var n = new Date();
+  //   const filePath = `${this.basePath}/${name}`;
+  //   const fileRef = this.storage.ref(filePath);
+  //   this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+  //     finalize(() => {
+  //       fileRef.getDownloadURL().subscribe((url) => {
+  //         this.url = url;
+  //         this.fileService.insertFileDetails(this.id, this.url);
+  //         alert('Upload Feito com Sucesso');
+  //       })
+  //     })
+  //   ).subscribe();
+  // }
+
+  view() {
+    this.fileService.getFiles(6).snapshotChanges().pipe(
+      map(changes =>
+        // store the key
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    ).subscribe(fileUploads => {
+      this.files = fileUploads;
+    });
   }
 
-view()
-{
-  this.fileService.getImage(this.file);
-}
+  deleteFile(id): void {
+    this.fileService.deleteFile(id);
+  }
 
 
 }

@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/sigtei",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",

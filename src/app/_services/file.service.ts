@@ -1,62 +1,70 @@
 import { Injectable, Inject } from '@angular/core';
 import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
 
-  imageDetailList: AngularFireList<any>;
+  FileDetailList: AngularFireList<any>;
 
   fileList: any[];
 
   dataSet: Data = {
-    id:'',
-    url:''
+    id: '',
+    name: '',
+    url: ''
   };
 
-  msg:string = 'error';
+  msg: string = 'error';
 
-  private basePath = '/pdfs';
+  private basePath = '/atestados';
 
-  constructor(@Inject(AngularFireDatabase) private firebase: AngularFireDatabase) { }
+  constructor(
+    @Inject(AngularFireDatabase) private firebase: AngularFireDatabase,
+    @Inject(AngularFireStorage) private storage: AngularFireStorage ) { }
 
-  getImageDetailList() {
-    this.imageDetailList = this.firebase.list('imageDetails');
-    console.log(this.imageDetailList);
-  }
-
-  insertImageDetails(id,url) {
+  saveFileData(id, name, url): void {
     this.dataSet = {
-      id : id,
+      id: id,
+      name: name,
       url: url
     };
-    this.imageDetailList.push(this.dataSet);
+    this.firebase.list(this.basePath).push(this.dataSet);
   }
 
-  getImage(value)
-  {
-    this.imageDetailList.snapshotChanges().subscribe(
-      list => {
-        this.fileList = list.map(item => { return item.payload.val(); });
-        this.fileList.forEach(element => {
-          if(element.id===value)
-            this.msg = element.url;
-        });
-        if(this.msg==='error')
-          alert('Arquivo não encontrado');
-        else
-        {
-          window.open(this.msg);
-          this.msg = 'error';
-        }
-      }
-    );
+  getfile(name: any) {
+    const storageRef = this.storage.ref(this.basePath);
+    storageRef.child(name);
   }
+
+  getFiles(numberItems): AngularFireList<any> {
+    return this.firebase.list(this.basePath, ref =>
+      ref.limitToLast(numberItems));
+  }
+
+  deleteFile(id: any): void {
+    this.deleteFileDatabase(id.key)
+      .then(() => {
+        this.deleteFileStorage(id.name);
+      })
+      .catch(error => console.log(error));
+  }
+
+  private deleteFileDatabase(id: string): Promise<void> {
+    return this.firebase.list(this.basePath).remove(id);
+  }
+
+  private deleteFileStorage(id: string): void {
+    const storageRef = this.storage.ref(this.basePath);
+    storageRef.child(id).delete();
+  }
+
 }
 
-export interface Data
-{
-  id:string;
-  url:string;
+export interface Data {
+  id: string;
+  name: string;
+  url: string;
 }
