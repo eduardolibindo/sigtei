@@ -51,17 +51,13 @@
   <mat-slide-toggle [(ngModel)]="visible" style="margin: 10px;">Visível</mat-slide-toggle>
 </div>
 
-<div *ngFor="let list of waypoint" class="row">
+<!-- <div *ngFor="let list of waypoint" class="row">
   <div class="cell" data-title="Endereço">
+    {{list.label}}
     {{list.location}}
   </div>
-</div>
+</div> -->
 
-<div *ngFor="let list of waypoints" class="row">
-  <div class="cell" data-title="Label">
-    {{list.label}}
-  </div>
-</div>
 
 <div #myPanel></div>
 

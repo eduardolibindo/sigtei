@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       { path: '', component: OverviewComponent },
       { path: 'list-files', component: ListComponent },
-      { path: 'upload', component: UploadComponent },
+      // { path: 'upload', component: UploadComponent },
       { path: 'attestation', component: AttestationFileComponent },
     ]
   }

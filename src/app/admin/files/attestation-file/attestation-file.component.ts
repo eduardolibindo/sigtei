@@ -1,4 +1,4 @@
-﻿import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
+﻿import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 
 import jsPDF from 'jspdf';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -17,7 +17,7 @@ import { finalize, map } from 'rxjs/operators';
   templateUrl: './attestation-file.component.html',
   styleUrls: ['./attestation-file.component.css', './main.css']
 })
-export class AttestationFileComponent {
+export class AttestationFileComponent implements OnInit {
   @ViewChild('pdfTable') pdfTable: ElementRef;
   account = this.accountService.accountValue;
   nameCpt = '' + this.account.firstName + ' ' + this.account.lastName + '';
@@ -181,7 +181,7 @@ export class AttestationFileComponent {
   //   ).subscribe();
   // }
 
-  view() {
+  ngOnInit(): void {
     this.fileService.getFiles(6).snapshotChanges().pipe(
       map(changes =>
         // store the key
