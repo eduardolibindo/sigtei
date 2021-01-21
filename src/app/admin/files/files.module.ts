@@ -11,6 +11,7 @@ import { DemoMaterialModule } from './material.module';
 import { RouterModule } from '@angular/router';
 import { OverviewComponent } from './overview.component';
 import { LayoutComponent } from './layout.component';
+import { AttestationFileComponent } from './attestation-file/attestation-file.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { LayoutComponent } from './layout.component';
   ],
   declarations: [
     ListComponent,
+    AttestationFileComponent,
     DetailsComponent,
     UploadComponent,
     OverviewComponent,
