@@ -1,4 +1,4 @@
-﻿import { Component, ElementRef, ViewChild } from '@angular/core';
+﻿import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 
 import jsPDF from 'jspdf';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -8,6 +8,9 @@ import htmlToPdfmake from 'html-to-pdfmake';
 import { AccountService } from 'src/app/_services/account.service';
 import { LocalStorageService } from 'src/app/_services/local-storage.service';
 import { StudentlistService } from 'src/app/_services/student-list.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { FileService } from 'src/app/_services/file.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-attestation-file',
@@ -19,6 +22,8 @@ export class AttestationFileComponent {
   account = this.accountService.accountValue;
   name = '' + this.account.firstName + ' ' + this.account.lastName + '';
 
+  private basePath = '/atestados';
+
   signature = '';
   student = '';
   semester = '';
@@ -29,11 +34,17 @@ export class AttestationFileComponent {
   // student = this.studentlistService.studentlistValue;
 
   localStorageChanges$ = this.localStorageService.changes$;
+  url: any;
+  id: any;
+  file: any;
+  selectedImage: any;
 
   constructor(
     private accountService: AccountService,
     private localStorageService: LocalStorageService,
     private studentlistService: StudentlistService,
+    @Inject(AngularFireStorage) private storage: AngularFireStorage,
+    @Inject(FileService) private fileService: FileService
   ) { }
 
   dataTime = new Date().toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -125,13 +136,52 @@ export class AttestationFileComponent {
     var [month, date, year] = new Date().toLocaleDateString("en-US").split("/");
     var [hour, minute, second] = new Date().toLocaleTimeString("pt-BR").split(/:| /);
 
-    pdfMake.createPdf(documentDefinition).download(`Atestado ${this.student} ${date}/${month}/${year} - ${hour}:${minute}:${second}`);
+    const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
+
+    pdfDocGenerator.getBase64((data) => {
+
+      const filePath = `${this.basePath}`;
+      const fileRef = this.storage.ref(filePath).child(`${this.student}`);
+
+      fileRef.putString(data, 'base64', {contentType: 'application/pdf'}).then(function (snapshot) {
+        console.log('Uploaded a base64url string!');
+      });
+
+    });
+
+    pdfDocGenerator.getDataUrl((dataUrl) => {
+      const targetElement = document.querySelector('#iframeContainer');
+      const iframe = document.createElement('iframe');
+      iframe.src = dataUrl;
+      targetElement.appendChild(iframe);
+    });
 
   }
 
   persist(key: string, value: any) {
     this.localStorageService.set(key, value);
   }
+
+  save() {
+    var name = this.selectedImage.name;
+    var n = new Date();
+    const filePath = `${this.basePath}/${name}`;
+    const fileRef = this.storage.ref(filePath);
+    this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          this.url = url;
+          this.fileService.insertImageDetails(this.id,this.url);
+          alert('Upload Feito com Sucesso');
+        })
+      })
+    ).subscribe();
+}
+
+view()
+{
+  this.fileService.getImage(this.file);
+}
 
 
 }
