@@ -1,6 +1,6 @@
 
 <div class="main">
-  <h3>Mapa da localização do ônibus</h3>
+  <h3>Mapa da localização do transporte</h3>
 
   <agm-map style="height:500px" [latitude]="center.lat" [longitude]="center.lng" [zoom]="zoom">
     <agm-marker [latitude]="center.lat" [longitude]="center.lng" [label]="label" (markerClick)="clickedMarker(label)"></agm-marker>
