@@ -58,19 +58,19 @@
       <!-- <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active" *ngIf="isEstudante">Mapa </a> -->
 
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active"
-        *ngIf="isMotorista">Mapa</a>
+        *ngIf="isMotorista">Mapa Desembarque</a>
 
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active" *ngIf="isAdmin">Mapa</a>
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active" *ngIf="isAdmin">Mapa Desembarque</a>
 
-
-      <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active"
-        *ngIf="isEstudante">Mapa Motorista</a>
 
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active"
-        *ngIf="isMotorista">Mapa Motorista</a>
+        *ngIf="isEstudante">Mapa Transporte</a>
 
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active"
-        *ngIf="isAdmin">Mapa Motorista</a>
+        *ngIf="isMotorista">Mapa Transporte</a>
+
+      <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active"
+        *ngIf="isAdmin">Mapa Transporte</a>
 
 
 

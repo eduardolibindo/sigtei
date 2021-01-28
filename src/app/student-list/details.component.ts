@@ -1,9 +1,9 @@
-import { first } from 'rxjs/operators';
-import { OnInit } from '@angular/core';
+import { finalize, first, map } from 'rxjs/operators';
+import { Inject, OnInit } from '@angular/core';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 
-import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
 
 import jsPDF from 'jspdf';
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -14,6 +14,8 @@ import * as moment from 'moment';
 import { AccountService } from '../_services';
 import { StudentlistService } from '../_services/student-list.service';
 import { LocalStorageService } from '../_services/local-storage.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { FileService } from '../_services/file.service';
 
 @Component({
   selector: 'app-details',
@@ -32,16 +34,23 @@ export class DetailsComponent implements OnInit {
 
   localStorageChanges$ = this.localStorageService.changes$;
 
+  private basePath = '/Lista_de_presença';
+
+  url: any;
+  files: any[];
+
   constructor(
     private accountService: AccountService,
     private studentlistService: StudentlistService,
+    @Inject(AngularFireStorage) private storage: AngularFireStorage,
+    @Inject(FileService) private fileService: FileService,
     private localStorageService: LocalStorageService,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer) {
-      iconRegistry.addSvgIcon(
-        'thumbs-up',
-        sanitizer.bypassSecurityTrustResourceUrl('../../assets/cancel.svg'));
-    }
+    iconRegistry.addSvgIcon(
+      'thumbs-up',
+      sanitizer.bypassSecurityTrustResourceUrl('../../assets/cancel.svg'));
+  }
 
   // dataTime2 = moment().locale()
   // dataTime = moment().format('LLLL');
@@ -117,7 +126,26 @@ export class DetailsComponent implements OnInit {
     var [month, date, year] = new Date().toLocaleDateString("en-US").split("/");
     var [hour, minute, second] = new Date().toLocaleTimeString("pt-BR").split(/:| /);
 
-    pdfMake.createPdf(documentDefinition).download(`Lista de Presença ${date}/${month}/${year} - ${hour}:${minute}:${second}`);
+    // pdfMake.createPdf(documentDefinition).download(`Lista de Presença ${date}/${month}/${year} - ${hour}:${minute}:${second}`);
+    const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
+
+    pdfDocGenerator.getBase64((data) => {
+
+      const filePath = `${this.basePath}`;
+      const fileRef = this.storage.ref(filePath).child(`Lista de Presença ${date}-${month}-${year}`);
+      fileRef.putString(data, 'base64', { contentType: 'application/pdf' }).snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            this.url = url;
+            this.name = `Lista de Presença ${date}/${month}/${year}`;
+            this.fileService.saveFileData1(`${date}/${month}/${year}`, this.name, this.url);
+            alert('Salvo com Sucesso');
+          });
+        })
+      ).subscribe();
+
+
+    });
 
   }
 

@@ -1,0 +1,18 @@
+<div class="mt-3 card">
+  <div class="card-header">Listas de Presença dos Alunos</div>
+  <ul class="list-group list-group-flush" *ngFor="let file of files">
+    <li class="list-group-item">
+      <a target="_blank" href="{{ file.url }}">{{ file.name }}</a>
+      <button (click)="deleteFile(file)" class="btn btn-danger btn-sm" style="float: right">
+        Delete
+      </button>
+    </li>
+  </ul>
+</div>
+
+<div class="text-center">
+  <button routerLink="/student-list" class="btn mt-3 rounded-pill btn-lg btn-cancel text-uppercase"
+    style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
+    Sair
+  </button>
+</div>

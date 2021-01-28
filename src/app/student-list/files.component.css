@@ -1,39 +1,3 @@
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-}
-
-h3 {
-  font-size: 15px;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 15px;
-}
-
-.alert {
-  background: #f14343;
-  color: white;
-  padding: 15px;
-  border-radius: 5px;
-}
-
-p{
-  margin: 0;
-}
-
-.location{
-  background: green;
-  margin-top: 20px;
-}
-
-agm-map {
-  height: 390px;
-  width: 390px;
-}
-
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
 body{
   font-family: 'Poppins', sans-serif;
@@ -71,6 +35,7 @@ body{
   border-color:#2B262C;
   box-shadow: 0 0 0 0.2rem rgba(43,38,44,.95);
 }
+
 .btn-submit{
   background: #2B262C;
   border-color:#2B262C;
@@ -130,7 +95,3 @@ body{
 .btn-cancel:focus{
   box-shadow: 0 0 0 0.2rem rgba(255,0,0,.55);
 }
-.sebm-google-map-container {
-  height: 300px;
-}
-

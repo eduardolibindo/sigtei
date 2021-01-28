@@ -7,6 +7,7 @@ import { StudentlistRoutingModule } from './student-list-routing.module';
 import { LayoutComponent } from './layout.component';
 import { DetailsComponent } from './details.component';
 import { DemoMaterialModule } from './material-module';
+import { FilesComponent } from './files.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { DemoMaterialModule } from './material-module';
   declarations: [
     LayoutComponent,
     DetailsComponent,
+    FilesComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

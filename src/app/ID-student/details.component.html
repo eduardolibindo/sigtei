@@ -15,15 +15,22 @@
 </div> -->
 
 <div>
-<div class="card text-center">
-  <h1 class="mt-1 font-weight-light text-uppercase text-center">ID Estudantil</h1>
-  <div>
-    <ngx-qrcode [elementType]="elementType" [errorCorrectionLevel]="correctionLevel" [value]="dataString" cssClass="bshadow">
-    </ngx-qrcode>
-  </div>
-  <div class="mt-3 font-weight-normal">
-    <p class="text-uppercase text-center"><strong>ID: </strong>{{account.id}}<br  /></p>
-    <p class="text-uppercase text-center"><strong>Nome: </strong>{{account.firstName}} {{account.lastName}}</p>
+  <div class="card text-center" id="pdfTable" #pdfTable>
+    <h1 class="mt-1 font-weight-light text-uppercase text-center" style="text-align: center;">ID Estudantil</h1>
+    <div style="text-align: center;">
+      <ngx-qrcode [elementType]="elementType" [errorCorrectionLevel]="correctionLevel" [value]="dataString"
+        cssClass="bshadow">
+      </ngx-qrcode>
+    </div>
+    <div class="mt-3 font-weight-normal">
+      <p class="text-uppercase text-center" style="text-align: center;"><strong>ID: </strong>{{account.id}}<br /></p>
+      <p class="text-uppercase text-center" style="text-align: center;"><strong>Nome: </strong>{{account.firstName}} {{account.lastName}}</p>
+    </div>
   </div>
 </div>
+
+<div class="text-center">
+  <button class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
+    style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;" (click)="downloadAsPDF()">Baixar ID
+    Estudantil</button>
 </div>
