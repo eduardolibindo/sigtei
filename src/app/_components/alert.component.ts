@@ -17,29 +17,29 @@ export class AlertComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private alertService: AlertService) { }
 
   ngOnInit() {
-    // subscribe to new alert notifications
+    // inscreva-se para novas notificações de alerta
     this.alertSubscription = this.alertService.onAlert(this.id)
       .subscribe(alert => {
-        // clear alerts when an empty alert is received
+        // limpa alertas quando um alerta vazio for recebido
         if (!alert.message) {
-          // filter out alerts without 'keepAfterRouteChange' flag
+          // filtrar alertas sem o sinalizador 'keepAfterRouteChange'
           this.alerts = this.alerts.filter(x => x.keepAfterRouteChange);
 
-          // remove 'keepAfterRouteChange' flag on the rest
+          // remove a sinalização 'keepAfterRouteChange' no resto
           this.alerts.forEach(x => delete x.keepAfterRouteChange);
           return;
         }
 
-        // add alert to array
+        // adiciona alerta ao array
         this.alerts.push(alert);
 
-        // auto close alert if required
+        // alerta de fechamento automático, se necessário
         if (alert.autoClose) {
           setTimeout(() => this.removeAlert(alert), 3000);
         }
       });
 
-    // clear alerts on location change
+    // limpar alertas em mudança de local
     this.routeSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         this.alertService.clear(this.id);
@@ -48,25 +48,25 @@ export class AlertComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // unsubscribe to avoid memory leaks
+    // cancele a inscrição para evitar vazamentos de memória
     this.alertSubscription.unsubscribe();
     this.routeSubscription.unsubscribe();
   }
 
   removeAlert(alert: Alert) {
-    // check if already removed to prevent error on auto close
+    // verifique se já foi removido para evitar erro no fechamento automático
     if (!this.alerts.includes(alert)) return;
 
     if (this.fade) {
-      // fade out alert
+      // alerta tipo fade out
       alert.fade = true;
 
-      // remove alert after faded out
+     // remove o alerta após desaparecer
       setTimeout(() => {
         this.alerts = this.alerts.filter(x => x !== alert);
       }, 250);
     } else {
-      // remove alert
+      // remove o alerta
       this.alerts = this.alerts.filter(x => x !== alert);
     }
   }

@@ -24,7 +24,6 @@ export class MapPlacesComponent implements OnInit {
   public origin: any;
   public destination: any;
   public travelMode: String = 'DRIVING';
-  // transitOptions: string; // default: 'DRIVING'
   provideRouteAlternatives = false; // default: false
   optimizeWaypoints = true; // default: true
   avoidHighways = false; // default: false
@@ -35,45 +34,18 @@ export class MapPlacesComponent implements OnInit {
     draggable: false,
     suppressMarkers: false,
     suppressInfoWindows: false,
-    markerOptions: { // effect all markers
+    markerOptions: { // afeta todos os marcadores
       icon: '../../../assets/icon.png',
     },
   };
 
   public markerOptions: {};
 
-  // public markerOptions = { // effect all markers
-  //   origin: {
-  //     infoWindow: 'Inicio',
-  //     icon: '../../../assets/icon_origin.png',
-  //   },
-  //   destination: {
-  //     infoWindow: 'Fim',
-  //     icon: '../../../assets/icon_destination.png',
-  //   },
-  //   waypoints: {
-  //     icon: '../../../assets/icon.png',
-  //   },
-  // };
 
   title: string = 'Google Map';
   lat: number = -29.136974;
   lng: number = -56.549621;
 
-  // public waypoints: any = [
-  //   {
-  //     location: 'Travessa Brigada - Estação, Itaqui - RS',
-  //     stopover: true
-  //   },
-  //   {
-  //     location: { lat: -29.140501, lng: -56.547600 },
-  //     stopover: true
-  //   },
-  //   {
-  //     location: { lat: -29.134065, lng: -56.545883 },
-  //     stopover: true
-  //   }
-  // ];
 
   ngOnInit() {
     this.studentlistService.getaddressAll()
@@ -92,9 +64,6 @@ export class MapPlacesComponent implements OnInit {
   getDirection() {
     this.origin = { lat: -29.144011, lng: -56.531227 };
     this.destination = { lat: -29.121408, lng: -56.557359 };
-    // Location within a string
-    // this.origin = 'barra do quaraí, rs';
-    // this.destination = 'santo antônio das missões, rs';
   }
 
 }

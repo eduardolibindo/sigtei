@@ -25,13 +25,13 @@ export class MessagingService {
   }
 
   /**
-   * create token in firebase database
+   * criar token no banco de dados do firebase
    *
-   * @param userId userId as a key
-   * @param token token as a value
+   * @param userId userId como uma chave
+   * @param token token como um valor
    */
   createToken(userId, token) {
-    // we can change this function to request our backend service
+    //  E possivel alterar esta função para solicitar nosso serviço de back-end
     this.angularFireAuth.authState.pipe(take(1)).subscribe(
       () => {
         const data = {};
@@ -41,13 +41,13 @@ export class MessagingService {
   }
 
   /**
-   * update token in firebase database
+   * atualizar token no banco de dados Firebase
    *
    * @param userId userId as a key
    * @param token token as a value
    */
   updateToken(userId, token) {
-    // we can change this function to request our backend service
+    // podemos alterar esta função para solicitar nosso serviço de back-end
     this.angularFireAuth.authState.pipe(take(1)).subscribe(
       () => {
         const data = {};
@@ -57,7 +57,7 @@ export class MessagingService {
   }
 
   /**
-   * request permission for notification from firebase cloud messaging
+   * solicitar permissão para notificação do Firebase Cloud Messaging
    *
    * @param userId userId
    */
@@ -74,7 +74,7 @@ export class MessagingService {
   }
 
   /**
-   * hook method when new notification received in foreground
+   * método de gancho quando uma nova notificação é recebida em primeiro plano
    */
   receiveMessage() {
     this.angularFireMessaging.messages.subscribe(

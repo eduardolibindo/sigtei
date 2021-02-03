@@ -48,9 +48,4 @@ export class UploadComponent implements OnInit {
       ).subscribe();
   }
 
-  // view()
-  // {
-  //   this.fileService.getFile(this.file);
-  // }
-
 }

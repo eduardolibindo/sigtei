@@ -1,17 +1,17 @@
 import { FormGroup } from '@angular/forms';
 
-// custom validator to check that two fields match
+// validador personalizado para verificar se dois campos correspondem
 export function MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
         const control = formGroup.controls[controlName];
         const matchingControl = formGroup.controls[matchingControlName];
 
         if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-            // return if another validator has already found an error on the matchingControl
+            // retorna se outro validador já encontrou um erro no matchingControl
             return;
         }
 
-        // set error on matchingControl if validation fails
+        // definir erro no matchingControl se a validação falhar
         if (control.value !== matchingControl.value) {
             matchingControl.setErrors({ mustMatch: true });
         } else {

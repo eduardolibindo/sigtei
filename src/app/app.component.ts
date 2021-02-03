@@ -85,27 +85,27 @@ export class AppComponent implements OnInit {
       // this.playAudio();
       this.audioPlayerRef.nativeElement.play();
       this.hidden = !this.hidden;
-      // Get the snackbar DIV
+      // Obtem o snackbar DIV
       const x = document.getElementById('snackbar');
       const y = document.getElementById('audio');
 
-      // Add the "show" class to DIV
+      // Adicione a classe "show" a DIV
       x.className = 'show';
 
-      // After 3 seconds, remove the show class from DIV
+      // Após 3 segundos, e removido a classe show da DIV
       setTimeout(() => { x.className = x.className.replace('show', ''); }, 3000);
 
       this.badgeContent = 0;
     } else {
       // this.playAudio();
       this.audioPlayerRef.nativeElement.play();
-      // Get the snackbar DIV
+      // Obtenha o snackbar DIV
       const x = document.getElementById('snackbarOff');
 
-      // Add the "show" class to DIV
+      // Adicione a classe "show" ao DIV
       x.className = 'show';
 
-      // After 3 seconds, remove the show class from DIV
+      // Após 3 segundos, e removido a classe show do DIV
       setTimeout(() => { x.className = x.className.replace('show', ''); }, 3000);
     }
   }

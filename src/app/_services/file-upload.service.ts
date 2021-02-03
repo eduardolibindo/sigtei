@@ -59,5 +59,3 @@ private basePath = '/uploads';
     storageRef.child(name).delete();
   }
 }
- // https://github.com/bezkoder/angular-10-firebase-storage/blob/master/src/app/components/upload-details/upload-details.component.ts
- // https://bezkoder.com/angular-11-file-upload-firebase-storage/#Retrieve_038_Display_List_of_Files_from_Firebase_Storage

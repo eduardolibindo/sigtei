@@ -40,7 +40,6 @@ export class FileComponent {
     const file = this.selectedFiles.item(0);
     this.selectedFiles = undefined;
     this.loading = true;
-    // https://github.com/bezkoder/angular-10-firebase-storage
 
     this.currentFileUpload = new FileUpload(file);
     this.pushFileToStorage(this.currentFileUpload)

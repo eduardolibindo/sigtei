@@ -5,15 +5,9 @@
       <p class="font-weight-normal text-center">{{dataTime}}</p>
       <p class="font-weight-normal text-center">Motorista: {{name}}</p>
 
-      <!-- <input type="text" class="form-control rounded-pill form-control-lg" placeholder="Placa do Veiculo" (input)="persist('test', $event.target.value)"> -->
-
       <mat-form-field class="col align-self-center" style="text-align: center;">
         <input matInput type="text" [(ngModel)]="placa">
       </mat-form-field>
-
-      <!-- <div *ngIf=" localStorageChanges$ | async as localStorageChanges">
-        <p>Placa: <span class="text-uppercase">{{ localStorageChanges.value.toUpperCase() }}</span></p>
-      </div> -->
 
       <div>
         <p class="font-weight-normal text-center">Placa: <span class="text-uppercase">{{placa.toUpperCase()}}</span></p>
@@ -61,8 +55,6 @@
               {{list.location}}
             </td>
             <td class="cell">
-
-              <!-- <button routerLink="edit/{{list.id}}" class="btn btn-sm btn-submit mr-3">Editar</button> -->
 
               <button (click)="deleteLists(list.id)" class="btn btn-sm btn-delete mr-1" [disabled]="list.isDeleting">
                 <span *ngIf="list.isDeleting" class="spinner-border spinner-border-sm"></span>

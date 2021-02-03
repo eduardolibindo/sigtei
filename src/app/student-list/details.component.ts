@@ -107,9 +107,7 @@ export class DetailsComponent implements OnInit {
 
   public downloadAsPDF() {
     const doc = new jsPDF();
-    // get table html
     const pdfTable = this.pdfTable.nativeElement;
-    // html to pdf format
     var html = htmlToPdfmake(pdfTable.innerHTML);
     var win = window.open('', '_self');
 

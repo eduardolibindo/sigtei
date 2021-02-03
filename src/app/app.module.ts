@@ -13,9 +13,6 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 
 
-// used to create fake backend
-import { fakeBackendProvider } from './_helpers';
-
 import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor, appInitializer } from './_helpers';
 import { AccountService } from './_services/account.service';
@@ -24,7 +21,6 @@ import { environment } from 'src/environments/environment';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
 import { from } from 'rxjs';
-import { UsersComponent } from './users/users.component';
 import { RouterModule } from '@angular/router';
 
 import { AngularFireModule } from '@angular/fire';
@@ -77,17 +73,13 @@ import { GlobalErrorHandler } from './global-error-handler';
     declarations: [
         AppComponent,
         AlertComponent,
-        HomeComponent,
-        UsersComponent,
+        HomeComponent
 ],
     providers: [
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: ErrorHandler, useClass: GlobalErrorHandler },
-
-        // provider used to create fake backend
-        // fakeBackendProvider
         PusherService,
         MessagingService,
         AsyncPipe

@@ -1,87 +1,4 @@
-﻿<!-- <h1>Atualizar perfil</h1>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="form-row">
-    <div class="form-group col-7">
-      <label>Usuario</label>
-      <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-        <option value=""></option>
-        <option value="Estudante">Estudante</option>
-        <option value="Motorista">Motorista</option>
-      </select>
-      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
-        <div *ngIf="f.title.errors.required">Selecione o tipo de usuario</div>
-      </div>
-    </div>
-
-  </div>
-  <div class="form-row">
-    <div class="form-group col">
-      <label>Primeiro Nome</label>
-      <input type="text" formControlName="firstName" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-      <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-        <div *ngIf="f.firstName.errors.required">Insira o primeiro nome</div>
-      </div>
-    </div>
-    <div class="form-group col">
-      <label>Ultimo Nome</label>
-      <input type="text" formControlName="lastName" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-      <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-        <div *ngIf="f.lastName.errors.required">Insira o ultimo nome</div>
-      </div>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-7">
-      <label>Email</label>
-      <input type="text" formControlName="email" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-        <div *ngIf="f.email.errors.required">Insira o email</div>
-        <div *ngIf="f.email.errors.email">O email deve ser um endereço de email válido</div>
-      </div>
-    </div>
-
-  </div>
-  <h3 class="pt-3">Mudar senha</h3>
-  <p>Deixe em branco para manter a mesma senha</p>
-  <div class="form-row">
-    <div class="form-group col">
-      <label>Senha</label>
-      <input type="password" formControlName="password" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-        <div *ngIf="f.password.errors.required">Insira a senha</div>
-        <div *ngIf="f.password.errors.minlength">A senha deve ter pelo menos 6 caracteres</div>
-      </div>
-    </div>
-    <div class="form-group col">
-      <label>Confirme a Senha</label>
-      <input type="password" formControlName="confirmPassword" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-      <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-        <div *ngIf="f.confirmPassword.errors.required">É necessário confirmar a senha</div>
-        <div *ngIf="f.confirmPassword.errors.mustMatch">As senhas devem corresponder</div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <button type="submit" [disabled]="loading" class="btn btn-primary mr-2">
-      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-      Atualizar
-    </button>
-    <button type="button" (click)="onDelete()" [disabled]="deleting" class="btn btn-danger">
-      <span *ngIf="deleting" class="spinner-border spinner-border-sm mr-1"></span>
-      Deletar
-    </button>
-    <a routerLink="../" href="" class="btn btn-link">Cancelar</a>
-  </div>
-</form> -->
-
-
-
-<div class="mt-5">
+﻿<div class="mt-5">
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form text-center">
     <h2 class="mb-4 font-weight-light text-uppercase">Atualizar perfil</h2>
     <div class="form-group">
@@ -146,6 +63,7 @@
         <option value="uergs">Uergs</option>
         <option value="senac">Senac</option>
         <option value="anhanguera">Anhanguera</option>
+        <option value="outro">Outro</option>
       </select>
       <div *ngIf="submitted && f.institution.errors" class="invalid-feedback">
         <div *ngIf="f.institution.errors.required">Selecione a instituição</div>
@@ -176,6 +94,7 @@
         <option value="tecnico em cabeleireira">Técnico em Cabeleireiro</option>
         <option value="tecnico em barbearia">Técnico em Barbearia</option>
         <option value="curso anhanguera ead">Curso anhanguera EAD</option>
+        <option value="outro">Outro</option>
       </select>
       <div *ngIf="submitted && f.course.errors" class="invalid-feedback">
         <div *ngIf="f.course.errors.required">Selecione o curso</div>

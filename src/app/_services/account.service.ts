@@ -134,8 +134,8 @@ export class AccountService {
   update(id, params) {
     return this.http.put(`${baseUrl}/${id}`, params)
       .pipe(map((accounts: any) => {
-        // update the current account if it was updated
-          // publish updated account to subscribers
+      // atualiza account atual se ela foi atualizada
+          // publicar account atualizada para o subscribers
           accounts = { ...this.accountValue, ...accounts };
           this.accountSubject.next(accounts);
           return accounts;
@@ -145,8 +145,8 @@ export class AccountService {
   updatePlace(id, params) {
     return this.http.put(`${placesUrl}/${id}`, params)
       .pipe(map((places: any) => {
-        // update the current places if it was updated
-          // publish updated places to subscribers
+      // atualiza place atual se ela foi atualizada
+          // publicar place atualizada para o subscribers
           places = { ...this.placesValue, ...places };
           this.placesSubject.next(places);
           return places;
@@ -156,8 +156,8 @@ export class AccountService {
   updateSchedule(id, params) {
     return this.http.put(`${schedulesUrl}/${id}`, params)
       .pipe(map((schedules: any) => {
-        // update the current account if it was updated
-          // publish updated account to subscribers
+      // atualiza schedule atual se ela foi atualizada
+          // publicar schedule atualizada para o subscribers
           schedules = { ...this.accountValue, ...schedules };
           this.accountSubject.next(schedules);
           return schedules;
@@ -167,7 +167,7 @@ export class AccountService {
   delete(id: string) {
     return this.http.delete(`${baseUrl}/${id}`)
       .pipe(finalize(() => {
-        // auto logout if the logged in account was deleted
+        // logout automático se a conta conectada for excluída
         if (id === this.accountValue.id) {
           this.logout();
         }
@@ -182,15 +182,15 @@ export class AccountService {
     return this.http.delete(`${schedulesUrl}/${id}`);
   }
 
-  // helper methods
+// métodos auxiliares
 
   private refreshTokenTimeout;
 
   private startRefreshTokenTimer() {
-    // parse json object from base64 encoded jwt token
+    // analisar o objeto json do token jwt codificado em base64
     const jwtToken = JSON.parse(atob(this.accountValue.jwtToken.split('.')[1]));
 
-    // set a timeout to refresh the token a minute before it expires
+    // define um tempo limite para atualizar o token um minuto antes de expirar
     const expires = new Date(jwtToken.exp * 1000);
     const timeout = expires.getTime() - Date.now() - (60 * 1000);
     this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);

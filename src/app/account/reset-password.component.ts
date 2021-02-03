@@ -43,7 +43,7 @@ export class ResetPasswordComponent implements OnInit {
 
     const token = this.route.snapshot.queryParams['token'];
 
-    // remove token from url to prevent http referer leakage
+    // remova o token do url para evitar vazamento de referenciador de http
     this.router.navigate([], { relativeTo: this.route, replaceUrl: true });
 
     this.accountService.validateResetToken(token)
@@ -59,16 +59,16 @@ export class ResetPasswordComponent implements OnInit {
       });
   }
 
-  // convenience getter for easy access to form fields
+  // getter de conveniência para fácil acesso aos campos do formulário
   get f() { return this.form.controls; }
 
   onSubmit() {
     this.submitted = true;
 
-    // reset alerts on submit
+    // redefinir alertas ao enviar
     this.alertService.clear();
 
-    // stop here if form is invalid
+    // pare aqui se o formulário for inválido
     if (this.form.invalid) {
       return;
     }

@@ -41,13 +41,13 @@ export class MapService {
           this.lat = results[0].geometry.location.lat();
           this.lng = results[0].geometry.location.lng();
         } else {
-          window.alert('No results found');
+          window.alert('Nenhum resultado encontrado');
         }
       } else {
-        window.alert('Geocoder failed due to: ' + status);
+        window.alert('O geocodificador falhou devido a: ' + status);
       }
 
     });
   }
-  
+
 }

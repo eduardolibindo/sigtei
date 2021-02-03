@@ -50,9 +50,9 @@ export class StudentlistService {
   updateStudentList(id, params) {
     return this.http.put(`${studentlistUrl}/${id}`, params)
       .pipe(map((studentlists: any) => {
-        // update the current account if it was updated
+      // atualiza o id estudantil atual se ele foi atualizado
         if (studentlists.id === this.studentlistValue.id) {
-          // publish updated account to subscribers
+         // publicar id estudantil atualizada para o subscribers
           studentlists = { ...this.studentlistValue, ...studentlists };
           this.studentlistSubject.next(studentlists);
         }

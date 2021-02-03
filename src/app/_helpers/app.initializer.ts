@@ -2,7 +2,7 @@ import { AccountService } from '../_services';
 
 export function appInitializer(accountService: AccountService) {
     return () => new Promise(resolve => {
-        // attempt to refresh token on app start up to auto authenticate
+        // tentativa de atualizar o token na inicialização do aplicativo para autenticação automática
         accountService.refreshToken()
             .subscribe()
             .add(resolve);

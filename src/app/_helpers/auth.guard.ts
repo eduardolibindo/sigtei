@@ -13,18 +13,18 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const account = this.accountService.accountValue;
         if (account) {
-            // check if route is restricted by role
+            // verifique se a rota é restrita por função
             if (route.data.roles && !route.data.roles.includes(account.role)) {
-                // role not authorized so redirect to home page
+                // função não autorizada, então redirecionar para a página inicial
                 this.router.navigate(['/']);
                 return false;
             }
 
-            // authorized so return true
+            // autorizado então retorna verdadeiro
             return true;
         }
 
-        // not logged in so redirect to login page with the return url
+        // não está logado, então redirecione para a página de login com o url de retorno
         this.router.navigate(['/account/login'], { queryParams: { returnUrl: state.url }});
         return false;
     }

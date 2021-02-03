@@ -54,9 +54,9 @@ export class AttestationFileComponent implements OnInit {
 
   public downloadAsPDF() {
     const doc = new jsPDF();
-    // get table html
+    // obtener tabela (table) html
     const pdfTable = this.pdfTable.nativeElement;
-    // html to pdf format
+    // html a formato pdf
     var html = htmlToPdfmake(pdfTable.innerHTML);
     var win = window.open('', '_self');
     const documentDefinition = {
@@ -165,26 +165,10 @@ export class AttestationFileComponent implements OnInit {
     this.localStorageService.set(key, value);
   }
 
-  // save() {
-  //   var name = this.selectedImage.name;
-  //   var n = new Date();
-  //   const filePath = `${this.basePath}/${name}`;
-  //   const fileRef = this.storage.ref(filePath);
-  //   this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
-  //     finalize(() => {
-  //       fileRef.getDownloadURL().subscribe((url) => {
-  //         this.url = url;
-  //         this.fileService.insertFileDetails(this.id, this.url);
-  //         alert('Upload Feito com Sucesso');
-  //       })
-  //     })
-  //   ).subscribe();
-  // }
-
   ngOnInit(): void {
     this.fileService.getFiles(6).snapshotChanges().pipe(
       map(changes =>
-        // store the key
+       // armazena a chave
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     ).subscribe(fileUploads => {

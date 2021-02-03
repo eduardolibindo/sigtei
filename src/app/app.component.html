@@ -1,30 +1,4 @@
-﻿<!-- <div class="app-container" [ngClass]="{ 'bg-light': account }">
-
-  main nav
-  <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="account">
-    <div class="navbar-nav">
-      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-        class="nav-item nav-link">Home</a>
-      <a routerLink="/profile" routerLinkActive="active" class="nav-item nav-link">Profile</a>
-      <a *ngIf="account.role === Role.Admin" routerLink="/admin" routerLinkActive="active"
-        class="nav-item nav-link">Admin</a>
-      <a (click)="logout()" class="nav-item nav-link">Logout</a>
-    </div>
-  </nav>
-
-
-  subnav router outlet
-  <router-outlet name="subnav"></router-outlet>
-
-  global alert
-  <alert></alert>
-
-  main router outlet
-  <router-outlet></router-outlet>
-</div> -->
-
-<!-- ------------------------------------------------------------------------------------------------------------------------- -->
-
+﻿
 <mat-sidenav-container fullscreen>
 
   <mat-sidenav mode="over" #sidenav position="start">
@@ -55,8 +29,6 @@
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/schedules" routerLinkActive="active">Horários</a>
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/places" routerLinkActive="active">Locais</a>
 
-      <!-- <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active" *ngIf="isEstudante">Mapa </a> -->
-
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/maps" routerLinkActive="active"
         *ngIf="isMotorista">Mapa Desembarque</a>
 
@@ -71,8 +43,6 @@
 
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/map-driver-location" routerLinkActive="active"
         *ngIf="isAdmin">Mapa Transporte</a>
-
-
 
       <a mat-list-item (click)="sidenav.toggle()" routerLink="/notification" routerLinkActive="active"
         *ngIf="isMotorista">Notificação</a>
@@ -127,57 +97,10 @@
         </span>
       </div>
 
-      <!-- <div id="snackbar">Some text some message..</div> -->
-      <!-- <span class="toolbar-spacer"></span>
-
-      <ul class="nav" *ngIf="account">
-       <li class="nav-item">
-          <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-item nav-link" routerLink="/profile" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">Perfil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-item nav-link" routerLink="/admin" routerLinkActive="active" *ngIf="isAdmin">Admin</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-item nav-link text-danger" (click)="permissionNotification()">Ativar Notificação</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-item nav-link">{{ message | async | json }}</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-item nav-link text-danger" (click)="permissionNotification()">
-            <i class="material-icons">notifications</i>
-          </a>
-        </li>
-
-      </ul>-->
-
-      <!-- <span class="toolbar-spacer"></span>
-
-      <ul class="nav">
-        <li class="nav-item dropdown">
-          <a aria-expanded="false" (click)="permissionNotification()" aria-haspopup="true" class="nav-link" data-toggle="dropdown">
-            <i class="material-icons">notifications</i>
-            <span class="notification">1</span>
-          </a>
-          <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item">{{titulo}}</a>
-            <a class="dropdown-item">{{corpo}}</a>
-            <a class="dropdown-item">{{icone}}</a>
-            <a class="dropdown-item"><img src="{{icone}}"></a>
-            <a class="dropdown-item">{{ message | async | json }}</a>
-          </div>
-        </li>
-      </ul> -->
     </mat-toolbar>
 
     <div class="main-content">
 
-      <!-- main app container -->
       <div class="app-container" [ngClass]="{ 'bg-light': account }">
         <alert></alert>
         <router-outlet></router-outlet>

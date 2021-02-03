@@ -6,24 +6,6 @@
   </agm-direction>
 </agm-map>
 
-<!-- <section style="display: flex; align-content: center; align-items: center; height: 60px;">
-  <label style="margin: 10px;">Modo de viagem:</label>
-  <mat-radio-group style="margin: 10px;" [(ngModel)]="travelMode">
-    <mat-radio-button value='DRIVING'>
-      Dirigindo
-    </mat-radio-button>
-    <mat-radio-button value='BICYCLING'>
-      Ciclismo
-    </mat-radio-button>
-    <mat-radio-button value='TRANSIT'>
-      Transito
-    </mat-radio-button>
-    <mat-radio-button value='WALKING'>
-      Caminhada
-    </mat-radio-button>
-  </mat-radio-group>
-</section> -->
-
 <div>
   <!-- <label>Otimização dos pontos de passagem: </label> -->
   <mat-slide-toggle [(ngModel)]="provideRouteAlternatives" style="margin: 10px;">Otimização dos pontos de passagem
@@ -50,14 +32,6 @@
   <!-- <label>Fornecimento de rotas alternativas: </label> -->
   <mat-slide-toggle [(ngModel)]="visible" style="margin: 10px;">Visível</mat-slide-toggle>
 </div>
-
-<!-- <div *ngFor="let list of waypoint" class="row">
-  <div class="cell" data-title="Endereço">
-    {{list.label}}
-    {{list.location}}
-  </div>
-</div> -->
-
 
 <div #myPanel></div>
 

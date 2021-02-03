@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'map-driver-location', loadChildren: mapdriverlocationModule, canActivate: [AuthGuard] },
   { path: 'notification', loadChildren: notificationModule, canActivate: [AuthGuard], data: { roles: [Role.Motorista, Role.Admin] } },
 
-  // otherwise redirect to home
+  // caso não for encontrado, redireciona para o home
   { path: '**', redirectTo: '' }
 ];
 

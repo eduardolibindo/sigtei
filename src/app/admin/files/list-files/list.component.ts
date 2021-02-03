@@ -15,7 +15,7 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.uploadService.getFiles(6).snapshotChanges().pipe(
       map(changes =>
-        // store the key
+        // armazena a chave
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     ).subscribe(fileUploads => {

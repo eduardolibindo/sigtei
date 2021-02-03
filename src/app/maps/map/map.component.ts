@@ -14,10 +14,10 @@ declare var google: google;
 })
 export class MapComponent implements OnInit {
   waypoints: any[];
-  // google maps zoom level
+  // nível de zoom do google maps
   zoom: number = 14;
 
-  // initial center position for the map
+  // posição central inicial para o mapa
   lat: number = -29.136974;
   lng: number = -56.549621;
 
@@ -28,7 +28,7 @@ export class MapComponent implements OnInit {
 
   constructor(private studentlistService: StudentlistService) { }
 
-  // speedMultiplier to control animation speed
+  // speedMultiplier para controlar a velocidade da animação
   speedMultiplier = 1;
 
   onMapReady(map: any) {
@@ -39,7 +39,7 @@ export class MapComponent implements OnInit {
     // this.initEvents();
   }
 
-  // get locations from direction service
+  // obter locais atraves do direction
   calcRoute() {
     this.line = new google.maps.Polyline({
       strokeOpacity: 0.5,
@@ -57,7 +57,7 @@ export class MapComponent implements OnInit {
     };
     this.directionsService = new google.maps.DirectionsService();
     this.directionsService.route(request, (response, status) => {
-      // Empty response as API KEY EXPIRED
+      // Resposta vazia como API KEY EXPIRED
       console.log(request);
       console.log(response);
       if (status == google.maps.DirectionsStatus.OK) {
@@ -76,7 +76,7 @@ export class MapComponent implements OnInit {
     });
   }
 
-  // mock directions api
+  // simulação de api de direções
   mockDirections() {
     const locationArray = locationData.map(l => new google.maps.LatLng(l[0], l[1]));
     this.line = new google.maps.Polyline({
@@ -94,74 +94,70 @@ export class MapComponent implements OnInit {
     this.initRoute();
   }
 
-  // initialize travel marker
+  // inicializar marcador de viagem
   initRoute() {
     const route = this.line.getPath().getArray();
 
-    // options
+    // opções
     const options: TravelMarkerOptions = {
-      map: this.map,  // map object
-      speed: 50,  // default 10 , animation speed
-      interval: 10, // default 10, marker refresh time
+      map: this.map,
+      speed: 50,
+      interval: 10,
       speedMultiplier: this.speedMultiplier,
       markerOptions: {
         title: 'Travel Marker',
         animation: google.maps.Animation.DROP,
         icon: {
           url: '../../../assets/bus.png',
-          // This marker is 20 pixels wide by 32 pixels high.
           animation: google.maps.Animation.DROP,
-          // size: new google.maps.Size(256, 256),
           scaledSize: new google.maps.Size(128, 128),
-          // The origin for this image is (0, 0).
           origin: new google.maps.Point(0, 0),
-          // The anchor for this image is the base of the flagpole at (0, 32).
           anchor: new google.maps.Point(60, 130)
         }
       },
     };
 
-    // define marker
+    // define marcação
     this.marker = new TravelMarker(options);
 
-    // add locations from direction service
+    // adiciona locais atraves do direction
     this.marker.addLocation(route);
 
     setTimeout(() => this.play(), 2000);
   }
 
-  // play animation
+  // play animação
   play() {
     this.marker.play();
   }
 
-  // pause animation
+  // pause animação
   pause() {
     this.marker.pause();
   }
 
-  // reset animation
+  // reset animação
   reset() {
     this.marker.reset();
   }
 
-  // jump to next location
+  // pula para proxima location
   next() {
     this.marker.next();
   }
 
-  // jump to previous location
+  // pula para location anterior
   prev() {
     this.marker.prev();
   }
 
-  // fast forward
+  // avançar rápido
   fast() {
     this.speedMultiplier *= 2;
     this.marker.setSpeedMultiplier(this.speedMultiplier);
   }
 
-  // slow motion
+  // avançar devagar
   slow() {
     this.speedMultiplier /= 2;
     this.marker.setSpeedMultiplier(this.speedMultiplier)

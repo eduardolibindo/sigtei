@@ -1,96 +1,4 @@
-﻿<!-- <h1 *ngIf="isAddMode">Criar Conta</h1>
-<h1 *ngIf="!isAddMode">Editar conta</h1>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="form-row">
-    <div class="form-group col-7">
-      <label>Usuario</label>
-      <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-        <option value=""></option>
-        <option value="Estudante">Estudante</option>
-        <option value="Motorista">Motorista</option>
-      </select>
-      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
-        <div *ngIf="f.title.errors.required">Title is required</div>
-      </div>
-    </div>
-
-  </div>
-  <div class="form-row">
-    <div class="form-group col">
-      <label>Primeiro Nome</label>
-      <input type="text" formControlName="firstName" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-      <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-        <div *ngIf="f.firstName.errors.required">Insira o primeiro nome</div>
-      </div>
-    </div>
-    <div class="form-group col">
-      <label>Ultimo Nome</label>
-      <input type="text" formControlName="lastName" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-      <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-        <div *ngIf="f.lastName.errors.required">Insira o ultimo nome</div>
-      </div>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-7">
-      <label>Email</label>
-      <input type="text" formControlName="email" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-        <div *ngIf="f.email.errors.required">Insira o email</div>
-        <div *ngIf="f.email.errors.email">O email deve ser um endereço de email válido</div>
-      </div>
-    </div>
-    <div class="form-group col-7">
-      <label>Função de Usuário</label>
-      <select formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
-        <option value=""></option>
-        <option value="Estudante">Estudante</option>
-        <option value="Motorista">Motorista</option>
-        <option value="Admin">Admin</option>
-      </select>
-      <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
-        <div *ngIf="f.role.errors.required">Insira a função de usuário</div>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="!isAddMode">
-    <h3 class="pt-3">Mudar senha</h3>
-    <p>Deixe em branco para manter a mesma senha</p>
-  </div>
-  <div class="form-row">
-    <div class="form-group col">
-      <label>Senha</label>
-      <input type="password" formControlName="password" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-        <div *ngIf="f.password.errors.required">Insira a senha</div>
-        <div *ngIf="f.password.errors.minlength">A senha deve ter pelo menos 6 caracteres</div>
-      </div>
-    </div>
-    <div class="form-group col">
-      <label>Confirme a Senha</label>
-      <input type="password" formControlName="confirmPassword" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-      <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-        <div *ngIf="f.confirmPassword.errors.required">É necessário confirmar a senha</div>
-        <div *ngIf="f.confirmPassword.errors.mustMatch">As senhas devem corresponder</div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <button [disabled]="loading" class="btn btn-primary">
-      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-      Salvar
-    </button>
-    <a routerLink="/admin/accounts" class="btn btn-link">Cancel</a>
-  </div>
-</form> -->
-
-
-<div class="mt-5">
+﻿<div class="mt-5">
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-4 login-form text-center">
     <h2 class="mb-5 font-weight-light text-uppercase" *ngIf="isAddMode">Criar Conta</h2>
     <h2 class="mb-5 font-weight-light text-uppercase" *ngIf="!isAddMode">Editar conta</h2>
@@ -167,6 +75,7 @@
         <option value="uergs">Uergs</option>
         <option value="senac">Senac</option>
         <option value="anhanguera">Anhanguera</option>
+        <option value="outro">Outro</option>
       </select>
       <div *ngIf="submitted && f.institution.errors" class="invalid-feedback">
         <div *ngIf="f.institution.errors.required">Selecione a instituição</div>
@@ -197,6 +106,7 @@
         <option value="tecnico em cabeleireira">Técnico em Cabeleireiro</option>
         <option value="tecnico em barbearia">Técnico em Barbearia</option>
         <option value="curso anhanguera ead">Curso anhanguera EAD</option>
+        <option value="outro">Outro</option>
       </select>
       <div *ngIf="submitted && f.course.errors" class="invalid-feedback">
         <div *ngIf="f.course.errors.required">Selecione o curso</div>

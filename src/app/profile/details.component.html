@@ -1,12 +1,4 @@
-﻿<!-- <h1>Meu perfil</h1>
-<p>
-  <strong>Perfil: </strong>{{account.title}}<br />
-  <strong>Nome: </strong>{{account.firstName}} {{account.lastName}}<br />
-  <strong>Email: </strong> {{account.email}}
-</p>
-<p><a routerLink="update">Atualizar perfil</a></p> -->
-
-<div class="mt-5">
+﻿<div class="mt-5">
   <div class="login-form">
     <h1 class="mt-1 font-weight-light text-uppercase text-center">Meu perfil</h1>
 
@@ -36,29 +28,3 @@
 
   </div>
 </div>
-
-<!-- <div class="mt-5">
-  <div class="login-form">
-    <h3 class="mt-1 font-weight-light text-uppercase text-center">Enviar atestado de Matricula</h3>
-
-    <label>
-      <input type="file" class="form-control rounded-pill form-control-lg" (change)="selectFile($event)" />
-    </label>
-
-    <div class="mt-1 font-weight-light text-uppercase text-center">
-      <button [disabled]="loading" [disabled]="!selectedFiles" (click)="upload()"
-        class="btn mt-3 rounded-pill btn-lg btn-submit text-uppercase"
-        style="margin-top: .25rem; margin-bottom: .25rem; margin: 0 10px;">
-        <span *ngIf="loading && !selectedFiles" class="spinner-border spinner-border-sm mr-1"></span>
-        Enviar
-      </button>
-
-      <div *ngIf="currentFileUpload" class="progress mt-2">
-        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-          attr.aria-valuenow="{{percentage}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:percentage+'%'}">
-          {{percentage}}%
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->

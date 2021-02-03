@@ -30,7 +30,7 @@ export class VerifyEmailComponent implements OnInit {
   ngOnInit() {
     const token = this.route.snapshot.queryParams['token'];
 
-    // remove token from url to prevent http referer leakage
+    // remova o token do url para evitar vazamento de referenciador de http
     this.router.navigate([], { relativeTo: this.route, replaceUrl: true });
 
     this.accountService.verifyEmail(token)

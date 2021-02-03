@@ -1,38 +1,4 @@
-﻿<!-- <h1>Contas</h1>
-<p>Todas as contas seguras (somente administrador):</p>
-<a routerLink="add" class="btn btn-sm btn-success mb-2">Criar Conta</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th style="width:30%">Nome</th>
-            <th style="width:30%">Email</th>
-            <th style="width:30%">Tipo de Usuário</th>
-            <th style="width:10%"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let account of accounts">
-            <td>{{account.title}} {{account.firstName}} {{account.lastName}}</td>
-            <td>{{account.email}}</td>
-            <td>{{account.role}}</td>
-            <td style="white-space: nowrap">
-                <a routerLink="edit/{{account.id}}" class="btn btn-sm btn-primary mr-1">Editar</a>
-                <button (click)="deleteAccount(account.id)" class="btn btn-sm btn-danger btn-delete-account" [disabled]="account.isDeleting">
-                    <span *ngIf="account.isDeleting" class="spinner-border spinner-border-sm"></span>
-                    <span *ngIf="!account.isDeleting">Deletar</span>
-                </button>
-            </td>
-        </tr>
-        <tr *ngIf="!accounts">
-            <td colspan="4" class="text-center">
-                <span class="spinner-border spinner-border-lg align-center"></span>
-            </td>
-        </tr>
-    </tbody>
-</table> -->
-
-
-<div>
+﻿<div>
 
   <div class="login-form text-center">
     <h2 class="mb-3 font-weight-light text-uppercase text-center">Contas</h2>

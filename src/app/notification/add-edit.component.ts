@@ -43,16 +43,16 @@ export class AddEditComponent implements OnInit {
     }
   }
 
-  // convenience getter for easy access to form fields
+  // getter de conveniência para fácil acesso aos campos do formulário
   get f() { return this.form.controls; }
 
   onSubmit() {
     this.submitted = true;
 
-    // reset alerts on submit
+    // redefinir alertas ao enviar
     this.alertService.clear();
 
-    // stop here if form is invalid
+    // para aqui se o formulário for inválido
     if (this.form.invalid) {
       return;
     }
