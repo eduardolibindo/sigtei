@@ -19,8 +19,8 @@ export class FileService {
 
   msg: string = 'error';
 
-  private basePath = '/atestados';
-  private basePath1 = '/Lista_de_presença';
+  private basePath = '/atestado_justificativa';
+  private basePath1 = '/lista_presenca_diaria';
 
   constructor(
     @Inject(AngularFireDatabase) private firebase: AngularFireDatabase,

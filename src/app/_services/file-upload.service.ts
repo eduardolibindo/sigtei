@@ -10,7 +10,7 @@ import { FileUpload } from '../_models/file';
   providedIn: 'root'
 })
 export class FileUploadService {
-private basePath = '/uploads';
+private basePath = '/atestado_matricula';
 
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
 
